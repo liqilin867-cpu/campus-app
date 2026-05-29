@@ -124,19 +124,16 @@ export default function BillTab({
           <div className="space-y-3">
             {Object.entries(billPaymentStatus).filter(([, p]) => Object.values(p).some(v => v === 'pending')).map(([billId, payments]) => {
               const bill = billsList.find(b => b.id === billId);
-              if (!bill) return null;
-
-              const pendingRoommates = Object.entries(payments).filter(([name, s]) => s === 'pending' && name !== currentUserName);
               const paidCount = Object.values(payments).filter(s => s === 'paid').length;
               const totalCount = Object.keys(payments).length;
-              const perPerson = bill.amount / totalCount;
+              const perPerson = bill ? bill.amount / totalCount : 0;
 
               return (
                 <div key={billId} className="bg-white/80 rounded-2xl p-3.5 border border-amber-100 shadow-sm">
                   <div className="flex justify-between items-center mb-2">
                     <div>
-                      <span className="font-bold text-xs text-slate-800">{bill.title}</span>
-                      <span className="text-[10px] text-slate-400 ml-2">¥{bill.amount.toFixed(2)}</span>
+                      <span className="font-bold text-xs text-slate-800">{bill?.title||'分摊账单'}</span>
+                      <span className="text-[10px] text-slate-400 ml-2">¥{(bill?.amount||perPerson*totalCount).toFixed(2)}</span>
                     </div>
                     <span className="text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
                       {paidCount}/{totalCount} 已缴
