@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+@theme {
+  --font-sans: "Noto Sans SC", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #0050c8;
+  --color-primary-container: #e6f0ff;
+  --color-primary-fixed: #e6f0ff;
+  --color-on-primary-fixed: #001a4d;
+  --color-on-primary-fixed-variant: #002e8c;
+  --color-primary-fixed-dim: #aac8ff;
+  --color-on-surface: #1b1b1f;
+  --color-on-surface-variant: #45464f;
+  --color-surface-container: #f0f0f5;
+  --color-surface-container-low: #f8f8fc;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #e2e2ec;
+  --color-surface-bright: #f5f7ff;
+  --color-outline: #767680;
+  --color-error: #ba1a1a;
+  --color-secondary: #ff6600;
+  --color-secondary-container: #fff0e6;
+}
+
+body, html, button, input, select, textarea, div, span, p, h1, h2, h3, h4, h5, h6, a {
+  font-family: "Noto Sans SC", "Inter", ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/* === Simple mobile-friendly background === */
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #f5f7ff;
+}
+
+/* === Glass panel - with mobile vendor prefix === */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* === Frosted Glass Card === */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* === Tab Bar (mobile safe) === */
+.tab-bar-glass {
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* === Neumorphic styles === */
+.neumorphic-convex {
+    box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.9), 6px 6px 14px rgba(163, 177, 198, 0.4);
+}
+
+.neumorphic-inset {
+    box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.9), inset 4px 4px 10px rgba(163, 177, 198, 0.4);
+}
+
+/* === Button gradient === */
+.btn-primary-gradient {
+    background: linear-gradient(135deg, #0071e6 0%, #0052cc 100%);
+    box-shadow: inset 0px 2px 0px rgba(255, 255, 255, 0.3), 0 8px 16px rgba(0, 113, 230, 0.25);
+}
+
+/* === Hide scrollbars === */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* === Animations - simplified for mobile === */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.animate-subtle-pulse {
+  animation: subtlePulse 3s ease-in-out infinite;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-scale-in {
+  animation: scaleIn 0.25s ease-out;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }

@@ -1,0 +1,6 @@
+{
+  "name": "校园生活助手",
+  "description": "一站式校园缴费与生活服务",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

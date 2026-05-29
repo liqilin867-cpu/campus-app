@@ -1,0 +1,252 @@
+{
+  "rooms": {
+    "room_3号楼520室": {
+      "billsList": [
+        {
+          "id": "r1780036851013",
+          "category": "校园卡",
+          "title": "校园卡充值",
+          "amount": 999999999,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六",
+          "month": "本月",
+          "orderNo": "R1780036851013"
+        },
+        {
+          "id": "h1780035251389",
+          "category": "网费",
+          "title": "网费包月",
+          "amount": 30,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "系统",
+          "month": "本月"
+        }
+      ],
+      "billPaymentStatus": {},
+      "guaranteeHistory": [
+        {
+          "id": "g1",
+          "title": "保电",
+          "timeSlot": "23:00-07:00",
+          "date": "2026-05-19",
+          "status": "已批准"
+        },
+        {
+          "id": "g2",
+          "title": "保电2",
+          "timeSlot": "22:30-06:00",
+          "date": "2026-05-10",
+          "status": "已拒绝"
+        }
+      ],
+      "fleaItems": [
+        {
+          "id": "f1",
+          "title": "九成新小米千兆路由器",
+          "price": 49,
+          "description": "考研退舍",
+          "seller": "张三",
+          "time": "1小时前",
+          "contact": "13888321288"
+        },
+        {
+          "id": "f2",
+          "title": "2024考研政治全套书",
+          "price": 15,
+          "description": "全新",
+          "seller": "李四",
+          "time": "3小时前",
+          "contact": "19983421233"
+        },
+        {
+          "id": "f3",
+          "title": "美利达勇士300",
+          "price": 180,
+          "description": "通勤代步",
+          "seller": "王五",
+          "time": "昨天",
+          "contact": "13593212999"
+        }
+      ],
+      "lostFoundItems": [
+        {
+          "id": "l1",
+          "type": "lost",
+          "title": "黑色充电盒",
+          "location": "操场",
+          "time": "2小时前",
+          "contact": "15893322112",
+          "status": "processing",
+          "description": "皮卡丘壳"
+        },
+        {
+          "id": "l2",
+          "type": "found",
+          "title": "钥匙串",
+          "location": "实训楼",
+          "time": "昨天",
+          "contact": "19823469988",
+          "status": "processing",
+          "description": "3把钥匙"
+        }
+      ],
+      "eventsList": [
+        {
+          "id": "e1",
+          "title": "创客沙龙",
+          "time": "今晚19:30",
+          "location": "活动中心",
+          "description": "校友分享",
+          "capacity": 200,
+          "registeredCount": 189,
+          "registered": false,
+          "tag": "讲座"
+        },
+        {
+          "id": "e2",
+          "title": "模拟面试",
+          "time": "明日14:00",
+          "location": "图书馆",
+          "description": "外企指导",
+          "capacity": 120,
+          "registeredCount": 119,
+          "registered": false,
+          "tag": "就业"
+        }
+      ],
+      "repairRecords": [
+        {
+          "id": "r1",
+          "category": "水管漏水",
+          "description": "龙头渗水",
+          "location": "520",
+          "time": "11-26",
+          "status": "pending",
+          "contact": "13888"
+        },
+        {
+          "id": "r2",
+          "category": "家具损坏",
+          "description": "空调叶片断",
+          "location": "520",
+          "time": "11-10",
+          "status": "completed",
+          "contact": "13888"
+        }
+      ],
+      "members": [
+        "赵六",
+        "张三",
+        "李四",
+        "王五"
+      ]
+    }
+  },
+  "users": {
+    "赵六": {
+      "cardBalance": 999999767.5,
+      "netBalance": 75,
+      "waterBalance": 32.5,
+      "elecBalance": 18.2,
+      "messages": [
+        {
+          "id": "1780036867569",
+          "category": "缴费成功",
+          "title": "订餐成功",
+          "content": "已购买 黄焖鸡米饭x20，共 ¥300.00",
+          "time": "14:41",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780036851013",
+          "category": "缴费成功",
+          "title": "充值成功",
+          "content": "已充值 ¥999999999.00",
+          "time": "14:40",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780035251389",
+          "category": "缴费成功",
+          "title": "网费已缴",
+          "content": "已扣 ¥30",
+          "time": "14:14",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780030645444",
+          "category": "系统通知",
+          "title": "欢迎",
+          "content": "欢迎您，赵六！",
+          "time": "12:57",
+          "date": "2026/5/29",
+          "unread": false
+        }
+      ],
+      "isNetAutoDeduct": false,
+      "unpaidBills": [],
+      "billsList": [
+        {
+          "id": "r1780036851013",
+          "category": "校园卡",
+          "title": "校园卡充值",
+          "amount": 999999999,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六",
+          "month": "本月",
+          "orderNo": "R1780036851013"
+        },
+        {
+          "id": "h1780035251389",
+          "category": "网费",
+          "title": "网费包月",
+          "amount": 30,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "系统",
+          "month": "本月"
+        }
+      ],
+      "myEvents": []
+    }
+  },
+  "sessions": {
+    "赵六": "69u9zr557fmmpqjwifz"
+  },
+  "registeredUsers": [
+    {
+      "name": "赵六",
+      "studentId": "20241234",
+      "phone": "13800000001",
+      "password": "zhaoliu123",
+      "room": "3号楼520室"
+    },
+    {
+      "name": "张三",
+      "studentId": "20240001",
+      "phone": "13800000002",
+      "password": "zhangsan123",
+      "room": "3号楼520室"
+    },
+    {
+      "name": "李四",
+      "studentId": "20240002",
+      "phone": "13800000003",
+      "password": "lisi123",
+      "room": "3号楼520室"
+    },
+    {
+      "name": "王五",
+      "studentId": "20240003",
+      "phone": "13800000004",
+      "password": "wangwu123",
+      "room": "3号楼520室"
+    }
+  ]
+}
