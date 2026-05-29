@@ -50,6 +50,7 @@ export default function App(){
     let saved:any={};try{saved=await loadD()}catch{}
     const rk='room_'+room;const rd=saved.rooms?.[rk];const ud=saved.users?.[userName];
     if(rd){
+      if(rd.billsList)setBl(rd.billsList);
       if(rd.billPaymentStatus)setBps(rd.billPaymentStatus);
       if(rd.guaranteeHistory)setGh(rd.guaranteeHistory);
       if(rd.fleaItems)setFi(rd.fleaItems);
@@ -57,7 +58,7 @@ export default function App(){
       if(rd.repairRecords)setRp2(rd.repairRecords);
       if(rd.eventsList)setEv(rd.eventsList);
       if(rd.members)setRm(rd.members.map((n,i)=>({id:'r'+i,name:n,pinyin:n,avatar:n[0],selected:true})));
-      if(!ud){const s2=['赵六','张三','李四','王五'];if(s2.includes(userName)&&room==='3号楼520室'){setB1(128.5);setB2(45);setB3(32.5);setB4(18.2);}}
+      if(!ud||ud.cardBalance==null){const s2=['赵六','张三','李四','王五'];if(s2.includes(userName)&&room==='3号楼520室'){setB1(128.5);setB2(45);setB3(32.5);setB4(18.2);}}
     }else{
       const seed=['赵六','张三','李四','王五'];
       if(seed.includes(userName)&&room==='3号楼520室'){setB1(128.5);setB2(45);setB3(32.5);setB4(18.2);setRm(seed.map((n,i)=>({id:'r'+i,name:n,pinyin:n,avatar:n[0],selected:true})));setUb([]);}

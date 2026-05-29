@@ -3,6 +3,29 @@
     "room_3号楼520室": {
       "billsList": [
         {
+          "id": "d1780037153155",
+          "category": "校园卡",
+          "title": "电费分摊（我的）",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（我）",
+          "month": "本月",
+          "orderNo": "D1780037153155"
+        },
+        {
+          "id": "qs-1780037153155",
+          "category": "电费",
+          "title": "电费分摊",
+          "amount": 80,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "全寝",
+          "orderNo": "S1780037153155",
+          "afterBalance": 999999552.5,
+          "month": "本月"
+        },
+        {
           "id": "r1780036851013",
           "category": "校园卡",
           "title": "校园卡充值",
@@ -24,7 +47,14 @@
           "month": "本月"
         }
       ],
-      "billPaymentStatus": {},
+      "billPaymentStatus": {
+        "qs-1780037153155": {
+          "赵六": "paid",
+          "张三": "pending",
+          "李四": "pending",
+          "王五": "pending"
+        }
+      },
       "guaranteeHistory": [
         {
           "id": "g1",
@@ -58,7 +88,8 @@
           "description": "全新",
           "seller": "李四",
           "time": "3小时前",
-          "contact": "19983421233"
+          "contact": "19983421233",
+          "purchased": true
         },
         {
           "id": "f3",
@@ -67,7 +98,8 @@
           "description": "通勤代步",
           "seller": "王五",
           "time": "昨天",
-          "contact": "13593212999"
+          "contact": "13593212999",
+          "purchased": true
         }
       ],
       "lostFoundItems": [
@@ -146,11 +178,56 @@
   },
   "users": {
     "赵六": {
-      "cardBalance": 999999767.5,
+      "cardBalance": 999999552.5,
       "netBalance": 75,
       "waterBalance": 32.5,
       "elecBalance": 18.2,
       "messages": [
+        {
+          "id": "1780037153156",
+          "category": "分摊通知",
+          "title": "电费分摊已发起",
+          "content": "电费分摊共 ¥80，每人 ¥20.00",
+          "time": "14:45",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "1780037042390",
+          "category": "缴费成功",
+          "title": "购买成功",
+          "content": "已购买 美利达勇士300，花费 ¥180，请联系卖家 13593212999 取货",
+          "time": "14:44",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780037042389",
+          "category": "缴费成功",
+          "title": "购买成功",
+          "content": "已购买二手商品，花费 ¥180",
+          "time": "14:44",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780037037752",
+          "category": "缴费成功",
+          "title": "购买成功",
+          "content": "已购买 2024考研政治全套书，花费 ¥15，请联系卖家 19983421233 取货",
+          "time": "14:43",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780037037752",
+          "category": "缴费成功",
+          "title": "购买成功",
+          "content": "已购买二手商品，花费 ¥15",
+          "time": "14:43",
+          "date": "2026/5/29",
+          "unread": false
+        },
         {
           "id": "1780036867569",
           "category": "缴费成功",
@@ -192,6 +269,29 @@
       "unpaidBills": [],
       "billsList": [
         {
+          "id": "d1780037153155",
+          "category": "校园卡",
+          "title": "电费分摊（我的）",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（我）",
+          "month": "本月",
+          "orderNo": "D1780037153155"
+        },
+        {
+          "id": "qs-1780037153155",
+          "category": "电费",
+          "title": "电费分摊",
+          "amount": 80,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "全寝",
+          "orderNo": "S1780037153155",
+          "afterBalance": 999999552.5,
+          "month": "本月"
+        },
+        {
           "id": "r1780036851013",
           "category": "校园卡",
           "title": "校园卡充值",
@@ -217,36 +317,6 @@
     }
   },
   "sessions": {
-    "赵六": "69u9zr557fmmpqjwifz"
-  },
-  "registeredUsers": [
-    {
-      "name": "赵六",
-      "studentId": "20241234",
-      "phone": "13800000001",
-      "password": "zhaoliu123",
-      "room": "3号楼520室"
-    },
-    {
-      "name": "张三",
-      "studentId": "20240001",
-      "phone": "13800000002",
-      "password": "zhangsan123",
-      "room": "3号楼520室"
-    },
-    {
-      "name": "李四",
-      "studentId": "20240002",
-      "phone": "13800000003",
-      "password": "lisi123",
-      "room": "3号楼520室"
-    },
-    {
-      "name": "王五",
-      "studentId": "20240003",
-      "phone": "13800000004",
-      "password": "wangwu123",
-      "room": "3号楼520室"
-    }
-  ]
+    "赵六": "avsj0dzdg3smpqki07d"
+  }
 }
