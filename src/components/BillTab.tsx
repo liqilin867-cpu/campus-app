@@ -35,11 +35,17 @@ export default function BillTab({
 }: BillTabProps) {
   const [selectedBill, setSelectedBill] = useState<BillItem | null>(null);
 
-  const totalSpent = billsList.reduce((acc, curr) => acc + curr.amount, 0);
-  const paidSpent = billsList
+  const myBills = billsList.filter(b => {
+    if(b.title?.includes('（我的）')) return true;
+    if(b.payer === '系统') return true;
+    if(b.payer && b.payer.includes(currentUserName)) return true;
+    return false;
+  });
+  const totalSpent = myBills.reduce((acc, curr) => acc + curr.amount, 0);
+  const paidSpent = myBills
     .filter((b) => b.status === '已缴费')
     .reduce((acc, curr) => acc + curr.amount, 0);
-  const unpaidSpent = billsList
+  const unpaidSpent = myBills
     .filter((b) => b.status !== '已缴费')
     .reduce((acc, curr) => acc + curr.amount, 0);
 

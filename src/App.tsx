@@ -75,7 +75,7 @@ export default function App(){
       if(ud.unpaidBills)setUb(ud.unpaidBills);if(ud.billsList)setBl(ud.billsList);
       if(ud.myEvents)setMyEv(ud.myEvents);
     }else{notif('系统通知','欢迎','欢迎您，'+userName+'！');}
-    const ns=Math.random().toString(36).slice(2)+Date.now().toString(36);setSid(ns);(async()=>{try{const ex=await loadD();save({...(ex||{}),sessions:{...(ex?.sessions||{}),[userName]:ns}})}catch{}})();
+    const ns=Math.random().toString(36).slice(2)+Date.now().toString(36);try{const ex=await loadD();await fetch('/api/data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...(ex||{}),sessions:{...(ex?.sessions||{}),[userName]:ns}})});}catch{}setSid(ns);
     setCu({name:userName,studentId,room});setLi(true);setLoad(false);fr.current=false;
   };
 
@@ -123,7 +123,7 @@ export default function App(){
     setBl([d,...s2,...c2,...bl]);const ps={};ids.forEach(id=>{ps[id]={};names.forEach(v=>{ps[id][v]=v===cu?.name?'paid':'pending';})});
     setBps({...bps,...ps});notif('分摊通知','分摊已发起','共 ¥'+sum+', 已扣 ¥'+pp);
     const others=names.filter(v=>v!==cu?.name);
-    others.forEach(rm2=>{const m={id:'sn'+Date.now()+rm2,category:'缴费提醒',title:'新分摊待缴',content:cu?.name+'发起了分摊，您需缴 ¥'+pp,time:new Date().toLocaleTimeString().slice(0,5),date:new Date().toLocaleDateString(),unread:true};pu.current.push({name:rm2,data:{messages:[m],billsList:s2.map(x=>({...x,status:'待缴费',time:'刚刚（待缴）'}))}})});
+    others.forEach(rm2=>{const m={id:'sn'+Date.now()+rm2,category:'缴费提醒',title:'新分摊待缴',content:cu?.name+'发起了分摊，您需缴 ¥'+pp,time:new Date().toLocaleTimeString().slice(0,5),date:new Date().toLocaleDateString(),unread:true};pu.current.push({name:rm2,data:{messages:[m],billsList:[...s2.map(x=>({...x,status:'待缴费',time:'刚刚（待缴）'})),...(c2||[]).map(x=>({...x,status:'待缴费',time:'刚刚（待缴）'}))]}})});
     setSd({title:'分摊成功',content:'已扣 ¥'+pp.toFixed(2)+'（余额 ¥'+fb.toFixed(2)+'）',actionText:'查看',onAction:()=>setTab('bill')});setSub(null);
   };
 

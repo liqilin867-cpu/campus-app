@@ -3,74 +3,7 @@
     "room_3号楼520室": {
       "billsList": [
         {
-          "id": "h1780043389661",
-          "category": "电费",
-          "title": "代付张三分摊",
-          "amount": 20,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "李四（代张三付）",
-          "month": "本月",
-          "orderNo": "H1780043389661"
-        },
-        {
-          "id": "h1780043386744",
-          "category": "电费",
-          "title": "代付李四分摊",
-          "amount": 20,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "李四（代李四付）",
-          "month": "本月",
-          "orderNo": "H1780043386744"
-        },
-        {
-          "id": "h1780043367797",
-          "category": "电费",
-          "title": "代付王五分摊",
-          "amount": 20,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "赵六（代王五付）",
-          "month": "本月",
-          "orderNo": "H1780043367797"
-        },
-        {
-          "id": "d1780037153155",
-          "category": "校园卡",
-          "title": "电费分摊（我的）",
-          "amount": 20,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "赵六（我）",
-          "month": "本月",
-          "orderNo": "D1780037153155"
-        },
-        {
-          "id": "qs-1780037153155",
-          "category": "电费",
-          "title": "电费分摊",
-          "amount": 80,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "全寝",
-          "orderNo": "S1780037153155",
-          "afterBalance": 999999552.5,
-          "month": "本月"
-        },
-        {
-          "id": "r1780036851013",
-          "category": "校园卡",
-          "title": "校园卡充值",
-          "amount": 999999999,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "赵六",
-          "month": "本月",
-          "orderNo": "R1780036851013"
-        },
-        {
-          "id": "h1780035251389",
+          "id": "h1780045898656",
           "category": "网费",
           "title": "网费包月",
           "amount": 30,
@@ -78,32 +11,90 @@
           "status": "已缴费",
           "payer": "系统",
           "month": "本月"
+        },
+        {
+          "id": "h1780045887540",
+          "category": "电费",
+          "title": "代付王五分摊",
+          "amount": 8.5,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（代王五付）",
+          "month": "本月",
+          "orderNo": "H1780045887540"
+        },
+        {
+          "id": "h1780045886247",
+          "category": "空调",
+          "title": "代付王五分摊",
+          "amount": 5.75,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（代王五付）",
+          "month": "本月",
+          "orderNo": "H1780045886247"
+        },
+        {
+          "id": "d1780045882469",
+          "category": "校园卡",
+          "title": "公摊（我的）",
+          "amount": 5.75,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（我）",
+          "month": "本月",
+          "orderNo": "D1780045882469"
+        },
+        {
+          "id": "custom-1780045881700",
+          "category": "空调",
+          "title": "111",
+          "amount": 23,
+          "time": "刚刚",
+          "status": "已缴费",
+          "month": "本月",
+          "payer": "全寝",
+          "orderNo": "C1780045882469-0"
+        },
+        {
+          "id": "d1780045872172",
+          "category": "校园卡",
+          "title": "电费分摊（我的）",
+          "amount": 8.5,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（我）",
+          "month": "本月",
+          "orderNo": "D1780045872172"
+        },
+        {
+          "id": "qs-1780045872172",
+          "category": "电费",
+          "title": "电费分摊",
+          "amount": 34,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "全寝",
+          "orderNo": "S1780045872172",
+          "afterBalance": 120,
+          "month": "本月"
         }
       ],
       "billPaymentStatus": {
-        "qs-1780037153155": {
+        "qs-1780045872172": {
+          "赵六": "paid",
+          "张三": "paid",
+          "李四": "paid",
+          "王五": "paid"
+        },
+        "custom-1780045881700": {
           "赵六": "paid",
           "张三": "paid",
           "李四": "paid",
           "王五": "paid"
         }
       },
-      "guaranteeHistory": [
-        {
-          "id": "g1",
-          "title": "保电",
-          "timeSlot": "23:00-07:00",
-          "date": "2026-05-19",
-          "status": "已批准"
-        },
-        {
-          "id": "g2",
-          "title": "保电2",
-          "timeSlot": "22:30-06:00",
-          "date": "2026-05-10",
-          "status": "已拒绝"
-        }
-      ],
+      "guaranteeHistory": [],
       "fleaItems": [
         {
           "id": "f1",
@@ -121,8 +112,7 @@
           "description": "全新",
           "seller": "李四",
           "time": "3小时前",
-          "contact": "19983421233",
-          "purchased": true
+          "contact": "19983421233"
         },
         {
           "id": "f3",
@@ -131,8 +121,7 @@
           "description": "通勤代步",
           "seller": "王五",
           "time": "昨天",
-          "contact": "13593212999",
-          "purchased": true
+          "contact": "13593212999"
         }
       ],
       "lostFoundItems": [
@@ -211,98 +200,62 @@
   },
   "users": {
     "赵六": {
-      "cardBalance": 999999532.5,
+      "cardBalance": 70,
       "netBalance": 75,
       "waterBalance": 32.5,
       "elecBalance": 18.2,
       "messages": [
         {
-          "id": "1780043367798",
-          "category": "缴费成功",
-          "title": "代付成功",
-          "content": "已帮王五代付 ¥20.00",
-          "time": "16:29",
-          "date": "2026/5/29",
-          "unread": true
-        },
-        {
-          "id": "1780037153156",
-          "category": "分摊通知",
-          "title": "电费分摊已发起",
-          "content": "电费分摊共 ¥80，每人 ¥20.00",
-          "time": "14:45",
-          "date": "2026/5/29",
-          "unread": true
-        },
-        {
-          "id": "1780037042390",
-          "category": "缴费成功",
-          "title": "购买成功",
-          "content": "已购买 美利达勇士300，花费 ¥180，请联系卖家 13593212999 取货",
-          "time": "14:44",
-          "date": "2026/5/29",
-          "unread": false
-        },
-        {
-          "id": "1780037042389",
-          "category": "缴费成功",
-          "title": "购买成功",
-          "content": "已购买二手商品，花费 ¥180",
-          "time": "14:44",
-          "date": "2026/5/29",
-          "unread": false
-        },
-        {
-          "id": "1780037037752",
-          "category": "缴费成功",
-          "title": "购买成功",
-          "content": "已购买 2024考研政治全套书，花费 ¥15，请联系卖家 19983421233 取货",
-          "time": "14:43",
-          "date": "2026/5/29",
-          "unread": false
-        },
-        {
-          "id": "1780037037752",
-          "category": "缴费成功",
-          "title": "购买成功",
-          "content": "已购买二手商品，花费 ¥15",
-          "time": "14:43",
-          "date": "2026/5/29",
-          "unread": false
-        },
-        {
-          "id": "1780036867569",
-          "category": "缴费成功",
-          "title": "订餐成功",
-          "content": "已购买 黄焖鸡米饭x20，共 ¥300.00",
-          "time": "14:41",
-          "date": "2026/5/29",
-          "unread": false
-        },
-        {
-          "id": "1780036851013",
-          "category": "缴费成功",
-          "title": "充值成功",
-          "content": "已充值 ¥999999999.00",
-          "time": "14:40",
-          "date": "2026/5/29",
-          "unread": false
-        },
-        {
-          "id": "1780035251389",
+          "id": "1780045898656",
           "category": "缴费成功",
           "title": "网费已缴",
           "content": "已扣 ¥30",
-          "time": "14:14",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "1780045887540",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮王五代付 ¥8.50",
+          "time": "17:11",
           "date": "2026/5/29",
           "unread": false
         },
         {
-          "id": "1780030645444",
+          "id": "1780045886247",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮王五代付 ¥5.75",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780045882469",
+          "category": "分摊通知",
+          "title": "分摊已发起",
+          "content": "共 ¥23, 已扣 ¥5.75",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780045872173",
+          "category": "分摊通知",
+          "title": "电费分摊已发起",
+          "content": "电费分摊共 ¥34，每人 ¥8.50",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": false
+        },
+        {
+          "id": "1780045865816",
           "category": "系统通知",
           "title": "欢迎",
           "content": "欢迎您，赵六！",
-          "time": "12:57",
+          "time": "17:11",
           "date": "2026/5/29",
           "unread": false
         }
@@ -311,52 +264,7 @@
       "unpaidBills": [],
       "billsList": [
         {
-          "id": "h1780043367797",
-          "category": "电费",
-          "title": "代付王五分摊",
-          "amount": 20,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "赵六（代王五付）",
-          "month": "本月",
-          "orderNo": "H1780043367797"
-        },
-        {
-          "id": "d1780037153155",
-          "category": "校园卡",
-          "title": "电费分摊（我的）",
-          "amount": 20,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "赵六（我）",
-          "month": "本月",
-          "orderNo": "D1780037153155"
-        },
-        {
-          "id": "qs-1780037153155",
-          "category": "电费",
-          "title": "电费分摊",
-          "amount": 80,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "全寝",
-          "orderNo": "S1780037153155",
-          "afterBalance": 999999552.5,
-          "month": "本月"
-        },
-        {
-          "id": "r1780036851013",
-          "category": "校园卡",
-          "title": "校园卡充值",
-          "amount": 999999999,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "赵六",
-          "month": "本月",
-          "orderNo": "R1780036851013"
-        },
-        {
-          "id": "h1780035251389",
+          "id": "h1780045898656",
           "category": "网费",
           "title": "网费包月",
           "amount": 30,
@@ -364,135 +272,72 @@
           "status": "已缴费",
           "payer": "系统",
           "month": "本月"
-        }
-      ],
-      "myEvents": []
-    },
-    "王五": {
-      "messages": [
-        {
-          "id": "pn1780043367797",
-          "category": "缴费成功",
-          "title": "室友帮您代付了",
-          "content": "赵六已帮您支付 ¥20.00",
-          "time": "16:29",
-          "date": "2026/5/29",
-          "unread": true
-        }
-      ]
-    },
-    "李四": {
-      "cardBalance": 88.5,
-      "netBalance": 45,
-      "waterBalance": 32.5,
-      "elecBalance": 18.2,
-      "messages": [
-        {
-          "id": "1780043389661",
-          "category": "缴费成功",
-          "title": "代付成功",
-          "content": "已帮张三代付 ¥20.00",
-          "time": "16:29",
-          "date": "2026/5/29",
-          "unread": true
         },
         {
-          "id": "1780043386744",
-          "category": "缴费成功",
-          "title": "代付成功",
-          "content": "已帮李四代付 ¥20.00",
-          "time": "16:29",
-          "date": "2026/5/29",
-          "unread": true
-        },
-        {
-          "id": "1780043384648",
-          "category": "系统通知",
-          "title": "欢迎",
-          "content": "欢迎您，李四！",
-          "time": "16:29",
-          "date": "2026/5/29",
-          "unread": true
-        }
-      ],
-      "isNetAutoDeduct": false,
-      "unpaidBills": [],
-      "billsList": [
-        {
-          "id": "h1780043389661",
-          "category": "电费",
-          "title": "代付张三分摊",
-          "amount": 20,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "李四（代张三付）",
-          "month": "本月",
-          "orderNo": "H1780043389661"
-        },
-        {
-          "id": "h1780043386744",
-          "category": "电费",
-          "title": "代付李四分摊",
-          "amount": 20,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "李四（代李四付）",
-          "month": "本月",
-          "orderNo": "H1780043386744"
-        },
-        {
-          "id": "h1780043367797",
+          "id": "h1780045887540",
           "category": "电费",
           "title": "代付王五分摊",
-          "amount": 20,
+          "amount": 8.5,
           "time": "刚刚",
           "status": "已缴费",
           "payer": "赵六（代王五付）",
           "month": "本月",
-          "orderNo": "H1780043367797"
+          "orderNo": "H1780045887540"
         },
         {
-          "id": "d1780037153155",
+          "id": "h1780045886247",
+          "category": "空调",
+          "title": "代付王五分摊",
+          "amount": 5.75,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（代王五付）",
+          "month": "本月",
+          "orderNo": "H1780045886247"
+        },
+        {
+          "id": "d1780045882469",
           "category": "校园卡",
-          "title": "电费分摊（我的）",
-          "amount": 20,
+          "title": "公摊（我的）",
+          "amount": 5.75,
           "time": "刚刚",
           "status": "已缴费",
           "payer": "赵六（我）",
           "month": "本月",
-          "orderNo": "D1780037153155"
+          "orderNo": "D1780045882469"
         },
         {
-          "id": "qs-1780037153155",
+          "id": "custom-1780045881700",
+          "category": "空调",
+          "title": "111",
+          "amount": 23,
+          "time": "刚刚",
+          "status": "已缴费",
+          "month": "本月",
+          "payer": "全寝",
+          "orderNo": "C1780045882469-0"
+        },
+        {
+          "id": "d1780045872172",
+          "category": "校园卡",
+          "title": "电费分摊（我的）",
+          "amount": 8.5,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（我）",
+          "month": "本月",
+          "orderNo": "D1780045872172"
+        },
+        {
+          "id": "qs-1780045872172",
           "category": "电费",
           "title": "电费分摊",
-          "amount": 80,
+          "amount": 34,
           "time": "刚刚",
           "status": "已缴费",
           "payer": "全寝",
-          "orderNo": "S1780037153155",
-          "afterBalance": 999999552.5,
-          "month": "本月"
-        },
-        {
-          "id": "r1780036851013",
-          "category": "校园卡",
-          "title": "校园卡充值",
-          "amount": 999999999,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "赵六",
-          "month": "本月",
-          "orderNo": "R1780036851013"
-        },
-        {
-          "id": "h1780035251389",
-          "category": "网费",
-          "title": "网费包月",
-          "amount": 30,
-          "time": "刚刚",
-          "status": "已缴费",
-          "payer": "系统",
+          "orderNo": "S1780045872172",
+          "afterBalance": 120,
           "month": "本月"
         }
       ],
@@ -501,16 +346,289 @@
     "张三": {
       "messages": [
         {
-          "id": "pn1780043389661",
+          "id": "pn1780045921432",
           "category": "缴费成功",
           "title": "室友帮您代付了",
-          "content": "李四已帮您支付 ¥20.00",
-          "time": "16:29",
+          "content": "李四已帮您支付 ¥8.50",
+          "time": "17:12",
           "date": "2026/5/29",
           "unread": true
+        },
+        {
+          "id": "pn1780045920182",
+          "category": "缴费成功",
+          "title": "室友帮您代付了",
+          "content": "李四已帮您支付 ¥5.75",
+          "time": "17:12",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "sn1780045882469张三",
+          "category": "缴费提醒",
+          "title": "新分摊待缴",
+          "content": "赵六发起了分摊，您需缴 ¥5.75",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "sn1780045872172张三",
+          "category": "缴费提醒",
+          "title": "电费分摊待缴",
+          "content": "赵六发起了电费分摊，您需缴 ¥8.50",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        }
+      ],
+      "billsList": [
+        {
+          "id": "custom-1780045881700",
+          "category": "空调",
+          "title": "111",
+          "amount": 23,
+          "time": "刚刚（待缴）",
+          "status": "待缴费",
+          "month": "本月",
+          "payer": "全寝",
+          "orderNo": "C1780045882469-0"
+        },
+        {
+          "id": "qs-1780045872172",
+          "category": "电费",
+          "title": "电费分摊",
+          "amount": 34,
+          "time": "刚刚（待缴）",
+          "status": "待缴费",
+          "payer": "全寝",
+          "orderNo": "S1780045872172",
+          "afterBalance": 120,
+          "month": "本月"
+        }
+      ]
+    },
+    "李四": {
+      "cardBalance": 70,
+      "netBalance": 75,
+      "waterBalance": 32.5,
+      "elecBalance": 18.2,
+      "messages": [
+        {
+          "id": "1780045930862",
+          "category": "缴费成功",
+          "title": "网费已缴",
+          "content": "已扣 ¥30",
+          "time": "17:12",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "1780045921432",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮张三代付 ¥8.50",
+          "time": "17:12",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "1780045920182",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮张三代付 ¥5.75",
+          "time": "17:12",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "1780045914642",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮李四代付 ¥8.50",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "1780045913398",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮李四代付 ¥5.75",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "sn1780045882469李四",
+          "category": "缴费提醒",
+          "title": "新分摊待缴",
+          "content": "赵六发起了分摊，您需缴 ¥5.75",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "sn1780045872172李四",
+          "category": "缴费提醒",
+          "title": "电费分摊待缴",
+          "content": "赵六发起了电费分摊，您需缴 ¥8.50",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        }
+      ],
+      "isNetAutoDeduct": false,
+      "unpaidBills": [],
+      "billsList": [
+        {
+          "id": "h1780045930862",
+          "category": "网费",
+          "title": "网费包月",
+          "amount": 30,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "系统",
+          "month": "本月"
+        },
+        {
+          "id": "h1780045921431",
+          "category": "电费",
+          "title": "代付张三分摊",
+          "amount": 8.5,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "李四（代张三付）",
+          "month": "本月",
+          "orderNo": "H1780045921432"
+        },
+        {
+          "id": "h1780045920182",
+          "category": "空调",
+          "title": "代付张三分摊",
+          "amount": 5.75,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "李四（代张三付）",
+          "month": "本月",
+          "orderNo": "H1780045920182"
+        },
+        {
+          "id": "h1780045914642",
+          "category": "电费",
+          "title": "代付李四分摊",
+          "amount": 8.5,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "李四（代李四付）",
+          "month": "本月",
+          "orderNo": "H1780045914642"
+        },
+        {
+          "id": "h1780045913397",
+          "category": "空调",
+          "title": "代付李四分摊",
+          "amount": 5.75,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "李四（代李四付）",
+          "month": "本月",
+          "orderNo": "H1780045913397"
+        },
+        {
+          "id": "custom-1780045881700",
+          "category": "空调",
+          "title": "111",
+          "amount": 23,
+          "time": "刚刚（待缴）",
+          "status": "待缴费",
+          "month": "本月",
+          "payer": "全寝",
+          "orderNo": "C1780045882469-0"
+        },
+        {
+          "id": "qs-1780045872172",
+          "category": "电费",
+          "title": "电费分摊",
+          "amount": 34,
+          "time": "刚刚（待缴）",
+          "status": "待缴费",
+          "payer": "全寝",
+          "orderNo": "S1780045872172",
+          "afterBalance": 120,
+          "month": "本月"
+        }
+      ],
+      "myEvents": []
+    },
+    "王五": {
+      "messages": [
+        {
+          "id": "pn1780045887540",
+          "category": "缴费成功",
+          "title": "室友帮您代付了",
+          "content": "赵六已帮您支付 ¥8.50",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "pn1780045886247",
+          "category": "缴费成功",
+          "title": "室友帮您代付了",
+          "content": "赵六已帮您支付 ¥5.75",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "sn1780045882469王五",
+          "category": "缴费提醒",
+          "title": "新分摊待缴",
+          "content": "赵六发起了分摊，您需缴 ¥5.75",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "sn1780045872172王五",
+          "category": "缴费提醒",
+          "title": "电费分摊待缴",
+          "content": "赵六发起了电费分摊，您需缴 ¥8.50",
+          "time": "17:11",
+          "date": "2026/5/29",
+          "unread": true
+        }
+      ],
+      "billsList": [
+        {
+          "id": "custom-1780045881700",
+          "category": "空调",
+          "title": "111",
+          "amount": 23,
+          "time": "刚刚（待缴）",
+          "status": "待缴费",
+          "month": "本月",
+          "payer": "全寝",
+          "orderNo": "C1780045882469-0"
+        },
+        {
+          "id": "qs-1780045872172",
+          "category": "电费",
+          "title": "电费分摊",
+          "amount": 34,
+          "time": "刚刚（待缴）",
+          "status": "待缴费",
+          "payer": "全寝",
+          "orderNo": "S1780045872172",
+          "afterBalance": 120,
+          "month": "本月"
         }
       ]
     }
   },
-  "sessions": {}
+  "sessions": {
+    "赵六": "dt38entgadmpqpj4vw",
+    "李四": "qyx6xilw5djmpqpdj9z"
+  }
 }
