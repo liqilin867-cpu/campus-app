@@ -5,108 +5,46 @@
       "billPaymentStatus": {},
       "guaranteeHistory": [],
       "fleaItems": [
-        {
-          "id": "f1",
-          "title": "九成新小米千兆路由器",
-          "price": 49,
-          "description": "考研退舍",
-          "seller": "张三",
-          "time": "1小时前",
-          "contact": "13888321288"
-        },
-        {
-          "id": "f2",
-          "title": "2024考研政治全套书",
-          "price": 15,
-          "description": "全新",
-          "seller": "李四",
-          "time": "3小时前",
-          "contact": "19983421233"
-        },
-        {
-          "id": "f3",
-          "title": "美利达勇士300",
-          "price": 180,
-          "description": "通勤代步",
-          "seller": "王五",
-          "time": "昨天",
-          "contact": "13593212999"
-        }
+        { "id": "f1", "title": "九成新小米千兆路由器", "price": 49, "description": "考研退舍", "seller": "张三", "time": "1小时前", "contact": "13888321288" },
+        { "id": "f2", "title": "2024考研政治全套书", "price": 15, "description": "全新", "seller": "李四", "time": "3小时前", "contact": "19983421233" },
+        { "id": "f3", "title": "美利达勇士300", "price": 180, "description": "通勤代步", "seller": "王五", "time": "昨天", "contact": "13593212999" }
       ],
       "lostFoundItems": [
-        {
-          "id": "l1",
-          "type": "lost",
-          "title": "黑色充电盒",
-          "location": "操场",
-          "time": "2小时前",
-          "contact": "15893322112",
-          "status": "processing",
-          "description": "皮卡丘壳"
-        },
-        {
-          "id": "l2",
-          "type": "found",
-          "title": "钥匙串",
-          "location": "实训楼",
-          "time": "昨天",
-          "contact": "19823469988",
-          "status": "processing",
-          "description": "3把钥匙"
-        }
+        { "id": "l1", "type": "lost", "title": "黑色充电盒", "location": "操场", "time": "2小时前", "contact": "15893322112", "status": "processing", "description": "皮卡丘壳" },
+        { "id": "l2", "type": "found", "title": "钥匙串", "location": "实训楼", "time": "昨天", "contact": "19823469988", "status": "processing", "description": "3把钥匙" }
       ],
       "eventsList": [
-        {
-          "id": "e1",
-          "title": "创客沙龙",
-          "time": "今晚19:30",
-          "location": "活动中心",
-          "description": "校友分享",
-          "capacity": 200,
-          "registeredCount": 189,
-          "registered": false,
-          "tag": "讲座"
-        },
-        {
-          "id": "e2",
-          "title": "模拟面试",
-          "time": "明日14:00",
-          "location": "图书馆",
-          "description": "外企指导",
-          "capacity": 120,
-          "registeredCount": 119,
-          "registered": false,
-          "tag": "就业"
-        }
+        { "id": "e1", "title": "创客沙龙", "time": "今晚19:30", "location": "活动中心", "description": "校友分享", "capacity": 200, "registeredCount": 189, "registered": false, "tag": "讲座" },
+        { "id": "e2", "title": "模拟面试", "time": "明日14:00", "location": "图书馆", "description": "外企指导", "capacity": 120, "registeredCount": 119, "registered": false, "tag": "就业" }
       ],
       "repairRecords": [
-        {
-          "id": "r1",
-          "category": "水管漏水",
-          "description": "龙头渗水",
-          "location": "520",
-          "time": "11-26",
-          "status": "pending",
-          "contact": "13888"
-        },
-        {
-          "id": "r2",
-          "category": "家具损坏",
-          "description": "空调叶片断",
-          "location": "520",
-          "time": "11-10",
-          "status": "completed",
-          "contact": "13888"
-        }
+        { "id": "r1", "category": "水管漏水", "description": "龙头渗水", "location": "520", "time": "11-26", "status": "pending", "contact": "13888" },
+        { "id": "r2", "category": "家具损坏", "description": "空调叶片断", "location": "520", "time": "11-10", "status": "completed", "contact": "13888" }
       ],
-      "members": [
-        "赵六",
-        "张三",
-        "李四",
-        "王五"
-      ]
+      "members": ["赵六", "张三", "李四", "王五"]
     }
   },
-  "users": {},
+  "users": {
+    "赵六": {
+      "cardBalance": 128.5, "netBalance": 45, "waterBalance": 32.5, "elecBalance": 18.2,
+      "messages": [{ "id": "sys1", "category": "系统通知", "title": "欢迎", "content": "欢迎您，赵六！", "time": "00:00", "date": "2026/5/29", "unread": true }],
+      "isNetAutoDeduct": false, "unpaidBills": [], "billsList": [], "myEvents": []
+    },
+    "张三": {
+      "cardBalance": 128.5, "netBalance": 45, "waterBalance": 32.5, "elecBalance": 18.2,
+      "messages": [{ "id": "sys2", "category": "系统通知", "title": "欢迎", "content": "欢迎您，张三！", "time": "00:00", "date": "2026/5/29", "unread": true }],
+      "isNetAutoDeduct": false, "unpaidBills": [], "billsList": [], "myEvents": []
+    },
+    "李四": {
+      "cardBalance": 128.5, "netBalance": 45, "waterBalance": 32.5, "elecBalance": 18.2,
+      "messages": [{ "id": "sys3", "category": "系统通知", "title": "欢迎", "content": "欢迎您，李四！", "time": "00:00", "date": "2026/5/29", "unread": true }],
+      "isNetAutoDeduct": false, "unpaidBills": [], "billsList": [], "myEvents": []
+    },
+    "王五": {
+      "cardBalance": 128.5, "netBalance": 45, "waterBalance": 32.5, "elecBalance": 18.2,
+      "messages": [{ "id": "sys4", "category": "系统通知", "title": "欢迎", "content": "欢迎您，王五！", "time": "00:00", "date": "2026/5/29", "unread": true }],
+      "isNetAutoDeduct": false, "unpaidBills": [], "billsList": [], "myEvents": []
+    }
+  },
   "sessions": {}
 }
