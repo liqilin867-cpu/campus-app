@@ -3,6 +3,39 @@
     "room_3号楼520室": {
       "billsList": [
         {
+          "id": "h1780043389661",
+          "category": "电费",
+          "title": "代付张三分摊",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "李四（代张三付）",
+          "month": "本月",
+          "orderNo": "H1780043389661"
+        },
+        {
+          "id": "h1780043386744",
+          "category": "电费",
+          "title": "代付李四分摊",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "李四（代李四付）",
+          "month": "本月",
+          "orderNo": "H1780043386744"
+        },
+        {
+          "id": "h1780043367797",
+          "category": "电费",
+          "title": "代付王五分摊",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（代王五付）",
+          "month": "本月",
+          "orderNo": "H1780043367797"
+        },
+        {
           "id": "d1780037153155",
           "category": "校园卡",
           "title": "电费分摊（我的）",
@@ -50,9 +83,9 @@
       "billPaymentStatus": {
         "qs-1780037153155": {
           "赵六": "paid",
-          "张三": "pending",
-          "李四": "pending",
-          "王五": "pending"
+          "张三": "paid",
+          "李四": "paid",
+          "王五": "paid"
         }
       },
       "guaranteeHistory": [
@@ -178,11 +211,20 @@
   },
   "users": {
     "赵六": {
-      "cardBalance": 999999552.5,
+      "cardBalance": 999999532.5,
       "netBalance": 75,
       "waterBalance": 32.5,
       "elecBalance": 18.2,
       "messages": [
+        {
+          "id": "1780043367798",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮王五代付 ¥20.00",
+          "time": "16:29",
+          "date": "2026/5/29",
+          "unread": true
+        },
         {
           "id": "1780037153156",
           "category": "分摊通知",
@@ -269,6 +311,17 @@
       "unpaidBills": [],
       "billsList": [
         {
+          "id": "h1780043367797",
+          "category": "电费",
+          "title": "代付王五分摊",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（代王五付）",
+          "month": "本月",
+          "orderNo": "H1780043367797"
+        },
+        {
           "id": "d1780037153155",
           "category": "校园卡",
           "title": "电费分摊（我的）",
@@ -314,9 +367,150 @@
         }
       ],
       "myEvents": []
+    },
+    "王五": {
+      "messages": [
+        {
+          "id": "pn1780043367797",
+          "category": "缴费成功",
+          "title": "室友帮您代付了",
+          "content": "赵六已帮您支付 ¥20.00",
+          "time": "16:29",
+          "date": "2026/5/29",
+          "unread": true
+        }
+      ]
+    },
+    "李四": {
+      "cardBalance": 88.5,
+      "netBalance": 45,
+      "waterBalance": 32.5,
+      "elecBalance": 18.2,
+      "messages": [
+        {
+          "id": "1780043389661",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮张三代付 ¥20.00",
+          "time": "16:29",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "1780043386744",
+          "category": "缴费成功",
+          "title": "代付成功",
+          "content": "已帮李四代付 ¥20.00",
+          "time": "16:29",
+          "date": "2026/5/29",
+          "unread": true
+        },
+        {
+          "id": "1780043384648",
+          "category": "系统通知",
+          "title": "欢迎",
+          "content": "欢迎您，李四！",
+          "time": "16:29",
+          "date": "2026/5/29",
+          "unread": true
+        }
+      ],
+      "isNetAutoDeduct": false,
+      "unpaidBills": [],
+      "billsList": [
+        {
+          "id": "h1780043389661",
+          "category": "电费",
+          "title": "代付张三分摊",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "李四（代张三付）",
+          "month": "本月",
+          "orderNo": "H1780043389661"
+        },
+        {
+          "id": "h1780043386744",
+          "category": "电费",
+          "title": "代付李四分摊",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "李四（代李四付）",
+          "month": "本月",
+          "orderNo": "H1780043386744"
+        },
+        {
+          "id": "h1780043367797",
+          "category": "电费",
+          "title": "代付王五分摊",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（代王五付）",
+          "month": "本月",
+          "orderNo": "H1780043367797"
+        },
+        {
+          "id": "d1780037153155",
+          "category": "校园卡",
+          "title": "电费分摊（我的）",
+          "amount": 20,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六（我）",
+          "month": "本月",
+          "orderNo": "D1780037153155"
+        },
+        {
+          "id": "qs-1780037153155",
+          "category": "电费",
+          "title": "电费分摊",
+          "amount": 80,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "全寝",
+          "orderNo": "S1780037153155",
+          "afterBalance": 999999552.5,
+          "month": "本月"
+        },
+        {
+          "id": "r1780036851013",
+          "category": "校园卡",
+          "title": "校园卡充值",
+          "amount": 999999999,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "赵六",
+          "month": "本月",
+          "orderNo": "R1780036851013"
+        },
+        {
+          "id": "h1780035251389",
+          "category": "网费",
+          "title": "网费包月",
+          "amount": 30,
+          "time": "刚刚",
+          "status": "已缴费",
+          "payer": "系统",
+          "month": "本月"
+        }
+      ],
+      "myEvents": []
+    },
+    "张三": {
+      "messages": [
+        {
+          "id": "pn1780043389661",
+          "category": "缴费成功",
+          "title": "室友帮您代付了",
+          "content": "李四已帮您支付 ¥20.00",
+          "time": "16:29",
+          "date": "2026/5/29",
+          "unread": true
+        }
+      ]
     }
   },
-  "sessions": {
-    "赵六": "cr5gqfl7errmpqmdakv"
-  }
+  "sessions": {}
 }
