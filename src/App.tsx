@@ -72,7 +72,7 @@ export default function App(){
       if(ud.unpaidBills)setUb(ud.unpaidBills);if(ud.billsList)setBl(ud.billsList);
       if(ud.myEvents)setMyEv(ud.myEvents);
     }else{notif('系统通知','欢迎','欢迎您，'+userName+'！');}
-    const ns=Math.random().toString(36).slice(2)+Date.now().toString(36);setSid(ns);save({sessions:{[userName]:ns}});
+    const ns=Math.random().toString(36).slice(2)+Date.now().toString(36);setSid(ns);(async()=>{try{const ex=await loadD();save({...(ex||{}),sessions:{...(ex?.sessions||{}),[userName]:ns}})}catch{}})();
     setCu({name:userName,studentId,room});setLi(true);setLoad(false);fr.current=false;
   };
 
