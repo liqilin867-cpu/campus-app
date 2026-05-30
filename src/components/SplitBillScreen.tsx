@@ -200,7 +200,7 @@ export default function SplitBillScreen({
           <h2 className="text-3xl font-extrabold tracking-tight">{billSum.toFixed(2)}</h2>
         </div>
 
-        <div className="mt-4 flex items-center justify-between text-xs bg-white dark:bg-gray-800/80 backdrop-blur-md rounded-xl p-2.5">
+        <div className="mt-4 flex items-center justify-between text-xs bg-white/95 dark:bg-gray-800/80 backdrop-blur-md rounded-xl p-2.5">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-orange-200 fill-current" />
             <span>免签授权，宿舍一卡通自动极速转账</span>
