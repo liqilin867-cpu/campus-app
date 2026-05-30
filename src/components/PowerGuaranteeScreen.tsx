@@ -40,7 +40,12 @@ export default function PowerGuaranteeScreen({
         >
           <ArrowLeft className="w-5 h-5 text-on-surface" />
         </button>
-        <span className="font-bold text-lg text-primary">寝室夜间不断电申请</span>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-primary">
+            <Zap className="w-4.5 h-4.5" />
+          </div>
+          <span className="font-bold text-lg text-primary">寝室夜间不断电申请</span>
+        </div>
         <div className="w-10 h-10"></div>
       </div>
 

@@ -2,7 +2,10 @@
  * @license SPDX-License-Identifier: Apache-2.0
  */
 import React,{useState,useEffect,useRef} from 'react';
-import {Home,Wallet,ReceiptText,Bell,User,CheckCircle2,X,Sparkles} from 'lucide-react';
+import {Home,Wallet,ReceiptText,Bell,User,CheckCircle2,Sparkles} from 'lucide-react';
+import {Toaster} from '../components/ui/sonner';
+import {toast} from 'sonner';
+import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription} from '../components/ui/dialog';
 import {Message,BillItem,Roommate,FleaItem,LostFoundItem,EventItem,RepairRecord,PowerGuaranteeRecord,RoommatePaymentStatus} from './types';
 import LoginPage from './components/LoginPage';
 import HomeTab from './components/HomeTab';
@@ -20,8 +23,7 @@ export default function App(){
   const [ad,setAd]=useState(false);const [rt,setRt]=useState(null);const [ra,setRa]=useState('50');const [rp,setRp]=useState('wechat');
   const [sd,setSd]=useState(null);const [ub,setUb]=useState([]);const [bl,setBl]=useState([]);
   const [sid,setSid]=useState('');const [load,setLoad]=useState(false);
-  const [tt,setTt]=useState(null);const ttr=useRef();
-  const showT=(m,t='success')=>{if(ttr.current)clearTimeout(ttr.current);setTt({message:m,type:t});ttr.current=setTimeout(()=>setTt(null),2800);};
+  const showT=(m,t='success')=>{if(t==='error')toast.error(m);else toast.success(m);};
   const [fi,setFi]=useState([{id:'f1',title:'九成新小米千兆路由器',price:49,description:'考研退舍',seller:'张三',time:'1小时前',contact:'13888321288'},{id:'f2',title:'2024考研政治全套书',price:15,description:'全新',seller:'李四',time:'3小时前',contact:'19983421233'},{id:'f3',title:'美利达勇士300',price:180,description:'通勤代步',seller:'王五',time:'昨天',contact:'13593212999'}]);
   const [li2,setLi2]=useState([{id:'l1',type:'lost',title:'黑色充电盒',location:'操场',time:'2小时前',contact:'15893322112',status:'processing',description:'皮卡丘壳'},{id:'l2',type:'found',title:'钥匙串',location:'实训楼',time:'昨天',contact:'19823469988',status:'processing',description:'3把钥匙'}]);
   const [ev,setEv]=useState([{id:'e1',title:'创客沙龙',time:'今晚19:30',location:'活动中心',description:'校友分享',capacity:200,registeredCount:189,registered:false,tag:'讲座'},{id:'e2',title:'模拟面试',time:'明日14:00',location:'图书馆',description:'外企指导',capacity:120,registeredCount:118,registered:false,tag:'就业'}]);
@@ -48,7 +50,7 @@ export default function App(){
   const notif=(c,t,ct)=>{setMsg(p=>[{id:String(Date.now()),category:c,title:t,content:ct,time:new Date().toLocaleTimeString().slice(0,5),date:new Date().toLocaleDateString(),unread:true},...p])};
 
   const handleLoginSuccess = async (userName, studentId, room) => {
-    setLoad(true);setUb([]);setBl([]);setBps({});setMsg([]);setRm([]);setMyEv([]);setSd(null);setTt(null);
+    setLoad(true);setUb([]);setBl([]);setBps({});setMsg([]);setRm([]);setMyEv([]);setSd(null);
     setB1(0);setB2(0);setB3(0);setB4(0);setAd(false);setEv([{id:'e1',title:'创客沙龙',time:'今晚19:30',location:'活动中心',description:'校友分享',capacity:200,registeredCount:189,registered:false,tag:'讲座'},{id:'e2',title:'模拟面试',time:'明日14:00',location:'图书馆',description:'外企指导',capacity:120,registeredCount:118,registered:false,tag:'就业'}]);
     let saved:any={};try{saved=await loadD()}catch{}
     const rk='room_'+room;const rd=saved.rooms?.[rk];const ud=saved.users?.[userName];
@@ -156,28 +158,37 @@ export default function App(){
   if(!li)return <LoginPage onLoginSuccess={handleLoginSuccess} />;
   return (
     <div className="min-h-screen flex flex-col pb-16 bg-[#f2f5ff]">
-      {tt&&<div className={'fixed top-20 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 rounded-2xl shadow-lg text-sm font-bold pointer-events-none '+(tt.type==='success'?'bg-emerald-600 text-white':tt.type==='error'?'bg-red-500 text-white':'bg-slate-800 text-white')}>{tt.type==='success'?'✓ ':tt.type==='error'?'✕ ':''}{tt.message}</div>}
-      {sd&&<div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white rounded-2xl w-full max-w-sm p-6 shadow-xl">
-        <button onClick={()=>setSd(null)} className="float-right text-gray-400 cursor-pointer"><X className="w-5 h-5"/></button>
-        <div className="text-center py-2"><div className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white mx-auto mb-3"><CheckCircle2 className="w-8 h-8"/></div>
-        <h3 className="font-bold text-lg">{sd.title}</h3><p className="text-xs text-gray-500 mt-2 whitespace-pre-line">{sd.content}</p>
-        <div className="flex gap-2.5 mt-4">{sd.actionText&&sd.onAction?<><button onClick={()=>{setSd(null);sd.onAction()}} className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-lg text-xs cursor-pointer">{sd.actionText}</button>
-        <button onClick={()=>setSd(null)} className="py-3 px-5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold rounded-full cursor-pointer">关闭</button></>:<button onClick={()=>setSd(null)} className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-lg cursor-pointer">我知道了</button>}</div></div></div></div>}
-      {rt&&<div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center p-4"><div className="bg-white rounded-t-2xl w-full max-w-sm p-5 shadow-xl">
-        <div className="flex items-center justify-between mb-4"><div className="flex items-center gap-2">
-          <div className={'w-10 h-10 rounded-xl flex items-center justify-center '+(rt==='校园卡'?'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-sm shadow-blue-200':'bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-sm shadow-orange-200')}>
-            {rt==='校园卡'?<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>:<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg>}
-          </div><div><p className="font-bold text-sm text-gray-900">{rt==='校园卡'?'校园一卡通充值':'网费缴纳'}</p><p className="text-[10px] text-gray-400">{rt==='校园卡'?'支持微信/支付宝':'支持校园卡/微信/支付宝'}</p></div></div>
-          <button onClick={()=>setRt(null)} className="text-gray-400 hover:text-gray-600 cursor-pointer p-1"><X className="w-5 h-5"/></button></div>
-        <div className="bg-slate-50 rounded-xl p-4">
-          <div className="flex items-center justify-between mb-3"><span className="text-xs text-gray-500">当前余额</span><span className="font-bold text-sm text-gray-900">{rt==='校园卡'?'¥'+b1.toFixed(2):'¥'+b2.toFixed(2)}</span></div>
-          <form onSubmit={doRecharge}>
-            {rt==='校园卡'?<div className="mb-3"><label className="text-[10px] font-semibold text-gray-500 mb-1.5 block">支付方式</label><div className="grid grid-cols-2 gap-2">{['wechat','alipay'].map(p=><button key={p} type="button" onClick={()=>setRp(p)} className={'py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer '+(rp===p?'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-emerald-500 shadow-sm':'bg-white text-gray-500 border-gray-200 hover:border-emerald-300 hover:shadow-sm')}>{p==='wechat'?'微信支付':'支付宝'}</button>)}</div></div>
-            :<div className="mb-3"><label className="text-[10px] font-semibold text-gray-500 mb-1.5 block">支付方式</label><div className="grid grid-cols-3 gap-2">{['campus_card','wechat','alipay'].map(p=><button key={p} type="button" onClick={()=>setRp(p)} className={'py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer '+(rp===p?'bg-gradient-to-r from-amber-500 to-orange-500 text-white border-amber-500 shadow-sm':'bg-white text-gray-500 border-gray-200 hover:border-amber-300 hover:shadow-sm')}>{p==='campus_card'?'校园卡':p==='wechat'?'微信':'支付宝'}</button>)}</div></div>}
-            <div><label className="text-[10px] font-semibold text-gray-500 mb-1.5 block">金额</label><div className="grid grid-cols-4 gap-1.5 mb-2">{[20,50,100,200].map(a=><button key={a} type="button" onClick={()=>setRa(String(a))} className={'py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer '+(ra===String(a)?'bg-blue-600 text-white border-blue-600 shadow-sm':'bg-white text-gray-600 border-gray-200 hover:border-blue-300')}>¥{a}</button>)}</div>
-            <input type="number" value={ra} onChange={e=>setRa(e.target.value)} className="w-full bg-white border border-gray-200 text-sm p-2.5 rounded-xl outline-none focus:border-blue-400 text-center" placeholder="自定义金额" required/></div>
-            <button type="submit" className="w-full mt-3 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-200 active:scale-[0.98] transition-all cursor-pointer">确认支付 ¥{ra}</button>
-          </form></div></div></div>}
+      <Toaster richColors position="top-center" />
+      <Dialog open={!!sd} onOpenChange={()=>setSd(null)}>
+        <DialogContent className="sm:max-w-sm">
+          <div className="text-center py-2">
+            <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white mx-auto mb-3"><CheckCircle2 className="w-8 h-8"/></div>
+            <DialogTitle className="text-lg">{sd?.title}</DialogTitle>
+            <DialogDescription className="text-xs text-gray-500 mt-2 whitespace-pre-line">{sd?.content}</DialogDescription>
+          </div>
+          <div className="flex gap-2.5 justify-center">{sd?.actionText&&sd?.onAction?<><button onClick={()=>{setSd(null);sd?.onAction?.()}} className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-lg text-xs cursor-pointer">{sd?.actionText}</button>
+          <button onClick={()=>setSd(null)} className="py-3 px-5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold rounded-full cursor-pointer">关闭</button></>:<button onClick={()=>setSd(null)} className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-lg cursor-pointer">我知道了</button>}</div>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={!!rt} onOpenChange={()=>setRt(null)}>
+        <DialogContent className="sm:max-w-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <div className={'w-10 h-10 rounded-xl flex items-center justify-center '+(rt==='校园卡'?'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-sm shadow-blue-200':'bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-sm shadow-orange-200')}>
+              {rt==='校园卡'?<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>:<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg>}
+            </div>
+            <div><p className="font-bold text-sm">{rt==='校园卡'?'校园一卡通充值':'网费缴纳'}</p><p className="text-[10px] text-muted-foreground">{rt==='校园卡'?'支持微信/支付宝':'支持校园卡/微信/支付宝'}</p></div>
+          </div>
+          <div className="bg-muted/50 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-3"><span className="text-xs text-muted-foreground">当前余额</span><span className="font-bold text-sm">{rt==='校园卡'?'¥'+b1.toFixed(2):'¥'+b2.toFixed(2)}</span></div>
+            <form onSubmit={doRecharge}>
+              {rt==='校园卡'?<div className="mb-3"><label className="text-[10px] font-semibold text-muted-foreground mb-1.5 block">支付方式</label><div className="grid grid-cols-2 gap-2">{['wechat','alipay'].map(p=><button key={p} type="button" onClick={()=>setRp(p)} className={'py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer '+(rp===p?'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-emerald-500 shadow-sm':'bg-white text-gray-500 border-gray-200 hover:border-emerald-300 hover:shadow-sm')}>{p==='wechat'?'微信支付':'支付宝'}</button>)}</div></div>
+              :<div className="mb-3"><label className="text-[10px] font-semibold text-muted-foreground mb-1.5 block">支付方式</label><div className="grid grid-cols-3 gap-2">{['campus_card','wechat','alipay'].map(p=><button key={p} type="button" onClick={()=>setRp(p)} className={'py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer '+(rp===p?'bg-gradient-to-r from-amber-500 to-orange-500 text-white border-amber-500 shadow-sm':'bg-white text-gray-500 border-gray-200 hover:border-amber-300 hover:shadow-sm')}>{p==='campus_card'?'校园卡':p==='wechat'?'微信':'支付宝'}</button>)}</div></div>}
+              <div><label className="text-[10px] font-semibold text-muted-foreground mb-1.5 block">金额</label><div className="grid grid-cols-4 gap-1.5 mb-2">{[20,50,100,200].map(a=><button key={a} type="button" onClick={()=>setRa(String(a))} className={'py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer '+(ra===String(a)?'bg-blue-600 text-white border-blue-600 shadow-sm':'bg-white text-gray-600 border-gray-200 hover:border-blue-300')}>¥{a}</button>)}</div>
+              <input type="number" value={ra} onChange={e=>setRa(e.target.value)} className="w-full bg-white border border-gray-200 text-sm p-2.5 rounded-xl outline-none focus:border-blue-400 text-center" placeholder="自定义金额" required/></div>
+              <button type="submit" className="w-full mt-3 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-200 active:scale-[0.98] transition-all cursor-pointer">确认支付 ¥{ra}</button>
+            </form></div>
+        </DialogContent>
+      </Dialog>
       <div className="max-w-md mx-auto w-full flex-1 px-4 py-6">
         {sub==='split'?<SplitBillScreen unpaidBills={ub} roommates={rm} currentUserName={cu?.name||''} defaultCategory={sc} onBack={()=>{setSub(null);setSc('')}} onInitiateSuccess={handleSplit} />
         :sub==='guarantee'?<PowerGuaranteeScreen guaranteeHistory={gh} onBack={()=>setSub(null)} onSubmitGuarantee={doPower} />

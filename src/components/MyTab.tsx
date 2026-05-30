@@ -232,7 +232,7 @@ export default function MyTab({
             className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-secondary">
+              <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
                 <BellRing className="w-4.5 h-4.5" />
               </div>
               <span className="font-semibold text-sm text-on-surface">防断电提醒设置</span>
