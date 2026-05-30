@@ -421,7 +421,7 @@ export default function SplitBillScreen({
                 {/* Sub Ratio input or Simple Checkbox */}
                 <div className="flex items-center gap-2.5">
                   {splitMethod === 'ratio' && isChecked && (
-                    <div className="flex items-center gap-1 bg-white dark:bg-gray-700 border border-slate-250 dark:border-gray-600 p-1 rounded-lg">
+                    <div className="flex items-center gap-1 bg-white dark:bg-gray-700 border border-slate-250 dark:border-gray-600 p-1 rounded-lg ratio-input">
                       <input 
                         type="number"
                         min="0"

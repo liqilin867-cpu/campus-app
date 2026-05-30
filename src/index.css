@@ -402,6 +402,9 @@ html, body {
   background: transparent !important;
   color: white !important;
 }
+.dark .ratio-input input {
+  background: transparent !important;
+}
 
 /* === Dark mode override for common hardcoded color utilities === */
 .dark .bg-\[\#faf9ff\] { background: #16162a !important; }
