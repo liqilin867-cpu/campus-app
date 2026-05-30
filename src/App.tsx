@@ -209,8 +209,8 @@ export default function App(){
       {!sub&&<nav className="fixed bottom-0 left-0 w-full z-40 pb-safe tab-bar-glass border-t border-white/40 flex justify-around items-center h-[72px] px-2">
         {[{key:'home',label:'首页',icon:Home},{key:'services',label:'服务',icon:Wallet},{key:'bill',label:'账单',icon:ReceiptText},{key:'message',label:'消息',icon:Bell},{key:'my',label:'我的',icon:User}].map(({key,label,icon:Icon})=>{const a=tab===key;
           return <button key={key} onClick={()=>setTab(key)} className={'flex flex-col items-center justify-center relative py-1 px-4 cursor-pointer transition-all duration-200 '+(a?'scale-100':'hover:opacity-70')}>
-            {a&&<span className="absolute inset-0 bg-gradient-to-t from-blue-50/90 to-transparent rounded-2xl shadow-sm border border-blue-100/40"></span>}
-            <div className="relative flex flex-col items-center"><div className={'mb-0.5 transition-all duration-300 '+(a?'scale-110 -translate-y-0.5':'scale-100')}><Icon className={'w-[22px] h-[22px] transition-all duration-300 '+(a?'text-blue-600 drop-shadow-sm':'text-slate-400')}/></div><span className={'text-[10px] transition-all duration-300 '+(a?'text-blue-700 font-bold':'text-slate-400')}>{label}</span></div>
+            {a&&<span className="absolute inset-0 bg-gradient-to-t from-blue-50/90 dark:from-blue-900/40 to-transparent rounded-2xl shadow-sm border border-blue-100/40 dark:border-blue-800/40"></span>}
+            <div className="relative flex flex-col items-center"><div className={'mb-0.5 transition-all duration-300 '+(a?'scale-110 -translate-y-0.5':'scale-100')}><Icon className={'w-[22px] h-[22px] transition-all duration-300 '+(a?'text-blue-600 dark:text-blue-400 drop-shadow-sm':'text-slate-400')}/></div><span className={'text-[10px] transition-all duration-300 '+(a?'text-blue-700 dark:text-blue-300 font-bold':'text-slate-400')}>{label}</span></div>
             {key==='message'&&msg.some(m=>m.unread)&&<span className="absolute top-1 right-2 w-2.5 h-2.5 bg-gradient-to-br from-red-400 to-red-500 rounded-full border-2 border-white shadow-sm animate-subtle-pulse"></span>}
           </button>;
         })}
