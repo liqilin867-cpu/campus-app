@@ -512,7 +512,7 @@ export default function MyTab({
                     onClick={() => setNoPasswordLimit(lim.val)}
                     className={`py-2 rounded-xl border text-center font-bold text-[11px] ${
                       noPasswordLimit === lim.val
-                        ? 'bg-primary text-white border-primary shadow-sm'
+                        ? 'bg-primary dark:bg-blue-700 text-white border-primary dark:border-blue-700 shadow-sm'
                         : 'bg-white dark:bg-gray-800 text-outline dark:text-gray-300 border-slate-200 dark:border-gray-600'
                     }`}
                   >
