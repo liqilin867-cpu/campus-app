@@ -106,12 +106,12 @@ export default function HomeTab(props: HomeTabProps) {
               <div className="w-5 h-5 rounded-full bg-white/20 dark:bg-gray-900/20 flex items-center justify-center"><ChevronDown className={'w-3 h-3 transition-transform '+(showPay?'rotate-180':'')} /></div>
             </button>
             {showPay && <div className="absolute z-20 top-full mt-1 left-0 right-0 bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl shadow-xl overflow-hidden">
-              <button onClick={() => { setShowPay(false); onQuickRecharge('网费'); }} className="w-full flex items-center gap-3 px-4 py-3 text-xs text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:bg-gray-800/50 border-b border-slate-50 cursor-pointer">
-                <div className="w-7 h-7 rounded-lg bg-blue-100 flex items-center justify-center"><svg className="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg></div>
+              <button onClick={() => { setShowPay(false); onQuickRecharge('网费'); }} className="w-full flex items-center gap-3 px-4 py-3 text-xs text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-gray-700 border-b border-slate-50 dark:border-gray-700 cursor-pointer">
+                <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center"><svg className="w-4 h-4 text-blue-600 dark:text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg></div>
                 <span className="font-medium">缴网费</span>
               </button>
-              <button onClick={() => { setShowPay(false); onQuickRecharge('校园卡'); }} className="w-full flex items-center gap-3 px-4 py-3 text-xs text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:bg-gray-800/50 cursor-pointer">
-                <div className="w-7 h-7 rounded-lg bg-indigo-100 flex items-center justify-center"><svg className="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
+              <button onClick={() => { setShowPay(false); onQuickRecharge('校园卡'); }} className="w-full flex items-center gap-3 px-4 py-3 text-xs text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-gray-700 cursor-pointer">
+                <div className="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center"><svg className="w-4 h-4 text-indigo-600 dark:text-indigo-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
                 <span className="font-medium">充校园卡</span>
               </button>
             </div>}
