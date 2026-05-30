@@ -108,7 +108,7 @@ export default function ServicesTab(p:Props){
         </div>
         {/* Search */}
         <div className="relative">
-          <div className="bg-white/20 dark:bg-gray-900/20 backdrop-blur-md rounded-2xl border border-white/20 flex items-center px-4 h-11">
+          <div className="bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-2xl border border-white/30 flex items-center px-4 h-11">
             <Search className="w-4 h-4 text-white/60 shrink-0"/>
             <input value={sr} onChange={e=>setSr(e.target.value)} className="w-full bg-transparent text-sm text-white ml-2.5 outline-none placeholder:text-white/40" placeholder="搜索美食、活动、二手..."/>
             {sr&&<button onClick={()=>setSr('')} className="text-white/50 hover:text-white/80"><X className="w-4 h-4"/></button>}
@@ -122,7 +122,7 @@ export default function ServicesTab(p:Props){
 
     {/* ===== Quick Service Grid (overlapping the header) ===== */}
     <div className="relative z-10 -mt-14 px-1">
-      <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl shadow-lg shadow-slate-200/80 border border-white/50 p-4 mx-1">
+      <div className="bg-white/90 dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-none border border-white/50 dark:border-gray-700/50 p-4 mx-1">
         <div className="grid grid-cols-4 gap-2">
           {HOT_SERVICES.map(s=>(
             <div key={s.key} onClick={()=>{setM(s.key)}} className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-slate-50 dark:bg-gray-800/50 active:scale-95 transition-all cursor-pointer group">
@@ -138,14 +138,14 @@ export default function ServicesTab(p:Props){
     </div>
 
     {/* ===== Banner Carousel ===== */}
-    {bannerShow&&<div className="mt-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-100 p-3 flex items-center justify-between">
+    {bannerShow&&<div className="mt-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl border border-amber-100 dark:border-amber-700/30 p-3 flex items-center justify-between">
       <div className="flex items-center gap-2.5">
         <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shrink-0">
           <Flame className="w-3.5 h-3.5 text-white"/>
         </div>
-        <p className="text-xs text-amber-800 font-medium">{BANNER_TIPS[bannerIdx]}</p>
+        <p className="text-xs text-amber-800 dark:text-amber-200 font-medium">{BANNER_TIPS[bannerIdx]}</p>
       </div>
-      <button onClick={()=>setBannerShow(false)} className="text-amber-300 hover:text-amber-500 shrink-0 ml-2"><X className="w-3.5 h-3.5"/></button>
+      <button onClick={()=>setBannerShow(false)} className="text-amber-300 hover:text-amber-500 dark:text-amber-600 dark:hover:text-amber-400 shrink-0 ml-2"><X className="w-3.5 h-3.5"/></button>
     </div>}
 
     {/* ===== Hot Events Preview ===== */}

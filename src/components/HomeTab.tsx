@@ -58,7 +58,7 @@ export default function HomeTab(props: HomeTabProps) {
         <div className="flex items-center gap-2">
           <MapPin className="w-5 h-5 text-primary" />
           <span className="font-bold text-lg">{currentRoom}</span>
-          <span className="text-[10px] bg-slate-100 rounded-full px-2 py-0.5 text-slate-500 dark:text-gray-400">{currentUserName}</span>
+          <span className="text-[10px] bg-slate-100 dark:bg-gray-800 rounded-full px-2 py-0.5 text-slate-500 dark:text-gray-400">{currentUserName}</span>
         </div>
         <button onClick={onNavigateToNotifications} className="relative w-9 h-9 rounded-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 flex items-center justify-center cursor-pointer hover:bg-slate-50 dark:bg-gray-800/50">
           <Bell className="w-4 h-4 text-primary" />
@@ -79,7 +79,7 @@ export default function HomeTab(props: HomeTabProps) {
           <div className="bg-white dark:bg-gray-900 rounded-xl p-2.5 border border-slate-100 dark:border-gray-700/50">
             <div className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-gray-400 mb-1"><Wifi className="w-3 h-3 text-blue-500" />校园网</div>
             <p className="font-bold text-sm text-slate-800 dark:text-gray-100">¥{netBalance.toFixed(2)}</p>
-            <button onClick={onAutoDeductNet} className="w-full mt-1.5 py-1 bg-blue-50 text-blue-700 rounded-lg text-[9px] font-bold cursor-pointer">自动缴费</button>
+            <button onClick={onAutoDeductNet} className="w-full mt-1.5 py-1 bg-blue-50 text-blue-700 dark:bg-blue-900/50 dark:text-blue-200 rounded-lg text-[9px] font-bold cursor-pointer">自动缴费</button>
           </div>
           <div className="bg-white dark:bg-gray-900 rounded-xl p-2.5 border border-slate-100 dark:border-gray-700/50 cursor-pointer hover:shadow-sm" onClick={() => { setQsCat('电费'); setQsAmt(''); }}>
             <div className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-gray-400 mb-1"><Zap className="w-3 h-3 text-orange-500" />电费</div>
@@ -129,7 +129,7 @@ export default function HomeTab(props: HomeTabProps) {
       <section className="px-2">
         <div onClick={() => setShowTrend(true)} className="rounded-2xl bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 shadow-sm p-3.5 flex items-center justify-between hover:shadow-md transition-all cursor-pointer active:scale-[0.98]">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center"><BarChart3 className="w-5 h-5 text-primary" /></div>
+            <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center"><BarChart3 className="w-5 h-5 text-primary" /></div>
             <div><p className="font-bold text-xs text-slate-800 dark:text-gray-100">用能走势</p><p className="text-[10px] text-slate-400 dark:text-gray-500">查看水电月度趋势</p></div>
           </div>
           <ChevronDown className="w-4 h-4 text-slate-400 dark:text-gray-500 -rotate-90" />
@@ -141,7 +141,7 @@ export default function HomeTab(props: HomeTabProps) {
         <h4 className="font-bold text-sm text-slate-800 dark:text-gray-100 mb-3 flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" />宿舍公摊待缴</h4>
         {pendingSplit.length > 0 ? <div className="space-y-2">
           {pendingSplit.map(({ billId, bill, perPerson }) => (
-            <div key={billId} className="bg-amber-50 rounded-xl p-3 border border-amber-100 flex items-center justify-between">
+            <div key={billId} className="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 border border-amber-100 dark:border-amber-800/30 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {bill.category === '电费' && <Zap className="w-4 h-4 text-orange-500" />}
                 {bill.category === '水费' && <Droplet className="w-4 h-4 text-blue-500" />}
@@ -180,15 +180,15 @@ export default function HomeTab(props: HomeTabProps) {
       <Dialog open={showTrend} onOpenChange={(o) => { if (!o) setShowTrend(false); }}>
         <DialogContent>
           <DialogTitle className="font-bold text-sm flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" />用能走势</DialogTitle>
-          <div className="flex gap-1 bg-slate-100 p-1 rounded-lg mb-3">
-            {(['电费', '水费'] as const).map(t => <button key={t} onClick={() => setTrendTab(t)} className={'flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer '+(trendTab===t?'bg-white text-primary shadow-sm':'text-slate-500')}>{t}走势</button>)}
+          <div className="flex gap-1 bg-slate-100 dark:bg-gray-800 p-1 rounded-lg mb-3">
+            {(['电费', '水费'] as const).map(t => <button key={t} onClick={() => setTrendTab(t)} className={'flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer '+(trendTab===t?'bg-white dark:bg-gray-700 text-primary shadow-sm':'text-slate-500 dark:text-gray-400')}>{t}走势</button>)}
           </div>
           {(trendTab === '电费' ? elecData : waterData).map(d => {
             const mx = Math.max(...(trendTab === '电费' ? elecData : waterData).map(x => x.amount), 1);
             return <div key={d.label} className="flex items-center gap-2 mb-1.5">
               <span className="text-[10px] text-slate-500 dark:text-gray-400 w-8">{d.label.replace('月','')}月</span>
-              <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden"><div className="h-full rounded-full" style={{backgroundColor:trendTab==='电费'?'#f59e0b':'#06b6d4',width:(d.amount/mx)*100+'%'}}></div></div>
-              <span className="text-[10px] text-slate-600 font-semibold w-12 text-right">¥{d.amount.toFixed(0)}</span>
+              <div className="flex-1 h-2 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden"><div className="h-full rounded-full" style={{backgroundColor:trendTab==='电费'?'#f59e0b':'#06b6d4',width:(d.amount/mx)*100+'%'}}></div></div>
+              <span className="text-[10px] text-slate-600 dark:text-gray-300 font-semibold w-12 text-right">¥{d.amount.toFixed(0)}</span>
             </div>;
           })}
           <button onClick={() => setShowTrend(false)} className="w-full mt-3 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-full cursor-pointer">关闭</button>

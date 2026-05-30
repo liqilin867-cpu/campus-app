@@ -82,7 +82,7 @@ export default function BillTab({
         <div className="relative z-10 flex flex-col items-center justify-center py-1">
           <p className="font-semibold text-xs text-slate-500 dark:text-gray-400 mb-1">累计消费</p>
           <div className="flex items-baseline gap-1 mb-4">
-            <span className="text-4xl font-extrabold text-[#001f5c] tracking-tight">
+            <span className="text-4xl font-extrabold text-[#001f5c] dark:text-blue-300 tracking-tight">
               ¥ {totalSpent.toFixed(2)}
             </span>
           </div>
@@ -115,7 +115,7 @@ export default function BillTab({
 
 {/* ===== 分摊追踪板块：显示所有有室友待缴的分摊账单 ===== */}
       {Object.values(billPaymentStatus).some(p => Object.values(p).some(v => v === 'pending')) && (
-        <section className="rounded-[24px] bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 p-4 shadow-sm" id="split_tracking">
+        <section className="rounded-[24px] bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 border border-amber-200 dark:border-amber-700/30 p-4 shadow-sm" id="split_tracking">
           <div className="flex items-center gap-1.5 mb-3">
             <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
             <h3 className="font-bold text-sm text-amber-900">分摊追踪</h3>
@@ -132,19 +132,19 @@ export default function BillTab({
               const perPerson = bill ? bill.amount / totalCount : 0;
 
               return (
-                <div key={billId} className="bg-white/80 dark:bg-gray-900/80 rounded-2xl p-3.5 border border-amber-100 shadow-sm">
+                <div key={billId} className="bg-white/80 dark:bg-gray-800/80 rounded-2xl p-3.5 border border-amber-100 dark:border-amber-800/30 shadow-sm">
                   <div className="flex justify-between items-center mb-2">
                     <div>
                       <span className="font-bold text-xs text-slate-800 dark:text-gray-100">{bill?.title||'分摊账单'}</span>
                       <span className="text-[10px] text-slate-400 dark:text-gray-500 ml-2">¥{(bill?.amount||perPerson*totalCount).toFixed(2)}</span>
                     </div>
-                    <span className="text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-semibold text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/40 px-2 py-0.5 rounded-full">
                       {paidCount}/{totalCount} 已缴
                     </span>
                   </div>
 
                   {/* 进度条 */}
-                  <div className="w-full bg-slate-100 h-1.5 rounded-full mb-2.5 overflow-hidden">
+                  <div className="w-full bg-slate-100 dark:bg-gray-700 h-1.5 rounded-full mb-2.5 overflow-hidden">
                     <div className="bg-green-500 h-full rounded-full transition-all" style={{ width: `${(paidCount / totalCount) * 100}%` }}></div>
                   </div>
 
@@ -276,7 +276,7 @@ export default function BillTab({
             </div>
 
             {/* Invoice info */}
-            <div className="border border-dashed border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800/50/50 p-4 rounded-xl space-y-3 text-xs text-slate-700 dark:text-gray-200 relative">
+            <div className="border border-dashed border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800/50 p-4 rounded-xl space-y-3 text-xs text-slate-700 dark:text-gray-200 relative">
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-500 via-orange-400 to-indigo-600 rounded-t-xl"></div>
 
               <div className="flex justify-between items-center pb-2.5 border-b border-slate-200 dark:border-gray-700">
@@ -337,9 +337,9 @@ export default function BillTab({
                       <p className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest px-1">寝室成员分摊（1/4 每人）</p>
                       <div className="space-y-2 max-h-40 overflow-y-auto">
                         {allRoommates.filter(r => r.name !== currentUserName).map((rm) => (
-                          <div key={rm.name} className="flex justify-between items-center bg-slate-50 dark:bg-gray-800/50 p-2.5 rounded-xl border border-white">
+                          <div key={rm.name} className="flex justify-between items-center bg-slate-50 dark:bg-gray-800/50 p-2.5 rounded-xl border border-white dark:border-gray-700/50">
                             <div className="flex items-center gap-2">
-                              <div className="w-6.5 h-6.5 rounded-full bg-slate-50 dark:bg-gray-800/500 text-white flex items-center justify-center font-bold text-[9px]">{rm.name[0]}</div>
+                              <div className="w-6.5 h-6.5 rounded-full bg-slate-50 dark:bg-gray-700 text-white flex items-center justify-center font-bold text-[9px]">{rm.name[0]}</div>
                               <span className="font-bold text-[11px] text-slate-700 dark:text-gray-200">{rm.name}</span>
                             </div>
                             <div className="flex items-center gap-1.5 text-[10px]">
@@ -368,7 +368,7 @@ export default function BillTab({
                       const isMe = name === currentUserName;
                       return (
                         <div key={name} className={`flex items-center justify-between p-2.5 rounded-xl border ${
-                          status === 'paid' ? 'bg-green-50/50 border-green-100' : 'bg-amber-50/50 border-amber-100'
+                          status === 'paid' ? 'bg-green-50/50 dark:bg-green-900/20 border-green-100 dark:border-green-800/30' : 'bg-amber-50/50 dark:bg-amber-900/20 border-amber-100 dark:border-amber-800/30'
                         }`}>
                           <div className="flex items-center gap-2">
                             <div className={`w-7 h-7 rounded-full ${avatar.bg} ${avatar.color} flex items-center justify-center font-bold text-[10px]`}>

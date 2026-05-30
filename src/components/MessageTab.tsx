@@ -92,15 +92,15 @@ export default function MessageTab({
               onClick={() => handleMessageClick(msg)}
               className={`rounded-[24px] p-4 flex gap-3 relative cursor-pointer active:scale-[0.98] transition-all hover:shadow-md ${
                 msg.unread
-                  ? 'bg-white border border-blue-100 shadow-sm'
-                  : 'bg-white/60 border border-slate-100/60 opacity-80'
+                  ? 'bg-white dark:bg-gray-800 border border-blue-100 dark:border-blue-900/50 shadow-sm'
+                  : 'bg-white/60 dark:bg-gray-800/40 border border-slate-100/60 dark:border-gray-700/30 opacity-80'
               }`}
             >
               {/* Icon */}
               <div className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 border ${
-                msg.unread 
-                  ? 'bg-primary-fixed border-white/50 text-[#003d9b]' 
-                  : 'bg-surface-container-highest border-white/40 text-outline'
+                msg.unread
+                  ? 'bg-primary-fixed dark:bg-blue-900/50 border-white/50 dark:border-gray-600 text-[#003d9b] dark:text-blue-200'
+                  : 'bg-surface-container-highest dark:bg-gray-700/50 border-white/40 dark:border-gray-600 text-outline dark:text-gray-400'
               }`}>
                 {msg.category === '系统通知' && <MessageSquare className="w-5 h-5" />}
                 {msg.category === '缴费提醒' && <Zap className="w-5 h-5 fill-current" />}
@@ -113,15 +113,15 @@ export default function MessageTab({
                 <div className="flex justify-between items-start mb-1">
                   <div className="flex items-center gap-1.5 flex-wrap">
                     <span className={`px-2 py-0.5 rounded-full font-semibold text-[9px] border ${
-                      msg.category === '缴费提醒' 
-                        ? 'bg-amber-50 text-amber-800 border-amber-200' 
+                      msg.category === '缴费提醒'
+                        ? 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-900/40 dark:text-amber-200 dark:border-amber-700/50'
                         : msg.category === '分摊通知'
-                          ? 'bg-teal-50 text-teal-800 border-teal-200'
-                          : 'bg-primary-fixed text-on-primary-fixed border-primary-fixed-dim/50'
+                          ? 'bg-teal-50 text-teal-800 border-teal-200 dark:bg-teal-900/40 dark:text-teal-200 dark:border-teal-700/50'
+                          : 'bg-primary-fixed text-on-primary-fixed border-primary-fixed-dim/50 dark:bg-blue-900/40 dark:text-blue-200 dark:border-blue-700/50'
                     }`}>
                       [{msg.category}]
                     </span>
-                    <h3 className={`font-semibold text-sm text-on-surface truncate ${msg.unread ? 'font-bold' : ''}`}>
+                    <h3 className={`font-semibold text-sm text-on-surface dark:text-gray-100 truncate ${msg.unread ? 'font-bold' : ''}`}>
                       {msg.title}
                     </h3>
                   </div>
@@ -154,7 +154,7 @@ export default function MessageTab({
             </div>
           ))
         ) : (
-          <div className="text-center py-12 text-outline bg-white/50 dark:bg-gray-900/50 rounded-[24px] border border-white/40">
+          <div className="text-center py-12 text-outline bg-white/50 dark:bg-gray-800/50 rounded-[24px] border border-white/40 dark:border-gray-700/30">
             <MailOpen className="w-10 h-10 mx-auto mb-2 opacity-50" />
             暂无此分类的信息消息
           </div>
