@@ -6,23 +6,23 @@
 
 @theme {
   --font-sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --color-primary: #0050c8;
-  --color-primary-container: #e6f0ff;
-  --color-primary-fixed: #e6f0ff;
-  --color-on-primary-fixed: #001a4d;
-  --color-on-primary-fixed-variant: #002e8c;
-  --color-primary-fixed-dim: #aac8ff;
-  --color-on-surface: #1b1b1f;
-  --color-on-surface-variant: #45464f;
-  --color-surface-container: #f0f0f5;
-  --color-surface-container-low: #f8f8fc;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-high: #e2e2ec;
-  --color-surface-bright: #f5f7ff;
-  --color-outline: #767680;
-  --color-error: #ba1a1a;
-  --color-secondary: #ff6600;
-  --color-secondary-container: #fff0e6;
+  --color-primary: var(--cl-primary);
+  --color-primary-container: var(--cl-primary-container);
+  --color-primary-fixed: var(--cl-primary-fixed);
+  --color-on-primary-fixed: var(--cl-on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--cl-on-primary-fixed-variant);
+  --color-primary-fixed-dim: var(--cl-primary-fixed-dim);
+  --color-on-surface: var(--cl-on-surface);
+  --color-on-surface-variant: var(--cl-on-surface-variant);
+  --color-surface-container: var(--cl-surface-container);
+  --color-surface-container-low: var(--cl-surface-container-low);
+  --color-surface-container-lowest: var(--cl-surface-container-lowest);
+  --color-surface-container-high: var(--cl-surface-container-high);
+  --color-surface-bright: var(--cl-surface-bright);
+  --color-outline: var(--cl-outline);
+  --color-error: var(--cl-error);
+  --color-secondary: var(--cl-secondary);
+  --color-secondary-container: var(--cl-secondary-container);
 }
 
 body, html, button, input, select, textarea, div, span, p, h1, h2, h3, h4, h5, h6, a {
@@ -304,6 +304,23 @@ html, body {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --cl-primary: #0050c8;
+  --cl-primary-container: #e6f0ff;
+  --cl-primary-fixed: #e6f0ff;
+  --cl-on-primary-fixed: #001a4d;
+  --cl-on-primary-fixed-variant: #002e8c;
+  --cl-primary-fixed-dim: #aac8ff;
+  --cl-on-surface: #1b1b1f;
+  --cl-on-surface-variant: #45464f;
+  --cl-surface-container: #f0f0f5;
+  --cl-surface-container-low: #f8f8fc;
+  --cl-surface-container-lowest: #ffffff;
+  --cl-surface-container-high: #e2e2ec;
+  --cl-surface-bright: #f5f7ff;
+  --cl-outline: #767680;
+  --cl-error: #ba1a1a;
+  --cl-secondary: #ff6600;
+  --cl-secondary-container: #fff0e6;
 }
 
 .dark {
@@ -338,6 +355,23 @@ html, body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --cl-primary: #aac8ff;
+  --cl-primary-container: #002e8c;
+  --cl-primary-fixed: #001a4d;
+  --cl-on-primary-fixed: #e6f0ff;
+  --cl-on-primary-fixed-variant: #aac8ff;
+  --cl-primary-fixed-dim: #0047a8;
+  --cl-on-surface: #e2e2ec;
+  --cl-on-surface-variant: #c4c4d0;
+  --cl-surface-container: #2a2a44;
+  --cl-surface-container-low: #22223c;
+  --cl-surface-container-lowest: #0f0f1a;
+  --cl-surface-container-high: #363654;
+  --cl-surface-bright: #3a3a5c;
+  --cl-outline: #90909a;
+  --cl-error: #ffb4ab;
+  --cl-secondary: #ff9944;
+  --cl-secondary-container: #4a2200;
 }
 
 /* Dark mode body & common overrides */

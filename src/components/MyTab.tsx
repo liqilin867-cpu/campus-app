@@ -211,7 +211,7 @@ export default function MyTab({
           {/* Quick Recharge triggers home recharge flow */}
           <button 
             onClick={() => onQuickRecharge('校园卡')}
-            className="col-span-2 mt-1 h-12 rounded-full bg-gradient-to-r from-primary to-primary-container text-white font-semibold text-sm flex items-center justify-center gap-1.5 shadow-[0_4px_14px_0_rgba(0,6,102,0.3)] duration-200 hover:shadow-md cursor-pointer active:scale-95"
+            className="col-span-2 mt-1 h-12 rounded-full bg-gradient-to-r from-primary to-primary-container dark:from-blue-800 dark:to-blue-950 text-white font-semibold text-sm flex items-center justify-center gap-1.5 shadow-[0_4px_14px_0_rgba(0,6,102,0.3)] duration-200 hover:shadow-md cursor-pointer active:scale-95"
           >
             <Bolt className="w-5 h-5" />
             快速充值
