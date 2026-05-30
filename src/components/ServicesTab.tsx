@@ -68,8 +68,8 @@ export default function ServicesTab(p:Props){
     const e=p.eventsList.filter(x=>x.title.includes(s)).map(x=>({label:x.title,tag:x.tag,type:'event'}));
     const all=[...r,...f,...l,...e];
     if(!all.length)return <div className="text-center py-8 text-xs text-slate-400 dark:text-gray-500">未找到匹配结果</div>;
-    return <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-gray-700 shadow-lg p-2 max-h-64 overflow-y-auto">{all.map((x,i)=>
-      <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 dark:bg-gray-800/50 cursor-pointer text-xs transition-colors" onClick={()=>{
+    return <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-gray-600 shadow-lg p-2 max-h-64 overflow-y-auto">{all.map((x,i)=>
+      <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-gray-700/50 cursor-pointer text-xs transition-colors" onClick={()=>{
         setSr('');
         if(x.type==='food')setM('food');
         else if(x.type==='flea')setM('flea');
@@ -108,7 +108,7 @@ export default function ServicesTab(p:Props){
         </div>
         {/* Search */}
         <div className="relative">
-          <div className="bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-2xl border border-white/30 flex items-center px-4 h-11">
+          <div className="bg-white/25 backdrop-blur-md rounded-2xl border border-white/40 flex items-center px-4 h-11">
             <Search className="w-4 h-4 text-white/60 shrink-0"/>
             <input value={sr} onChange={e=>setSr(e.target.value)} className="w-full bg-transparent text-sm text-white ml-2.5 outline-none placeholder:text-white/40" placeholder="搜索美食、活动、二手..."/>
             {sr&&<button onClick={()=>setSr('')} className="text-white/50 hover:text-white/80"><X className="w-4 h-4"/></button>}
