@@ -159,7 +159,7 @@ export default function ServicesTab(p:Props){
           全部 <ChevronRight className="w-3 h-3"/>
         </button>
       </div>
-      <div className="flex gap-3 overflow-x-auto scrollbar-none pb-1 -mx-1 px-1">
+      <div className="flex gap-3 hscroll pb-1 -mx-1 px-1">
         {p.eventsList.slice(0,3).map(ev=>{
           const ratio=ev.capacity>0?Math.round(ev.registeredCount/ev.capacity*100):0;
           const isHot=ratio>=80;
@@ -219,7 +219,7 @@ export default function ServicesTab(p:Props){
         </div>
         <div className="p-4">
           {!done?<>
-            <div className="flex gap-2 mb-3 overflow-x-auto scrollbar-none">{[...FOOD].map(r=><button key={r.id} onClick={()=>{setRes(r);setCart({})}} className={'shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition-all '+(res.id===r.id?'bg-orange-500 text-white shadow-md shadow-orange-200':'bg-slate-100 text-slate-600 hover:bg-slate-200')}>{r.name}</button>)}</div>
+            <div className="flex gap-2 mb-3 hscroll">{[...FOOD].map(r=><button key={r.id} onClick={()=>{setRes(r);setCart({})}} className={'shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition-all '+(res.id===r.id?'bg-orange-500 text-white shadow-md shadow-orange-200':'bg-slate-100 text-slate-600 hover:bg-slate-200')}>{r.name}</button>)}</div>
             <div className="rounded-2xl overflow-hidden h-28 mb-3 relative shadow-md">{res.img?<img src={res.img} className="w-full h-full object-cover"/>:<div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-4xl">🍽️</div>}<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3"><p className="font-bold text-white text-lg drop-shadow-sm">{res.name}</p></div></div>
             <div className="space-y-2">{res.items.map(item=>{
               const q=cart[item.id]||0;
