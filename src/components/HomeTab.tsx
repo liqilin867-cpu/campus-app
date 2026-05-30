@@ -72,7 +72,7 @@ export default function HomeTab(props: HomeTabProps) {
         <div className="bg-gradient-to-br from-blue-700 to-indigo-800 rounded-2xl p-4 text-white mb-3">
           <div className="flex justify-between items-center">
             <div><p className="text-[10px] text-white/70">一卡通余额</p><p className="text-2xl font-bold">¥{cardBalance.toFixed(2)}</p></div>
-            <button onClick={() => onQuickRecharge('校园卡')} className="bg-white/20 hover:bg-white dark:bg-gray-900/30 border border-white/30 rounded-full px-4 py-1.5 text-[11px] font-bold cursor-pointer">充值</button>
+            <button onClick={() => onQuickRecharge('校园卡')} className="bg-white/20 hover:bg-white/30 dark:bg-gray-900/30 border border-white/30 rounded-full px-4 py-1.5 text-[11px] font-bold cursor-pointer">充值</button>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-2">
@@ -99,11 +99,11 @@ export default function HomeTab(props: HomeTabProps) {
         <div className="flex gap-2">
           <div className="flex-1 relative">
             <button onClick={() => setShowPay(!showPay)} className="w-full flex items-center gap-2.5 px-3 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm hover:shadow-md active:scale-[0.98] transition-all cursor-pointer">
-              <div className="w-9 h-9 rounded-lg bg-white dark:bg-gray-900/15 flex items-center justify-center backdrop-blur-sm">
+              <div className="w-9 h-9 rounded-lg bg-white/15 dark:bg-gray-900/15 flex items-center justify-center backdrop-blur-sm">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
               </div>
               <div className="text-left flex-1"><p className="font-bold text-xs">个人缴费</p><p className="text-[10px] text-blue-100">网费 · 校园卡</p></div>
-              <div className="w-5 h-5 rounded-full bg-white dark:bg-gray-900/20 flex items-center justify-center"><ChevronDown className={'w-3 h-3 transition-transform '+(showPay?'rotate-180':'')} /></div>
+              <div className="w-5 h-5 rounded-full bg-white/20 dark:bg-gray-900/20 flex items-center justify-center"><ChevronDown className={'w-3 h-3 transition-transform '+(showPay?'rotate-180':'')} /></div>
             </button>
             {showPay && <div className="absolute z-20 top-full mt-1 left-0 right-0 bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl shadow-xl overflow-hidden">
               <button onClick={() => { setShowPay(false); onQuickRecharge('网费'); }} className="w-full flex items-center gap-3 px-4 py-3 text-xs text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:bg-gray-800/50 border-b border-slate-50 cursor-pointer">
@@ -117,7 +117,7 @@ export default function HomeTab(props: HomeTabProps) {
             </div>}
           </div>
           <button onClick={() => onNavigateToSplit()} className="flex-1 flex items-center gap-2.5 px-3 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-sm hover:shadow-md active:scale-[0.98] transition-all cursor-pointer">
-            <div className="w-9 h-9 rounded-lg bg-white dark:bg-gray-900/15 flex items-center justify-center backdrop-blur-sm">
+            <div className="w-9 h-9 rounded-lg bg-white/15 dark:bg-gray-900/15 flex items-center justify-center backdrop-blur-sm">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
             </div>
             <div className="text-left"><p className="font-bold text-xs">分摊缴费</p><p className="text-[10px] text-orange-100">电费·水费·空调</p></div>

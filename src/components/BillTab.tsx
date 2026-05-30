@@ -132,7 +132,7 @@ export default function BillTab({
               const perPerson = bill ? bill.amount / totalCount : 0;
 
               return (
-                <div key={billId} className="bg-white dark:bg-gray-900/80 rounded-2xl p-3.5 border border-amber-100 shadow-sm">
+                <div key={billId} className="bg-white/80 dark:bg-gray-900/80 rounded-2xl p-3.5 border border-amber-100 shadow-sm">
                   <div className="flex justify-between items-center mb-2">
                     <div>
                       <span className="font-bold text-xs text-slate-800 dark:text-gray-100">{bill?.title||'分摊账单'}</span>

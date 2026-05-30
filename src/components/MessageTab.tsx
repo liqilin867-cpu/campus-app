@@ -154,7 +154,7 @@ export default function MessageTab({
             </div>
           ))
         ) : (
-          <div className="text-center py-12 text-outline bg-white dark:bg-gray-900/50 rounded-[24px] border border-white/40">
+          <div className="text-center py-12 text-outline bg-white/50 dark:bg-gray-900/50 rounded-[24px] border border-white/40">
             <MailOpen className="w-10 h-10 mx-auto mb-2 opacity-50" />
             暂无此分类的信息消息
           </div>

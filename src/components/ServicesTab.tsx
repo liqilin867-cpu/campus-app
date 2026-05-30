@@ -68,7 +68,7 @@ export default function ServicesTab(p:Props){
     const e=p.eventsList.filter(x=>x.title.includes(s)).map(x=>({label:x.title,tag:x.tag,type:'event'}));
     const all=[...r,...f,...l,...e];
     if(!all.length)return <div className="text-center py-8 text-xs text-slate-400 dark:text-gray-500">未找到匹配结果</div>;
-    return <div className="bg-white dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-gray-700 shadow-lg p-2 max-h-64 overflow-y-auto">{all.map((x,i)=>
+    return <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-gray-700 shadow-lg p-2 max-h-64 overflow-y-auto">{all.map((x,i)=>
       <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 dark:bg-gray-800/50 cursor-pointer text-xs transition-colors" onClick={()=>{
         setSr('');
         if(x.type==='food')setM('food');
@@ -89,7 +89,7 @@ export default function ServicesTab(p:Props){
     {/* ===== Gradient Header ===== */}
     <div className="relative -mx-4 -mt-6 px-4 pt-6 pb-20 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 rounded-b-[28px] shadow-lg shadow-indigo-200/50">
       <div className="absolute inset-0 rounded-b-[28px] overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white dark:bg-gray-900/5 rounded-full blur-2xl"></div>
+        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/5 dark:bg-gray-900/5 rounded-full blur-2xl"></div>
         <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-purple-500/10 rounded-full blur-3xl"></div>
         <div className="absolute top-20 left-1/3 w-20 h-20 bg-blue-400/10 rounded-full blur-xl"></div>
       </div>
@@ -101,14 +101,14 @@ export default function ServicesTab(p:Props){
             </h2>
             <p className="text-xs text-white/70 mt-0.5">一站式解决课余生活需求</p>
           </div>
-          <div className="bg-white dark:bg-gray-900/15 backdrop-blur-sm rounded-2xl px-3 py-1.5 flex items-center gap-1.5">
+          <div className="bg-white/15 dark:bg-gray-900/15 backdrop-blur-sm rounded-2xl px-3 py-1.5 flex items-center gap-1.5">
             <Shield className="w-3.5 h-3.5 text-yellow-300"/>
             <span className="text-[10px] text-white font-medium">安全校园</span>
           </div>
         </div>
         {/* Search */}
         <div className="relative">
-          <div className="bg-white dark:bg-gray-900/20 backdrop-blur-md rounded-2xl border border-white/20 flex items-center px-4 h-11">
+          <div className="bg-white/20 dark:bg-gray-900/20 backdrop-blur-md rounded-2xl border border-white/20 flex items-center px-4 h-11">
             <Search className="w-4 h-4 text-white/60 shrink-0"/>
             <input value={sr} onChange={e=>setSr(e.target.value)} className="w-full bg-transparent text-sm text-white ml-2.5 outline-none placeholder:text-white/40" placeholder="搜索美食、活动、二手..."/>
             {sr&&<button onClick={()=>setSr('')} className="text-white/50 hover:text-white/80"><X className="w-4 h-4"/></button>}
@@ -122,7 +122,7 @@ export default function ServicesTab(p:Props){
 
     {/* ===== Quick Service Grid (overlapping the header) ===== */}
     <div className="relative z-10 -mt-14 px-1">
-      <div className="bg-white dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl shadow-lg shadow-slate-200/80 border border-white/50 p-4 mx-1">
+      <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl shadow-lg shadow-slate-200/80 border border-white/50 p-4 mx-1">
         <div className="grid grid-cols-4 gap-2">
           {HOT_SERVICES.map(s=>(
             <div key={s.key} onClick={()=>{setM(s.key)}} className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-slate-50 dark:bg-gray-800/50 active:scale-95 transition-all cursor-pointer group">

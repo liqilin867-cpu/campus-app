@@ -295,7 +295,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
       <main className="w-full max-w-sm relative z-10 my-auto">
         {/* Header Badge */}
         <div className="text-center mb-5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200 dark:border-gray-700/60 rounded-full shadow-sm text-[10px] text-blue-700 font-bold tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200 dark:border-gray-700/60 rounded-full shadow-sm text-[10px] text-blue-700 font-bold tracking-wider mb-3">
             <ShieldCheck className="w-3.5 h-3.5" />
             统一身份认证门户
           </div>
