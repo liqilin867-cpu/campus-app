@@ -420,7 +420,7 @@ export default function BillTab({
             <div className="flex gap-2.5">
               <button
                 onClick={() => handleDownloadInvoice(selectedBill)}
-                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 dark:text-gray-200 font-semibold text-xs rounded-full flex items-center justify-center gap-1.5 cursor-pointer"
+                className="flex-1 py-3 bg-slate-100 dark:bg-gray-800 hover:bg-slate-200 dark:hover:bg-gray-700 text-slate-700 dark:text-gray-200 font-semibold text-xs rounded-full flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 下载凭证
