@@ -366,8 +366,8 @@ html, body {
 }
 
 /* === Dark mode override for common hardcoded color utilities === */
-.dark .bg-\[#faf9ff\] { background: #16162a !important; }
-.dark .bg-\[#dae2ff\] { background: #1e2a4a !important; }
+.dark .bg-\[\#faf9ff\] { background: #16162a !important; }
+.dark .bg-\[\#dae2ff\] { background: #1e2a4a !important; }
 .dark .bg-emerald-50 { background: #0d3d2e !important; }
 .dark .text-emerald-700 { color: #6ee7b7 !important; }
 .dark .border-emerald-200 { border-color: #065f46 !important; }
@@ -382,7 +382,7 @@ html, body {
 .dark .text-blue-600 { color: #93c5fd !important; }
 .dark .bg-red-50 { background: #4a1e1e !important; }
 .dark .text-red-500 { color: #fca5a5 !important; }
-.dark .text-\[#006474\] { color: #22d3ee !important; }
+.dark .text-\[\#006474\] { color: #22d3ee !important; }
 .dark .bg-teal-50 { background: #0d3d3d !important; }
 .dark .text-teal-700 { color: #5eead4 !important; }
 .dark .border-teal-100 { border-color: #115e59 !important; }

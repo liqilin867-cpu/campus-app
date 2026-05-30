@@ -102,7 +102,7 @@ export default function MyTab({
       >
         <div className="flex items-center gap-4">
           <div className="relative">
-            <div className="w-[72px] h-[72px] rounded-full neumorphic-convex p-1 bg-[#faf9ff] ring-2 ring-primary/20 group-hover:ring-orange-500/50 transition-all">
+            <div className="w-[72px] h-[72px] rounded-full neumorphic-convex p-1 bg-[#faf9ff] dark:bg-[#16162a] ring-2 ring-primary/20 group-hover:ring-orange-500/50 transition-all">
               <img 
                 alt={`${studentName}头像`} 
                 className="w-full h-full rounded-full object-cover border border-white/50" 
@@ -134,7 +134,7 @@ export default function MyTab({
             e.stopPropagation();
             setActiveModal('simpleSetup');
           }}
-          className="w-10 h-10 rounded-full neumorphic-convex flex items-center justify-center text-primary transition-all hover:scale-105 active:scale-95 cursor-pointer bg-[#faf9ff]"
+          className="w-10 h-10 rounded-full neumorphic-convex flex items-center justify-center text-primary transition-all hover:scale-105 active:scale-95 cursor-pointer bg-[#faf9ff] dark:bg-[#16162a]"
         >
           <Settings className="w-5 h-5" />
         </button>
@@ -179,7 +179,7 @@ export default function MyTab({
         <h3 className="font-semibold text-base text-on-surface mb-3 px-1">我的钱包</h3>
         <div className="grid grid-cols-2 gap-3">
           {/* Card 1 */}
-          <div className="neumorphic-convex rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden bg-[#faf9ff]">
+          <div className="neumorphic-convex rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
             <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none">
               <CreditCard className="w-20 h-20 text-primary" />
             </div>
@@ -194,7 +194,7 @@ export default function MyTab({
           </div>
 
           {/* Card 2 */}
-          <div className="neumorphic-convex rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden bg-[#faf9ff]">
+          <div className="neumorphic-convex rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
             <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none text-secondary">
               <Droplet className="w-20 h-20 text-[#006474]" />
             </div>
@@ -220,7 +220,7 @@ export default function MyTab({
       </section>
 
       {/* Settings Grid Panel */}
-      <section className="neumorphic-convex rounded-2xl overflow-hidden bg-[#faf9ff]">
+      <section className="neumorphic-convex rounded-2xl overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
         <div className="flex flex-col">
           
           <button 
@@ -228,7 +228,7 @@ export default function MyTab({
             className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#dae2ff] flex items-center justify-center text-primary">
+              <div className="w-8 h-8 rounded-full bg-[#dae2ff] dark:bg-[#1e2a4a] flex items-center justify-center text-primary">
                 <CreditCard className="w-4.5 h-4.5" />
               </div>
               <span className="font-semibold text-sm text-on-surface">缴费安全与自动充值</span>
@@ -299,7 +299,7 @@ export default function MyTab({
 
       {/* System info & Help */}
       <section className="flex flex-col gap-2">
-        <div className="neumorphic-convex rounded-2xl overflow-hidden bg-[#faf9ff] flex flex-col">
+        <div className="neumorphic-convex rounded-2xl overflow-hidden bg-[#faf9ff] dark:bg-[#16162a] flex flex-col">
           <button 
             onClick={() => setActiveModal('feedback')}
             className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
@@ -334,7 +334,7 @@ export default function MyTab({
         </button>
         <button 
           onClick={onLogout}
-          className="mt-3 w-full p-4 neumorphic-convex rounded-2xl font-bold text-base text-error bg-[#faf9ff] hover:text-red-800 transition-colors flex items-center justify-center gap-2 cursor-pointer transition-transform active:scale-[0.98]"
+          className="mt-3 w-full p-4 neumorphic-convex rounded-2xl font-bold text-base text-error bg-[#faf9ff] dark:bg-[#16162a] hover:text-red-800 transition-colors flex items-center justify-center gap-2 cursor-pointer transition-transform active:scale-[0.98]"
         >
           <LogOut className="w-5 h-5" />
           安全退出登录账号
