@@ -42,7 +42,7 @@ export default function PowerGuaranteeScreen({
           <ArrowLeft className="w-5 h-5 text-on-surface" />
         </button>
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-primary">
+          <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-900/40 flex items-center justify-center text-primary">
             <Zap className="w-4.5 h-4.5" />
           </div>
           <span className="font-bold text-lg text-primary">寝室夜间不断电申请</span>
@@ -80,7 +80,7 @@ export default function PowerGuaranteeScreen({
               <select 
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
-                className="w-full bg-[#f1f3ff] border-none text-sm p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer"
+                className="w-full bg-[#f1f3ff] dark:bg-gray-800 border-none text-sm p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer dark:text-gray-100"
               >
                 <option value="22:30">22:30 (下自习时段)</option>
                 <option value="23:00">23:00 (常规熄灯关灯时段)</option>
@@ -94,10 +94,10 @@ export default function PowerGuaranteeScreen({
           <div>
             <label className="block text-xs font-semibold text-on-surface-variant mb-1">结束时间 (系统自动恢复常规托管)</label>
             <div className="relative">
-              <select 
+              <select
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
-                className="w-full bg-[#f1f3ff] border-none text-sm p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer"
+                className="w-full bg-[#f1f3ff] dark:bg-gray-800 border-none text-sm p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer dark:text-gray-100"
               >
                 <option value="06:00">06:00 (次日清晨)</option>
                 <option value="07:00">07:00 (次日洗漱醒来)</option>
@@ -108,13 +108,13 @@ export default function PowerGuaranteeScreen({
           </div>
 
           {appliedToday ? (
-            <div className="bg-green-50 p-3 rounded-2xl border border-green-200 text-center text-xs text-green-700 font-semibold flex items-center justify-center gap-1.5">
+            <div className="bg-green-50 dark:bg-green-900/30 p-3 rounded-2xl border border-green-200 dark:border-green-800/40 text-center text-xs text-green-700 dark:text-green-300 font-semibold flex items-center justify-center gap-1.5">
               <CheckCircle2 className="w-4.5 h-4.5" /> 申请今日已绿灯放行通过，夜间将维持持续电源供应！
             </div>
           ) : (
             <button
               type="submit"
-              className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-base rounded-full shadow-lg shadow-blue-200 active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-800 text-white font-bold text-base rounded-full shadow-lg shadow-blue-200 dark:shadow-blue-950 active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <Send className="w-4 h-4" />
               提交今日保电极速审批
@@ -136,14 +136,14 @@ export default function PowerGuaranteeScreen({
 
         <div className="space-y-2.5">
           {guaranteeHistory.map((rec) => (
-            <div key={rec.id} className="bg-white dark:bg-gray-900 dark:bg-gray-900/80 p-3 rounded-2xl border border-white/50 flex justify-between items-center shadow-sm">
+            <div key={rec.id} className="bg-white dark:bg-gray-800 p-3 rounded-2xl border border-white/50 dark:border-gray-700/50 flex justify-between items-center shadow-sm">
               <div className="flex items-center gap-3">
                 <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border ${
-                  rec.status === '已批准' 
-                    ? 'bg-green-50 text-green-600 border-green-100' 
-                    : rec.status === '已拒绝' 
-                      ? 'bg-red-50 text-error border-red-100' 
-                      : 'bg-amber-50 text-amber-600 border-amber-100'
+                  rec.status === '已批准'
+                    ? 'bg-green-50 dark:bg-green-900/40 text-green-600 dark:text-green-300 border-green-100 dark:border-green-800/40'
+                    : rec.status === '已拒绝'
+                      ? 'bg-red-50 dark:bg-red-900/40 text-error dark:text-red-300 border-red-100 dark:border-red-800/40'
+                      : 'bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 border-amber-100 dark:border-amber-800/40'
                 }`}>
                   {rec.status === '已批准' && <CheckCircle2 className="w-4.5 h-4.5" />}
                   {rec.status === '已拒绝' && <XCircle className="w-4.5 h-4.5" />}
@@ -156,11 +156,11 @@ export default function PowerGuaranteeScreen({
               </div>
               
               <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
-                rec.status === '已批准' 
-                  ? 'bg-green-50 text-green-700 border border-green-200' 
-                  : rec.status === '已拒绝' 
-                    ? 'bg-red-50 text-error border-red-200' 
-                    : 'bg-amber-50 text-amber-700 border-amber-200 animate-pulse'
+                rec.status === '已批准'
+                  ? 'bg-green-50 dark:bg-green-900/40 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/40'
+                  : rec.status === '已拒绝'
+                    ? 'bg-red-50 dark:bg-red-900/40 text-error dark:text-red-300 border-red-200 dark:border-red-800/40'
+                    : 'bg-amber-50 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/40 animate-pulse'
               }`}>
                 {rec.status}
               </span>

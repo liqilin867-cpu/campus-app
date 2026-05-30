@@ -487,7 +487,7 @@ export default function MyTab({
                     className={`flex justify-between items-center px-4 py-2.5 rounded-xl border-2 text-left transition-all ${
                       payMethod === item.key
                         ? 'border-primary bg-primary/5 font-semibold text-primary'
-                        : 'border-slate-100 hover:border-slate-200 text-on-surface-variant'
+                        : 'border-slate-100 dark:border-gray-600 hover:border-slate-200 dark:hover:border-gray-500 text-on-surface-variant'
                     }`}
                   >
                     <span>{item.label}</span>
@@ -513,7 +513,7 @@ export default function MyTab({
                     className={`py-2 rounded-xl border text-center font-bold text-[11px] ${
                       noPasswordLimit === lim.val
                         ? 'bg-primary text-white border-primary shadow-sm'
-                        : 'bg-white text-outline border-slate-200'
+                        : 'bg-white dark:bg-gray-800 text-outline dark:text-gray-300 border-slate-200 dark:border-gray-600'
                     }`}
                   >
                     {lim.label}
@@ -541,7 +541,7 @@ export default function MyTab({
               toast.success('缴费安全与自动扣划新策略已保存并全面生效！');
               setActiveModal(null);
             }}
-            className="w-full mt-2 py-3 bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-full shadow-md active:scale-95 duration-150"
+            className="w-full mt-2 py-3 bg-gradient-to-r from-primary to-primary-container dark:from-blue-700 dark:to-blue-900 text-white font-bold rounded-full shadow-md active:scale-95 duration-150"
           >
             应用并保存修改
           </button>
@@ -572,7 +572,7 @@ export default function MyTab({
                     className={`py-2 rounded-xl border text-center font-bold text-[11px] ${
                       outageThreshold === lev.val
                         ? 'bg-[#006474] text-white border-[#006474] shadow-sm'
-                        : 'bg-white text-outline border-slate-200'
+                        : 'bg-white dark:bg-gray-800 text-outline dark:text-gray-300 border-slate-200 dark:border-gray-600'
                     }`}
                   >
                     {lev.label}
@@ -601,7 +601,7 @@ export default function MyTab({
 
             <div>
               <label className="block text-[11px] text-outline font-semibold mb-1.5">备用接收紧急联系手机号</label>
-              <input type="tel" value={backupPhone} onChange={(e) => setBackupPhone(e.target.value)} className="w-full bg-slate-100 border-none p-3 text-xs font-semibold rounded-xl text-on-surface focus:ring-2 focus:ring-[#006474] outline-none" placeholder="请输入手机号" />
+              <input type="tel" value={backupPhone} onChange={(e) => setBackupPhone(e.target.value)} className="w-full bg-slate-100 dark:bg-gray-800 border-none p-3 text-xs font-semibold rounded-xl text-on-surface dark:text-gray-100 focus:ring-2 focus:ring-[#006474] outline-none" placeholder="请输入手机号" />
             </div>
           </div>
 
