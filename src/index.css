@@ -31,12 +31,51 @@ body, html, button, input, select, textarea, div, span, p, h1, h2, h3, h4, h5, h
   font-family: "Noto Sans SC", "Inter", ui-sans-serif, system-ui, sans-serif !important;
 }
 
-/* === Simple mobile-friendly background === */
+/* === Animated gradient background === */
 html, body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
   background: #f5f7ff;
+  background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #f0faff 100%);
+  background-attachment: fixed;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bg-animated {
+  background: linear-gradient(-45deg, #f0f4ff, #faf5ff, #f0faff, #eef2ff);
+  background-size: 400% 400%;
+  animation: bgShift 15s ease infinite;
+}
+
+/* === Subtle decorative blobs === */
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-blob-1 {
+  width: 400px; height: 400px;
+  background: #818cf8;
+  top: -100px; right: -100px;
+}
+.bg-blob-2 {
+  width: 300px; height: 300px;
+  background: #38bdf8;
+  bottom: 100px; left: -80px;
+}
+.bg-blob-3 {
+  width: 250px; height: 250px;
+  background: #c084fc;
+  bottom: -50px; right: 20%;
 }
 
 /* === Glass panel - with mobile vendor prefix === */
@@ -54,6 +93,20 @@ html, body {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* === Elevated card === */
+.elevated-card {
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 8px 32px rgba(0, 80, 200, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.elevated-card:hover {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 12px 48px rgba(0, 80, 200, 0.10);
+  transform: translateY(-1px);
 }
 
 /* === Tab Bar (mobile safe) === */
@@ -117,6 +170,55 @@ html, body {
 /* Scrollbar hide utility */
 .scrollbar-none::-webkit-scrollbar { display: none; }
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* === Page transition === */
+.page-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* === Gradient avatars === */
+.avatar-gradient {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 2px solid rgba(255,255,255,0.5);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+}
+.avatar-gradient-1 { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.avatar-gradient-2 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+.avatar-gradient-3 { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+.avatar-gradient-4 { background: linear-gradient(135deg, #10b981, #059669); }
+.avatar-gradient-5 { background: linear-gradient(135deg, #ec4899, #f43f5e); }
+
+/* === shimmer / skeleton === */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* === Press feedback === */
+.press-scale {
+  transition: transform 0.15s ease;
+}
+.press-scale:active {
+  transform: scale(0.97);
+}
 
 @theme inline {
   --font-heading: var(--font-sans);

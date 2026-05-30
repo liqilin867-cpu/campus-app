@@ -79,7 +79,7 @@ export default function App(){
       if(ud.unpaidBills)setUb(ud.unpaidBills);if(ud.billsList)setBl(ud.billsList);
       if(ud.myEvents)setMyEv(ud.myEvents);
     }else{notif('系统通知','欢迎','欢迎您，'+userName+'！');}
-    const ns=Math.random().toString(36).slice(2)+Date.now().toString(36);try{const ex=loadD();await fetch('/api/data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...(ex||{}),sessions:{...(ex?.sessions||{}),[userName]:ns}})});}catch{}setSid(ns);
+    const ns=Math.random().toString(36).slice(2)+Date.now().toString(36);try{const ex=loadD();save({...(ex||{}),sessions:{...(ex?.sessions||{}),[userName]:ns}});}catch{}setSid(ns);
     setCu({name:userName,studentId,room});setLi(true);setLoad(false);fr.current=false;
   };
 
@@ -156,11 +156,11 @@ export default function App(){
     setSd({title:cat+'分摊成功',content:'¥'+amt.toFixed(2)+' 已分给 '+rm.length+' 人\\n每人 ¥'+pp.toFixed(2)+'（余额 ¥'+fb.toFixed(2)+'）',actionText:'查看',onAction:()=>setTab('bill')});
   };
 
-  if(load)return <div className="h-screen bg-[#f2f5ff] flex items-center justify-center"><div className="flex flex-col items-center gap-3"><div className="w-10 h-10 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div><p className="text-sm text-slate-500">加载中...</p></div></div>;
+  if(load)return <div className="h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center"><div className="flex flex-col items-center gap-4"><div className="w-12 h-12 rounded-full border-4 border-blue-600 border-t-transparent animate-spin shadow-lg shadow-blue-200"></div><p className="text-sm font-semibold text-slate-500">加载中...</p></div></div>;
   if(!li)return <LoginPage onLoginSuccess={handleLoginSuccess} />;
   return (<ErrorBoundary>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-    <div className="min-h-screen flex flex-col pb-16 bg-[#f2f5ff]">
+    <div className="min-h-screen flex flex-col pb-16 bg-animated">
       <Toaster richColors position="top-center" />
       <Dialog open={!!sd} onOpenChange={()=>setSd(null)}>
         <DialogContent className="sm:max-w-sm">
@@ -192,7 +192,10 @@ export default function App(){
             </form></div>
         </DialogContent>
       </Dialog>
-      <div className="max-w-md mx-auto w-full flex-1 px-4 py-6">
+      <div className="bg-blob bg-blob-1"></div>
+      <div className="bg-blob bg-blob-2"></div>
+      <div className="bg-blob bg-blob-3"></div>
+      <div className="max-w-md mx-auto w-full flex-1 px-4 py-6 relative z-10">
         {sub==='split'?<SplitBillScreen unpaidBills={ub} roommates={rm} currentUserName={cu?.name||''} defaultCategory={sc} onBack={()=>{setSub(null);setSc('')}} onInitiateSuccess={handleSplit} />
         :sub==='guarantee'?<PowerGuaranteeScreen guaranteeHistory={gh} onBack={()=>setSub(null)} onSubmitGuarantee={doPower} />
         :<>
@@ -205,10 +208,10 @@ export default function App(){
       </div>
       {!sub&&<nav className="fixed bottom-0 left-0 w-full z-40 pb-safe tab-bar-glass border-t border-white/40 flex justify-around items-center h-[72px] px-2">
         {[{key:'home',label:'首页',icon:Home},{key:'services',label:'服务',icon:Wallet},{key:'bill',label:'账单',icon:ReceiptText},{key:'message',label:'消息',icon:Bell},{key:'my',label:'我的',icon:User}].map(({key,label,icon:Icon})=>{const a=tab===key;
-          return <button key={key} onClick={()=>setTab(key)} className={'flex flex-col items-center justify-center relative py-1 px-3 cursor-pointer transition-all duration-200 '+(a?'scale-100':'hover:opacity-80')}>
-            {a&&<span className="absolute inset-0 bg-blue-50/80 rounded-2xl -mx-1 shadow-sm border border-blue-100/50"></span>}
-            <div className="relative flex flex-col items-center"><div className={'mb-0.5 transition-all '+(a?'scale-110':'scale-100')}><Icon className={'w-[22px] h-[22px] '+(a?'text-blue-600 fill-current drop-shadow-sm':'text-slate-400')}/></div><span className={'text-[10px] font-semibold '+(a?'text-blue-700 font-bold':'text-slate-400')}>{label}</span></div>
-            {key==='message'&&msg.some(m=>m.unread)&&<span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white shadow-sm"></span>}
+          return <button key={key} onClick={()=>setTab(key)} className={'flex flex-col items-center justify-center relative py-1 px-4 cursor-pointer transition-all duration-200 '+(a?'scale-100':'hover:opacity-70')}>
+            {a&&<span className="absolute inset-0 bg-gradient-to-t from-blue-50/90 to-transparent rounded-2xl shadow-sm border border-blue-100/40"></span>}
+            <div className="relative flex flex-col items-center"><div className={'mb-0.5 transition-all duration-300 '+(a?'scale-110 -translate-y-0.5':'scale-100')}><Icon className={'w-[22px] h-[22px] transition-all duration-300 '+(a?'text-blue-600 drop-shadow-sm':'text-slate-400')}/></div><span className={'text-[10px] transition-all duration-300 '+(a?'text-blue-700 font-bold':'text-slate-400')}>{label}</span></div>
+            {key==='message'&&msg.some(m=>m.unread)&&<span className="absolute top-1 right-2 w-2.5 h-2.5 bg-gradient-to-br from-red-400 to-red-500 rounded-full border-2 border-white shadow-sm animate-subtle-pulse"></span>}
           </button>;
         })}
       </nav>}
