@@ -340,6 +340,31 @@ html, body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Dark mode body & common overrides */
+.dark body, .dark .bg-animated {
+  background: #0f0f1a !important;
+}
+.dark .tab-bar-glass {
+  background: rgba(15, 15, 26, 0.85) !important;
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark .glass-panel {
+  background: rgba(30, 30, 50, 0.65) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark .glass-card {
+  background: rgba(30, 30, 50, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark .bg-blob-1 { background: #4f46e5 !important; }
+.dark .bg-blob-2 { background: #0891b2 !important; }
+.dark .bg-blob-3 { background: #7c3aed !important; }
+.dark input, .dark textarea, .dark select {
+  background: #1e1e32 !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

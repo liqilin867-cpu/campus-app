@@ -236,27 +236,27 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
       {/* OAuth bind form — ask for student ID and phone */}
       {oauthPlatform && !oauthLoading && (
         <div className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-sm p-6 shadow-xl animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-gray-900 rounded-[24px] w-full max-w-sm p-6 shadow-xl animate-in zoom-in-95 duration-200">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white">
                 {oauthPlatform === 'wechat' ? <MessageSquare className="w-5 h-5" /> : <CreditCard className="w-5 h-5" />}
               </div>
               <div>
                 <h3 className="font-bold text-base text-slate-900">绑定{oauthPlatform === 'wechat' ? '微信' : '支付宝'}</h3>
-                <p className="text-[11px] text-slate-500">输入学号和手机号完成绑定</p>
+                <p className="text-[11px] text-slate-500 dark:text-gray-400">输入学号和手机号完成绑定</p>
               </div>
             </div>
             <div className="space-y-3">
               <div>
-                <label className="block text-[10px] text-slate-400 font-bold uppercase mb-1">学号</label>
+                <label className="block text-[10px] text-slate-400 dark:text-gray-500 font-bold uppercase mb-1">学号</label>
                 <input type="text" value={oauthStudentId} onChange={e => setOauthStudentId(e.target.value)}
-                  className="w-full border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-full border border-slate-200 dark:border-gray-700 rounded-xl p-3 text-xs outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   placeholder="请输入8位学号" />
               </div>
               <div>
-                <label className="block text-[10px] text-slate-400 font-bold uppercase mb-1">绑定手机号</label>
+                <label className="block text-[10px] text-slate-400 dark:text-gray-500 font-bold uppercase mb-1">绑定手机号</label>
                 <input type="tel" value={oauthPhone} onChange={e => setOauthPhone(e.target.value)}
-                  className="w-full border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-full border border-slate-200 dark:border-gray-700 rounded-xl p-3 text-xs outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   placeholder="注册时使用的11位手机号" />
               </div>
               <button onClick={handleOauthBind}
@@ -264,7 +264,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
                 绑定并登录
               </button>
               <button onClick={() => setOauthPlatform(null)}
-                className="w-full text-center text-xs text-slate-400 hover:text-slate-600 cursor-pointer">
+                className="w-full text-center text-xs text-slate-400 dark:text-gray-500 hover:text-slate-600 cursor-pointer">
                 取消
               </button>
             </div>
@@ -275,7 +275,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
       {/* OAuth loading spinner */}
       {oauthLoading && (
         <div className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl p-8 max-w-xs w-full text-center shadow-2xl flex flex-col items-center gap-4">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 max-w-xs w-full text-center shadow-2xl flex flex-col items-center gap-4">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-blue-50 animate-ping opacity-75"></div>
               <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center text-primary relative z-10">
@@ -286,7 +286,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
               <h3 className="font-extrabold text-base text-slate-900">
                 {oauthPlatform === 'wechat' ? '微信授权中' : '支付宝授权中'}
               </h3>
-              <p className="text-xs text-slate-500 mt-2">正在验证身份信息...</p>
+              <p className="text-xs text-slate-500 dark:text-gray-400 mt-2">正在验证身份信息...</p>
             </div>
           </div>
         </div>
@@ -295,7 +295,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
       <main className="w-full max-w-sm relative z-10 my-auto">
         {/* Header Badge */}
         <div className="text-center mb-5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/70 backdrop-blur-sm border border-slate-200/60 rounded-full shadow-sm text-[10px] text-blue-700 font-bold tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200 dark:border-gray-700/60 rounded-full shadow-sm text-[10px] text-blue-700 font-bold tracking-wider mb-3">
             <ShieldCheck className="w-3.5 h-3.5" />
             统一身份认证门户
           </div>
@@ -312,7 +312,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
               <GraduationCap className="w-9 h-9 text-white" />
             </div>
             <h1 className="text-xl text-slate-900 font-extrabold tracking-tight">智慧校园生活助手</h1>
-            <p className="text-[12px] text-slate-500 mt-1">电费 · 水费 · 网费 一键查缴</p>
+            <p className="text-[12px] text-slate-500 dark:text-gray-400 mt-1">电费 · 水费 · 网费 一键查缴</p>
           </div>
 
           {/* Tab Switch */}
@@ -370,43 +370,43 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
             <form onSubmit={handleRegisterSubmit} className="w-full space-y-2.5 relative z-10">
 
               <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
-                <User className="w-4 h-4 text-slate-400 shrink-0" />
+                <User className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
                 <input type="text" value={regName} onChange={(e) => setRegName(e.target.value)}
-                  className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                  className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                   placeholder="真实姓名" required />
               </div>
 
               <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
-                <KeyRound className="w-4 h-4 text-slate-400 shrink-0" />
+                <KeyRound className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
                 <input type="text" value={regStudentId} onChange={(e) => setRegStudentId(e.target.value)}
-                  className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                  className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                   placeholder="8位学号" required />
               </div>
 
               <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
-                <Smartphone className="w-4 h-4 text-slate-400 shrink-0" />
+                <Smartphone className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
                 <input type="tel" value={regPhone} onChange={(e) => setRegPhone(e.target.value)}
-                  className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                  className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                   placeholder="11位手机号" required />
               </div>
 
               <div className="relative">
                 <div className="flex items-center gap-1.5 mb-1.5">
-                  <Home className="w-3.5 h-3.5 text-slate-400" />
-                  <span className="text-[10px] font-semibold text-slate-500">选择宿舍</span>
+                  <Home className="w-3.5 h-3.5 text-slate-400 dark:text-gray-500" />
+                  <span className="text-[10px] font-semibold text-slate-500 dark:text-gray-400">选择宿舍</span>
                 </div>
                 <button type="button" onClick={() => { setRoomPickerOpen(!roomPickerOpen); setRoomSearch(''); }}
-                  className="flex items-center gap-2 w-full bg-slate-50/60 rounded-xl px-3 py-2.5 border border-slate-100 text-xs text-slate-800 cursor-pointer text-left">
-                  <Home className="w-4 h-4 text-slate-400 shrink-0" />
-                  <span className={`flex-1 ${regRoom ? 'text-slate-800' : 'text-slate-400'}`}>{regRoom || '请选择宿舍楼栋'}</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  className="flex items-center gap-2 w-full bg-slate-50/60 rounded-xl px-3 py-2.5 border border-slate-100 text-xs text-slate-800 dark:text-gray-100 cursor-pointer text-left">
+                  <Home className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
+                  <span className={`flex-1 ${regRoom ? 'text-slate-800 dark:text-gray-100' : 'text-slate-400 dark:text-gray-500'}`}>{regRoom || '请选择宿舍楼栋'}</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400 dark:text-gray-500 shrink-0" />
                 </button>
                 {roomPickerOpen && (
-                  <div className="absolute z-20 top-full mt-1 left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
+                  <div className="absolute z-20 top-full mt-1 left-0 right-0 bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden">
                     {/* Search input */}
                     <div className="p-2 border-b border-slate-100">
                       <input type="text" value={roomSearch} onChange={e => setRoomSearch(e.target.value)}
-                        className="w-full bg-slate-50 rounded-lg px-3 py-1.5 text-xs outline-none placeholder:text-slate-400"
+                        className="w-full bg-slate-50 rounded-lg px-3 py-1.5 text-xs outline-none placeholder:text-slate-400 dark:text-gray-500"
                         placeholder="搜索宿舍楼栋..." autoFocus />
                     </div>
                     {/* Room list */}
@@ -425,14 +425,14 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
                             }`}
                           >
                             <span>{room}</span>
-                            <span className={`text-[10px] ${sel ? 'text-blue-400' : full ? 'text-slate-300' : 'text-slate-400'}`}>
+                            <span className={`text-[10px] ${sel ? 'text-blue-400' : full ? 'text-slate-300' : 'text-slate-400 dark:text-gray-500'}`}>
                               {full ? '已满员' : `${n}/4`}
                             </span>
                           </button>
                         );
                       })}
                       {roomSearch && !(['3号楼520室', '4号楼201室', '1号楼302室', '11号楼415室'].some(r => r.includes(roomSearch))) && (
-                        <div className="text-center py-6 text-[11px] text-slate-400">未找到匹配宿舍</div>
+                        <div className="text-center py-6 text-[11px] text-slate-400 dark:text-gray-500">未找到匹配宿舍</div>
                       )}
                     </div>
                   </div>
@@ -442,25 +442,25 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
               <div className="grid grid-cols-2 gap-2">
                 <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
                   <input type="password" value={regPassword} onChange={(e) => setRegPassword(e.target.value)}
-                    className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                    className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                     placeholder="密码" required />
                 </div>
                 <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
                   <input type="password" value={regConfirmPassword} onChange={(e) => setRegConfirmPassword(e.target.value)}
-                    className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                    className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                     placeholder="确认密码" required />
                 </div>
               </div>
 
               <div className="flex items-center justify-between bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-semibold text-slate-500">验证</span>
+                  <span className="text-[10px] font-semibold text-slate-500 dark:text-gray-400">验证</span>
                   <span className="font-mono text-xs text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded font-bold select-none">
                     {numA} + {numB} =
                   </span>
                 </div>
                 <input type="text" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)}
-                  className="w-16 bg-white border border-slate-200 rounded-lg text-center py-1.5 text-xs font-bold outline-none"
+                  className="w-16 bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-lg text-center py-1.5 text-xs font-bold outline-none"
                   placeholder="" required />
               </div>
 
@@ -481,16 +481,16 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
               {loginTab === 'sso' ? (
                 <>
                   <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
-                    <User className="w-4 h-4 text-slate-400 shrink-0" />
+                    <User className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
                     <input type="text" value={studentId} onChange={(e) => setStudentId(e.target.value)}
-                      className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                      className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                       placeholder="学号" required />
                   </div>
 
                   <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
-                    <Lock className="w-4 h-4 text-slate-400 shrink-0" />
+                    <Lock className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                      className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                      className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                       placeholder="密码" required />
                     <button type="button" onClick={() => toast.error('请携带学生证前往宿舍楼值班室重置密码，或切换到短信验证码登录。')}
                       className="text-[10px] text-blue-500 hover:text-blue-700 font-medium shrink-0">
@@ -501,16 +501,16 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
               ) : (
                 <>
                   <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
-                    <Smartphone className="w-4 h-4 text-slate-400 shrink-0" />
+                    <Smartphone className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
                     <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)}
-                      className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                      className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                       placeholder="手机号" required />
                   </div>
 
                   <div className="flex items-center gap-2 bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
-                    <Lock className="w-4 h-4 text-slate-400 shrink-0" />
+                    <Lock className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
                     <input type="text" value={smsCode} onChange={(e) => setSmsCode(e.target.value)}
-                      className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
+                      className="bg-transparent w-full text-xs text-slate-800 dark:text-gray-100 outline-none placeholder:text-slate-400 dark:text-gray-500"
                       placeholder="验证码" maxLength={6} required />
                     <button type="button" onClick={handleSendCode}
                       className="text-[10px] text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg font-bold shrink-0">
@@ -523,13 +523,13 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
               {/* Captcha */}
               <div className="flex items-center justify-between bg-slate-50/60 rounded-xl px-3 py-2 border border-slate-100">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-semibold text-slate-500">验证</span>
+                  <span className="text-[10px] font-semibold text-slate-500 dark:text-gray-400">验证</span>
                   <span className="font-mono text-xs text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded font-bold select-none">
                     {numA} + {numB} =
                   </span>
                 </div>
                 <input type="text" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)}
-                  className="w-14 bg-white border border-slate-200 rounded-lg text-center py-1.5 text-xs font-bold outline-none"
+                  className="w-14 bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-lg text-center py-1.5 text-xs font-bold outline-none"
                   placeholder="" required />
               </div>
 
@@ -538,7 +538,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
                 <input id="agreement" type="checkbox" checked={agree}
                   onChange={(e) => setAgree(e.target.checked)}
                   className="h-3.5 w-3.5 rounded border-blue-300 accent-blue-600 cursor-pointer" />
-                <span className="text-[10px] text-slate-500 select-none">
+                <span className="text-[10px] text-slate-500 dark:text-gray-400 select-none">
                   同意<span className="text-blue-600">《服务协议》</span>
                 </span>
               </label>
@@ -553,7 +553,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
           {/* Register Link */}
           {!isRegistering && (
             <div className="w-full text-center mt-3 z-10">
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-gray-400">
                 还没有账户？{' '}
                 <button onClick={() => { setIsRegistering(true); setErrorMsg(''); setSuccessMsg(''); refreshCaptcha(); }}
                   className="text-blue-700 hover:underline font-extrabold cursor-pointer inline-flex items-center gap-0.5">
@@ -566,20 +566,20 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
 
           {/* Divider */}
           <div className="w-full flex items-center my-3 relative z-10 opacity-60">
-            <div className="flex-grow border-t border-slate-200"></div>
-            <span className="px-2.5 text-[10px] font-semibold text-slate-400 uppercase">快捷登录</span>
-            <div className="flex-grow border-t border-slate-200"></div>
+            <div className="flex-grow border-t border-slate-200 dark:border-gray-700"></div>
+            <span className="px-2.5 text-[10px] font-semibold text-slate-400 dark:text-gray-500 uppercase">快捷登录</span>
+            <div className="flex-grow border-t border-slate-200 dark:border-gray-700"></div>
           </div>
 
           {/* Third Party */}
           <div className="grid grid-cols-2 gap-3 w-full relative z-10">
             <button type="button" onClick={() => handleThirdPartyAction('wechat')}
-              className="py-2.5 rounded-xl bg-slate-50/80 border border-slate-200 hover:bg-emerald-50 hover:border-emerald-200 text-xs text-slate-600 hover:text-emerald-700 flex items-center justify-center gap-1.5 font-bold transition-all active:scale-95 cursor-pointer">
+              className="py-2.5 rounded-xl bg-slate-50/80 border border-slate-200 dark:border-gray-700 hover:bg-emerald-50 hover:border-emerald-200 text-xs text-slate-600 hover:text-emerald-700 flex items-center justify-center gap-1.5 font-bold transition-all active:scale-95 cursor-pointer">
               <MessageSquare className="w-4 h-4 text-emerald-500 fill-current" />
               <span>微信登录</span>
             </button>
             <button type="button" onClick={() => handleThirdPartyAction('alipay')}
-              className="py-2.5 rounded-xl bg-slate-50/80 border border-slate-200 hover:bg-blue-50 hover:border-blue-200 text-xs text-slate-600 hover:text-blue-700 flex items-center justify-center gap-1.5 font-bold transition-all active:scale-95 cursor-pointer">
+              className="py-2.5 rounded-xl bg-slate-50/80 border border-slate-200 dark:border-gray-700 hover:bg-blue-50 hover:border-blue-200 text-xs text-slate-600 hover:text-blue-700 flex items-center justify-center gap-1.5 font-bold transition-all active:scale-95 cursor-pointer">
               <CreditCard className="w-4 h-4 text-sky-500" />
               <span>支付宝登录</span>
             </button>
@@ -587,9 +587,9 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
 
           {/* Demo Accounts Hint */}
           <div className="mt-3 w-full px-2">
-            <div className="bg-slate-50/80 border border-slate-200/60 rounded-2xl p-3">
-              <p className="text-[9px] text-slate-400 font-semibold text-center mb-2">演示账号 · 3号楼520室（4/4 满员）</p>
-              <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[9px] text-slate-500">
+            <div className="bg-slate-50/80 border border-slate-200 dark:border-gray-700/60 rounded-2xl p-3">
+              <p className="text-[9px] text-slate-400 dark:text-gray-500 font-semibold text-center mb-2">演示账号 · 3号楼520室（4/4 满员）</p>
+              <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[9px] text-slate-500 dark:text-gray-400">
                 <div className="flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                   <span>赵六：20241234 / zhaoliu123</span>
@@ -607,7 +607,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
                   <span>王五：20240003 / wangwu123</span>
                 </div>
               </div>
-              <p className="text-[8px] text-slate-400 text-center mt-2">3号楼520室已满，新注册可选择其他宿舍</p>
+              <p className="text-[8px] text-slate-400 dark:text-gray-500 text-center mt-2">3号楼520室已满，新注册可选择其他宿舍</p>
             </div>
           </div>
 

@@ -154,7 +154,7 @@ export default function MessageTab({
             </div>
           ))
         ) : (
-          <div className="text-center py-12 text-outline bg-white/50 rounded-[24px] border border-white/40">
+          <div className="text-center py-12 text-outline bg-white dark:bg-gray-900/50 rounded-[24px] border border-white/40">
             <MailOpen className="w-10 h-10 mx-auto mb-2 opacity-50" />
             暂无此分类的信息消息
           </div>
@@ -164,10 +164,10 @@ export default function MessageTab({
       {/* -------------------- DETAIL MODAL -------------------- */}
       {readingMessage && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200 shadow-xl">
+          <div className="bg-white dark:bg-gray-900 rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200 shadow-xl">
             <button
               onClick={() => setReadingMessage(null)}
-              className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 cursor-pointer"
+              className="absolute right-4 top-4 text-slate-400 dark:text-gray-500 hover:text-slate-600 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>

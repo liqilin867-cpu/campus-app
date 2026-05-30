@@ -97,7 +97,7 @@ export default function MyTab({
           setInputAvatar(studentAvatar);
           setActiveModal('editProfile');
         }}
-        className="flex items-center justify-between px-1 bg-white/50 border border-slate-100 p-3 rounded-[24px] cursor-pointer group hover:bg-white hover:shadow-xs transition-all duration-250 active:scale-[0.99]"
+        className="flex items-center justify-between px-1 bg-white/50 border border-slate-100 dark:border-gray-700/50 p-3 rounded-[24px] cursor-pointer group hover:bg-white dark:bg-gray-900 hover:shadow-xs transition-all duration-250 active:scale-[0.99]"
         title="点击修改姓名与学生照片"
       >
         <div className="flex items-center gap-4">
@@ -225,7 +225,7 @@ export default function MyTab({
           
           <button 
             onClick={() => setActiveModal('paymentSecurity')}
-            className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
+            className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#dae2ff] flex items-center justify-center text-primary">
@@ -238,7 +238,7 @@ export default function MyTab({
 
           <button 
             onClick={() => setActiveModal('outageSettings')}
-            className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
+            className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
@@ -252,7 +252,7 @@ export default function MyTab({
 
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
+            className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-700">
@@ -261,13 +261,13 @@ export default function MyTab({
               <span className="font-semibold text-sm text-on-surface">{theme === 'dark' ? '浅色模式' : '深色模式'}</span>
             </div>
             <div className={`w-9 h-5 rounded-full transition-colors ${theme === 'dark' ? 'bg-purple-600' : 'bg-slate-300'} relative`}>
-              <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${theme === 'dark' ? 'translate-x-[18px]' : 'translate-x-0.5'}`}></div>
+              <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white dark:bg-gray-900 shadow-sm transition-transform ${theme === 'dark' ? 'translate-x-[18px]' : 'translate-x-0.5'}`}></div>
             </div>
           </button>
 
           <button
             onClick={onNavigateToPowerGuarantee}
-            className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
+            className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-[#0071e6]">
@@ -302,14 +302,14 @@ export default function MyTab({
         <div className="neumorphic-convex rounded-2xl overflow-hidden bg-[#faf9ff] flex flex-col">
           <button 
             onClick={() => setActiveModal('feedback')}
-            className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
+            className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
             <span className="font-semibold text-sm text-on-surface">意见与功能建议反馈</span>
             <ChevronRight className="w-5 h-5 text-outline-variant" />
           </button>
           <button
             onClick={() => setActiveModal('changePassword')}
-            className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
+            className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
             <span className="font-semibold text-sm text-on-surface">修改登录密码</span>
             <ChevronRight className="w-5 h-5 text-outline-variant" />
@@ -522,7 +522,7 @@ export default function MyTab({
               </div>
             </div>
 
-            <div className="flex justify-between items-center py-2 bg-slate-50 px-3 rounded-xl">
+            <div className="flex justify-between items-center py-2 bg-slate-50 dark:bg-gray-800/50 px-3 rounded-xl">
               <div>
                 <span className="font-bold">指纹 / 面容 FaceID 闪付保驾</span>
                 <p className="text-[9px] text-outline mt-0.5">大额充缴一键验证防误触</p>
@@ -583,7 +583,7 @@ export default function MyTab({
 
             <div className="space-y-2">
               <label className="block text-[11px] text-outline font-semibold">消息接收通道配置</label>
-              <div className="space-y-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+              <div className="space-y-2 bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-2xl border border-slate-100 dark:border-gray-700/50">
                 <div className="flex justify-between items-center">
                   <span>短信提醒 (扣取 0.05元 / 条)</span>
                   <input type="checkbox" checked={notifySms} onChange={(e) => setNotifySms(e.target.checked)} className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
@@ -621,23 +621,23 @@ export default function MyTab({
       <Dialog open={activeModal === 'editProfile'} onOpenChange={(o) => { if (!o) setActiveModal(null); }}>
         <DialogContent>
           <DialogTitle className="font-extrabold text-base text-slate-900">修改个人信息</DialogTitle>
-          <p className="text-[11px] text-slate-500">点击下方精选校园照片，或手动输入照片网址</p>
+          <p className="text-[11px] text-slate-500 dark:text-gray-400">点击下方精选校园照片，或手动输入照片网址</p>
 
           <div className="space-y-4">
             <div className="space-y-1">
-              <label className="block text-[10px] font-bold text-slate-400 uppercase">学籍登记姓名</label>
+              <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase">学籍登记姓名</label>
               <input
                 type="text"
                 value={inputName}
                 onChange={(e) => setInputName(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 p-3 text-xs font-bold rounded-xl text-slate-800 outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                className="w-full bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700 p-3 text-xs font-bold rounded-xl text-slate-800 dark:text-gray-100 outline-none focus:ring-2 focus:ring-primary focus:bg-white dark:bg-gray-900 transition-all"
                 placeholder="请输入您的姓名"
                 maxLength={12}
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-[10px] font-bold text-slate-400 uppercase">选择精选照片/头像</label>
+              <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase">选择精选照片/头像</label>
               <div className="grid grid-cols-3 gap-2">
                 {PRESET_AVATARS.map((avatar, idx) => {
                   const isSelected = inputAvatar === avatar.url;
@@ -659,12 +659,12 @@ export default function MyTab({
             </div>
 
             <div className="space-y-1">
-              <label className="block text-[10px] font-bold text-slate-400 uppercase">粘贴自定义照片链接 (URL)</label>
+              <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase">粘贴自定义照片链接 (URL)</label>
               <input
                 type="text"
                 value={inputAvatar}
                 onChange={(e) => setInputAvatar(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 p-2.5 text-[10px] font-mono rounded-xl text-slate-700 outline-none focus:ring-1 focus:ring-primary focus:bg-white transition-all"
+                className="w-full bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700 p-2.5 text-[10px] font-mono rounded-xl text-slate-700 dark:text-gray-200 outline-none focus:ring-1 focus:ring-primary focus:bg-white dark:bg-gray-900 transition-all"
                 placeholder="网址以 http / https 开头"
               />
             </div>
@@ -723,13 +723,13 @@ function ChangePasswordModal({ onClose, currentUserName }: { onClose: () => void
         <DialogTitle className="font-bold text-base text-slate-900">修改密码</DialogTitle>
         <form onSubmit={handleSubmit} className="space-y-3">
           <input type="password" value={oldPw} onChange={e => setOldPw(e.target.value)}
-            className="w-full border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-blue-500"
+            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl p-3 text-xs outline-none focus:border-blue-500"
             placeholder="当前密码" />
           <input type="password" value={newPw} onChange={e => setNewPw(e.target.value)}
-            className="w-full border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-blue-500"
+            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl p-3 text-xs outline-none focus:border-blue-500"
             placeholder="新密码（至少6位）" />
           <input type="password" value={confirmPw} onChange={e => setConfirmPw(e.target.value)}
-            className="w-full border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-blue-500"
+            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl p-3 text-xs outline-none focus:border-blue-500"
             placeholder="确认新密码" />
           {msg && <p className="text-xs text-red-500">{msg}</p>}
           <button type="submit"

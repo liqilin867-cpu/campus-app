@@ -74,25 +74,25 @@ export default function BillTab({
     <div className="flex flex-col gap-5">
 
       {/* Summary */}
-      <section className="bg-slate-50 border border-slate-200/80 rounded-[24px] p-5 relative overflow-hidden">
+      <section className="bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700/80 rounded-[24px] p-5 relative overflow-hidden">
         <div className="absolute -right-10 -top-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-center py-1">
-          <p className="font-semibold text-xs text-slate-500 mb-1">累计消费</p>
+          <p className="font-semibold text-xs text-slate-500 dark:text-gray-400 mb-1">累计消费</p>
           <div className="flex items-baseline gap-1 mb-4">
             <span className="text-4xl font-extrabold text-[#001f5c] tracking-tight">
               ¥ {totalSpent.toFixed(2)}
             </span>
           </div>
           <div className="flex gap-3.5 w-full mt-1">
-            <div className="flex-1 bg-white rounded-2xl p-3 flex flex-col items-center border border-slate-100 shadow-xs">
-              <span className="font-semibold text-[10px] text-slate-400 mb-0.5">已缴费</span>
+            <div className="flex-1 bg-white dark:bg-gray-900 rounded-2xl p-3 flex flex-col items-center border border-slate-100 dark:border-gray-700/50 shadow-xs">
+              <span className="font-semibold text-[10px] text-slate-400 dark:text-gray-500 mb-0.5">已缴费</span>
               <span className="font-extrabold text-sm text-primary">¥ {paidSpent.toFixed(2)}</span>
             </div>
-            <div className="flex-1 bg-white rounded-2xl p-3 flex flex-col items-center border border-slate-100 shadow-xs">
-              <span className="font-semibold text-[10px] text-slate-400 mb-0.5">待缴/代付</span>
+            <div className="flex-1 bg-white dark:bg-gray-900 rounded-2xl p-3 flex flex-col items-center border border-slate-100 dark:border-gray-700/50 shadow-xs">
+              <span className="font-semibold text-[10px] text-slate-400 dark:text-gray-500 mb-0.5">待缴/代付</span>
               <span className="font-extrabold text-sm text-orange-500">¥ {unpaidSpent.toFixed(2)}</span>
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function BillTab({
           const rows = billsList.map(b => [b.title, b.amount, b.time, b.status].join(",")).join(String.fromCharCode(10));
           const blob = new Blob(["项目,金额,时间,状态" + String.fromCharCode(10) + rows], {type:"text/csv;charset=utf-8;"});
           const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "账单导出.csv"; a.click();
-        }} className="px-4 py-2 bg-white border border-slate-100 rounded-2xl shadow-sm flex items-center gap-2 hover:bg-slate-50 transition-colors cursor-pointer active:scale-[0.98] text-xs text-blue-600 font-semibold">
+        }} className="px-4 py-2 bg-white dark:bg-gray-900 border border-slate-100 dark:border-gray-700/50 rounded-2xl shadow-sm flex items-center gap-2 hover:bg-slate-50 dark:bg-gray-800/50 transition-colors cursor-pointer active:scale-[0.98] text-xs text-blue-600 font-semibold">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           导出CSV
         </button>
@@ -132,11 +132,11 @@ export default function BillTab({
               const perPerson = bill ? bill.amount / totalCount : 0;
 
               return (
-                <div key={billId} className="bg-white/80 rounded-2xl p-3.5 border border-amber-100 shadow-sm">
+                <div key={billId} className="bg-white dark:bg-gray-900/80 rounded-2xl p-3.5 border border-amber-100 shadow-sm">
                   <div className="flex justify-between items-center mb-2">
                     <div>
-                      <span className="font-bold text-xs text-slate-800">{bill?.title||'分摊账单'}</span>
-                      <span className="text-[10px] text-slate-400 ml-2">¥{(bill?.amount||perPerson*totalCount).toFixed(2)}</span>
+                      <span className="font-bold text-xs text-slate-800 dark:text-gray-100">{bill?.title||'分摊账单'}</span>
+                      <span className="text-[10px] text-slate-400 dark:text-gray-500 ml-2">¥{(bill?.amount||perPerson*totalCount).toFixed(2)}</span>
                     </div>
                     <span className="text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
                       {paidCount}/{totalCount} 已缴
@@ -159,7 +159,7 @@ export default function BillTab({
                             <div className={`w-6 h-6 rounded-full ${avatarStyle.bg} ${avatarStyle.color} flex items-center justify-center font-bold text-[8px]`}>
                               {avatarStyle.initial}
                             </div>
-                            <span className="text-[11px] font-medium text-slate-700">
+                            <span className="text-[11px] font-medium text-slate-700 dark:text-gray-200">
                               {name} {isMe ? '(我)' : ''}
                             </span>
                           </div>
@@ -203,16 +203,16 @@ export default function BillTab({
           const monthBills = billsList.filter((b) => b.month === month);
           return (
             <div key={month}>
-              <h2 className="font-extrabold text-xs text-slate-400 uppercase tracking-widest mb-2 px-1">{month}</h2>
+              <h2 className="font-extrabold text-xs text-slate-400 dark:text-gray-500 uppercase tracking-widest mb-2 px-1">{month}</h2>
               <div className="flex flex-col gap-2">
                 {monthBills.map((bill) => (
                   <div
                     key={bill.id}
                     onClick={() => setSelectedBill(bill)}
-                    className="flex items-center justify-between p-4 bg-white hover:bg-blue-50/30 hover:shadow-sm transition-all cursor-pointer active:scale-[0.99] rounded-2xl border border-slate-100 shadow-sm"
+                    className="flex items-center justify-between p-4 bg-white dark:bg-gray-900 hover:bg-blue-50/30 hover:shadow-sm transition-all cursor-pointer active:scale-[0.99] rounded-2xl border border-slate-100 dark:border-gray-700/50 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border border-slate-100 shadow-xs bg-slate-50">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border border-slate-100 dark:border-gray-700/50 shadow-xs bg-slate-50 dark:bg-gray-800/50">
                         {bill.category === '电费' && <Zap className="w-5 h-5 text-orange-500 fill-current" />}
                         {bill.category === '水费' && <Droplet className="w-5 h-5 text-cyan-500 fill-current" />}
                         {bill.category === '网费' && <Wifi className="w-5 h-5 text-blue-500" />}
@@ -221,13 +221,13 @@ export default function BillTab({
                         {bill.category === '校园卡' && <CreditCard className="w-5 h-5 text-emerald-600" />}
                       </div>
                       <div className="flex flex-col">
-                        <span className="font-semibold text-xs text-slate-800">{bill.title}</span>
-                        <span className="text-[10px] text-slate-400 mt-0.5">{bill.time}</span>
+                        <span className="font-semibold text-xs text-slate-800 dark:text-gray-100">{bill.title}</span>
+                        <span className="text-[10px] text-slate-400 dark:text-gray-500 mt-0.5">{bill.time}</span>
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end">
-                      <span className="font-extrabold text-xs text-slate-800">-{bill.amount.toFixed(2)} 元</span>
+                      <span className="font-extrabold text-xs text-slate-800 dark:text-gray-100">-{bill.amount.toFixed(2)} 元</span>
                       <span className={`text-[9px] px-2 py-0.5 rounded-full mt-1.5 font-bold border ${
                         bill.status === '已缴费'
                           ? 'bg-green-50 text-green-700 border-green-200'
@@ -262,10 +262,10 @@ export default function BillTab({
       {/* DETAIL MODAL */}
       {selectedBill && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center p-4">
-          <div className="bg-white rounded-t-[24px] md:rounded-[24px] w-full max-w-sm p-5 flex flex-col gap-4 relative animate-in slide-in-from-bottom-5 duration-300 shadow-xl">
+          <div className="bg-white dark:bg-gray-900 rounded-t-[24px] md:rounded-[24px] w-full max-w-sm p-5 flex flex-col gap-4 relative animate-in slide-in-from-bottom-5 duration-300 shadow-xl">
             <button
               onClick={() => setSelectedBill(null)}
-              className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 cursor-pointer p-1 rounded-full hover:bg-slate-50"
+              className="absolute right-4 top-4 text-slate-400 dark:text-gray-500 hover:text-slate-600 cursor-pointer p-1 rounded-full hover:bg-slate-50 dark:bg-gray-800/50"
             >
               <X className="w-5 h-5" />
             </button>
@@ -276,13 +276,13 @@ export default function BillTab({
             </div>
 
             {/* Invoice info */}
-            <div className="border border-dashed border-slate-200 bg-slate-50/50 p-4 rounded-xl space-y-3 text-xs text-slate-700 relative">
+            <div className="border border-dashed border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800/50/50 p-4 rounded-xl space-y-3 text-xs text-slate-700 dark:text-gray-200 relative">
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-500 via-orange-400 to-indigo-600 rounded-t-xl"></div>
 
-              <div className="flex justify-between items-center pb-2.5 border-b border-slate-200">
+              <div className="flex justify-between items-center pb-2.5 border-b border-slate-200 dark:border-gray-700">
                 <div>
-                  <span className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">电子凭证</span>
-                  <h3 className="font-extrabold text-xs text-slate-800 mt-0.5">{selectedBill.title}</h3>
+                  <span className="text-[9px] text-slate-400 dark:text-gray-500 uppercase tracking-widest font-bold">电子凭证</span>
+                  <h3 className="font-extrabold text-xs text-slate-800 dark:text-gray-100 mt-0.5">{selectedBill.title}</h3>
                 </div>
                 <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold ${
                   selectedBill.status === '已缴费' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
@@ -293,34 +293,34 @@ export default function BillTab({
 
               <div className="grid grid-cols-2 gap-y-2.5 text-[11px] pt-1">
                 <div>
-                  <span className="text-slate-400 block">金额</span>
-                  <span className="font-extrabold text-sm text-slate-800">¥ {selectedBill.amount.toFixed(2)}</span>
+                  <span className="text-slate-400 dark:text-gray-500 block">金额</span>
+                  <span className="font-extrabold text-sm text-slate-800 dark:text-gray-100">¥ {selectedBill.amount.toFixed(2)}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">项目</span>
-                  <span className="font-bold text-slate-800">{selectedBill.title}</span>
+                  <span className="text-slate-400 dark:text-gray-500 block">项目</span>
+                  <span className="font-bold text-slate-800 dark:text-gray-100">{selectedBill.title}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">单号</span>
-                  <span className="font-mono text-slate-500 text-[10px]">{selectedBill.orderNo || '—'}</span>
+                  <span className="text-slate-400 dark:text-gray-500 block">单号</span>
+                  <span className="font-mono text-slate-500 dark:text-gray-400 text-[10px]">{selectedBill.orderNo || '—'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">支付方式</span>
-                  <span className="font-semibold text-slate-800">{selectedBill.paymentMethod || '—'}</span>
+                  <span className="text-slate-400 dark:text-gray-500 block">支付方式</span>
+                  <span className="font-semibold text-slate-800 dark:text-gray-100">{selectedBill.paymentMethod || '—'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">时间</span>
-                  <span className="font-medium text-slate-500">{selectedBill.time}</span>
+                  <span className="text-slate-400 dark:text-gray-500 block">时间</span>
+                  <span className="font-medium text-slate-500 dark:text-gray-400">{selectedBill.time}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">余额</span>
+                  <span className="text-slate-400 dark:text-gray-500 block">余额</span>
                   <span className="font-mono font-bold text-primary">
                     {selectedBill.afterBalance != null ? `¥${selectedBill.afterBalance.toFixed(2)}` : '—'}
                   </span>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-dashed border-slate-200 flex items-center gap-1 text-[9px] text-slate-400">
+              <div className="pt-2 border-t border-dashed border-slate-200 dark:border-gray-700 flex items-center gap-1 text-[9px] text-slate-400 dark:text-gray-500">
                 <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
                 <span>校后勤财务系统认证</span>
               </div>
@@ -334,16 +334,16 @@ export default function BillTab({
                 if (selectedBill.category === '电费' || selectedBill.category === '水费' || selectedBill.category === '空调') {
                   return (
                     <div className="space-y-2.5">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">寝室成员分摊（1/4 每人）</p>
+                      <p className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest px-1">寝室成员分摊（1/4 每人）</p>
                       <div className="space-y-2 max-h-40 overflow-y-auto">
                         {allRoommates.filter(r => r.name !== currentUserName).map((rm) => (
-                          <div key={rm.name} className="flex justify-between items-center bg-slate-50 p-2.5 rounded-xl border border-white">
+                          <div key={rm.name} className="flex justify-between items-center bg-slate-50 dark:bg-gray-800/50 p-2.5 rounded-xl border border-white">
                             <div className="flex items-center gap-2">
-                              <div className="w-6.5 h-6.5 rounded-full bg-slate-500 text-white flex items-center justify-center font-bold text-[9px]">{rm.name[0]}</div>
-                              <span className="font-bold text-[11px] text-slate-700">{rm.name}</span>
+                              <div className="w-6.5 h-6.5 rounded-full bg-slate-50 dark:bg-gray-800/500 text-white flex items-center justify-center font-bold text-[9px]">{rm.name[0]}</div>
+                              <span className="font-bold text-[11px] text-slate-700 dark:text-gray-200">{rm.name}</span>
                             </div>
                             <div className="flex items-center gap-1.5 text-[10px]">
-                              <span className="font-semibold text-slate-500">¥{(selectedBill.amount / 4).toFixed(2)}</span>
+                              <span className="font-semibold text-slate-500 dark:text-gray-400">¥{(selectedBill.amount / 4).toFixed(2)}</span>
                               <span className="text-green-600 font-bold flex items-center gap-0.5">
                                 <CheckCircle className="w-3.5 h-3.5 inline" />已缴
                               </span>
@@ -361,7 +361,7 @@ export default function BillTab({
               const perPerson = selectedBill.amount / Object.keys(paymentInfo).length;
               return (
                 <div className="space-y-2.5">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">分摊缴费状态（每人 ¥{perPerson.toFixed(2)}）</p>
+                  <p className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest px-1">分摊缴费状态（每人 ¥{perPerson.toFixed(2)}）</p>
                   <div className="space-y-2 max-h-48 overflow-y-auto">
                     {Object.entries(paymentInfo).map(([name, status]) => {
                       const avatar = ROOMMATE_AVATARS[name] || (name === currentUserName ? { bg: 'bg-blue-600', initial: '我', color: 'text-white' } : { bg: 'bg-slate-500', initial: name[0], color: 'text-white' });
@@ -375,14 +375,14 @@ export default function BillTab({
                               {avatar.initial}
                             </div>
                             <div>
-                              <span className="font-bold text-[11px] text-slate-700">
+                              <span className="font-bold text-[11px] text-slate-700 dark:text-gray-200">
                                 {name} {isMe ? '(我)' : ''}
                               </span>
-                              <span className="text-[9px] text-slate-400 block">{status === 'paid' ? '已缴费' : isMe ? '待缴费' : '待缴费'}</span>
+                              <span className="text-[9px] text-slate-400 dark:text-gray-500 block">{status === 'paid' ? '已缴费' : isMe ? '待缴费' : '待缴费'}</span>
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="font-semibold text-[10px] text-slate-500">¥{perPerson.toFixed(2)}</span>
+                            <span className="font-semibold text-[10px] text-slate-500 dark:text-gray-400">¥{perPerson.toFixed(2)}</span>
                             {status === 'paid' ? (
                               <span className="flex items-center gap-0.5 text-green-600 font-bold text-[10px]">
                                 <CheckCircle className="w-3.5 h-3.5" /> 已缴
@@ -420,7 +420,7 @@ export default function BillTab({
             <div className="flex gap-2.5">
               <button
                 onClick={() => handleDownloadInvoice(selectedBill)}
-                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-full flex items-center justify-center gap-1.5 cursor-pointer"
+                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 dark:text-gray-200 font-semibold text-xs rounded-full flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 下载凭证

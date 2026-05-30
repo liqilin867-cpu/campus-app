@@ -136,7 +136,7 @@ export default function PowerGuaranteeScreen({
 
         <div className="space-y-2.5">
           {guaranteeHistory.map((rec) => (
-            <div key={rec.id} className="bg-white/80 p-3 rounded-2xl border border-white/50 flex justify-between items-center shadow-sm">
+            <div key={rec.id} className="bg-white dark:bg-gray-900 dark:bg-gray-900/80 p-3 rounded-2xl border border-white/50 flex justify-between items-center shadow-sm">
               <div className="flex items-center gap-3">
                 <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border ${
                   rec.status === '已批准' 
