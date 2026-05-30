@@ -219,7 +219,7 @@ export default function SplitBillScreen({
             className="flex items-center gap-1 px-3 py-1 bg-primary text-white text-[10px] font-extrabold rounded-full shadow-sm hover:bg-orange-500 transition-colors"
           >
             <Plus className="w-3.5 h-3.5" />
-            添加公公自购
+            添加公共自购
           </button>
         </div>
 
