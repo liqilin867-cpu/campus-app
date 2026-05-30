@@ -202,10 +202,10 @@ export default function SplitBillScreen({
 
         <div className="mt-4 flex items-center justify-between text-xs bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl p-2.5">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-orange-200 fill-current" />
-            <span>免签授权，宿舍一卡通自动极速转账</span>
+            <ShieldCheck className="w-4 h-4 text-orange-600 dark:text-orange-200 fill-current" />
+            <span className="text-slate-700 dark:text-gray-200">免签授权，宿舍一卡通自动极速转账</span>
           </div>
-          <span className="font-bold text-orange-200">免密安全</span>
+          <span className="font-bold text-orange-600 dark:text-orange-200">免密安全</span>
         </div>
       </div>
 
