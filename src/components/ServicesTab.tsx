@@ -347,7 +347,7 @@ function FleaModal({items,onAdd,onClose,balance,onBuyItem,onNotif}:{items:FleaIt
         <div className="flex gap-2">
           <span className="text-blue-600 font-medium bg-blue-50 px-2 py-0.5 rounded-full">{f.contact}</span>
           {f.purchased?<span className="px-3 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[9px] font-bold flex items-center gap-1"><CheckCircle className="w-2.5 h-2.5"/>已购买</span>
-          :<button onClick={()=>{if(balance<f.price){onNotif('系统通知','余额不足','校园卡余额不足，请先充值');return}onBuyItem(f.id,f.price);onNotif('缴费成功','购买成功','已购买 '+f.title+'，花费 ¥'+f.price+'，请联系卖家 '+f.contact+' 取货');}} className="px-3 py-0.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full text-[9px] font-bold shadow-sm hover:shadow-md transition-shadow">购买</button>}
+          :<button onClick={()=>{if(balance<f.price){toast.error('校园卡余额不足，请先充值');return}onBuyItem(f.id,f.price);onNotif('缴费成功','购买成功','已购买 '+f.title+'，花费 ¥'+f.price+'，请联系卖家 '+f.contact+' 取货');}} className="px-3 py-0.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full text-[9px] font-bold shadow-sm hover:shadow-md transition-shadow">购买</button>}
         </div>
       </div>
     </div>)}
