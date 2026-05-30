@@ -176,14 +176,14 @@ export default function SplitBillScreen({
       
       {/* Top Header Navigation */}
       <div className="flex items-center justify-between pb-1">
-        <button 
+        <button
           onClick={onBack}
-          className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors cursor-pointer border border-slate-200 dark:border-gray-700 dark:border-gray-700"
+          className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors cursor-pointer border border-slate-200 dark:border-gray-600"
         >
-          <ArrowLeft className="w-5 h-5 text-slate-800 dark:text-gray-100 dark:text-gray-100" />
+          <ArrowLeft className="w-5 h-5 text-slate-800 dark:text-gray-100" />
         </button>
         <div className="flex items-center gap-1.5">
-          <span className="font-extrabold text-base text-slate-900">{defaultCategory ? defaultCategory+'分摊' : '多人分摊'}</span>
+          <span className="font-extrabold text-base text-slate-900 dark:text-gray-100">{defaultCategory ? defaultCategory+'分摊' : '多人分摊'}</span>
         </div>
         <div className="w-9 h-9"></div>
       </div>
@@ -228,9 +228,9 @@ export default function SplitBillScreen({
         {showAddForm && (
           <form 
             onSubmit={handleAddCustomBill}
-            className="bg-slate-100 p-4 rounded-2xl border border-slate-200 dark:border-gray-700 dark:border-gray-700/60 shadow-inner flex flex-col gap-3 animate-in slide-in-from-top-3 duration-200"
+            className="bg-slate-100 dark:bg-gray-800 p-4 rounded-2xl border border-slate-200 dark:border-gray-700 shadow-inner flex flex-col gap-3 animate-in slide-in-from-top-3 duration-200"
           >
-            <span className="text-xs font-bold text-slate-700 dark:text-gray-200 block border-b pb-1.5 border-slate-200 dark:border-gray-700 dark:border-gray-700 flex items-center gap-1.5">
+            <span className="text-xs font-bold text-slate-700 dark:text-gray-200 block border-b pb-1.5 border-slate-200 dark:border-gray-700 flex items-center gap-1.5">
               <TrendingUp className="w-4 h-4 text-orange-500 animate-pulse" />
               登记宿舍垫付款项目 (如桶装水、水果、洁厕灵)
             </span>
@@ -241,7 +241,7 @@ export default function SplitBillScreen({
                   type="text" 
                   value={customTitle}
                   onChange={e => setCustomTitle(e.target.value)}
-                  className="w-full bg-white dark:bg-gray-900 dark:bg-gray-900 text-xs p-2.5 rounded-xl border border-slate-200 dark:border-gray-700 dark:border-gray-700 outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full bg-white dark:bg-gray-900 text-xs p-2.5 rounded-xl border border-slate-200 dark:border-gray-700 outline-none focus:ring-1 focus:ring-primary"
                   placeholder="项目描述 (例如: 购买阳台挂锁与洗洁精)"
                   required
                 />
@@ -253,7 +253,7 @@ export default function SplitBillScreen({
                   step="0.01"
                   value={customAmount}
                   onChange={e => setCustomAmount(e.target.value)}
-                  className="w-full bg-white dark:bg-gray-900 dark:bg-gray-900 text-xs p-2.5 rounded-xl border border-slate-200 dark:border-gray-700 dark:border-gray-700 outline-none focus:ring-1 focus:ring-primary font-bold text-slate-900"
+                  className="w-full bg-white dark:bg-gray-900 text-xs p-2.5 rounded-xl border border-slate-200 dark:border-gray-700 outline-none focus:ring-1 focus:ring-primary font-bold text-slate-900 dark:text-gray-100"
                   placeholder="代付金额 (¥)"
                   required
                 />
@@ -263,7 +263,7 @@ export default function SplitBillScreen({
                 <select
                   value={customCategory}
                   onChange={e => setCustomCategory(e.target.value as any)}
-                  className="w-full bg-white dark:bg-gray-900 dark:bg-gray-900 text-xs p-2.5 rounded-xl border border-slate-200 dark:border-gray-700 dark:border-gray-700 outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full bg-white dark:bg-gray-900 text-xs p-2.5 rounded-xl border border-slate-200 dark:border-gray-700 outline-none focus:ring-1 focus:ring-primary"
                 >
                   <option value="空调">其他宿舍杂费</option>
                   <option value="电费">临时公共用电</option>
@@ -276,7 +276,7 @@ export default function SplitBillScreen({
               <button 
                 type="button" 
                 onClick={() => setShowAddForm(false)}
-                className="flex-1 py-2 bg-slate-200 hover:bg-slate-300 text-slate-600 rounded-xl text-xs font-bold cursor-pointer transition-colors"
+                className="flex-1 py-2 bg-slate-200 dark:bg-gray-700 hover:bg-slate-300 dark:hover:bg-gray-600 text-slate-600 dark:text-gray-300 rounded-xl text-xs font-bold cursor-pointer transition-colors"
               >
                 取消
               </button>
@@ -300,26 +300,26 @@ export default function SplitBillScreen({
               <div 
                 key={bill.id}
                 onClick={() => handleToggleBill(bill.id)}
-                className={`p-3.5 rounded-2xl flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all bg-white border ${
-                  isChecked 
-                    ? 'border-primary ring-2 ring-primary/5 bg-slate-50/50' 
-                    : 'border-slate-150 opacity-75 hover:opacity-90 bg-white'
+                className={`p-3.5 rounded-2xl flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all bg-white dark:bg-gray-800 border ${
+                  isChecked
+                    ? 'border-primary ring-2 ring-primary/5 bg-slate-50/50 dark:bg-gray-700/50'
+                    : 'border-slate-150 dark:border-gray-600 opacity-75 hover:opacity-90 bg-white dark:bg-gray-800'
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center shadow-sm ${
-                    isChecked ? 'bg-indigo-50 text-indigo-700' : 'bg-slate-100 text-slate-500'
+                    isChecked ? 'bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-200' : 'bg-slate-100 dark:bg-gray-700 text-slate-500 dark:text-gray-400'
                   }`}>
                     {bill.category === '电费' && <Zap className="w-5 h-5 text-amber-500 fill-current" />}
                     {bill.category === '水费' && <Droplet className="w-5 h-5 text-blue-500 fill-current" />}
                     {bill.category === '空调' && <Flame className="w-5 h-5 text-orange-500" />}
                   </div>
                   <div>
-                    <h4 className="font-bold text-xs text-slate-850 flex items-center gap-1">
+                    <h4 className="font-bold text-xs text-slate-850 dark:text-gray-100 flex items-center gap-1">
                       {bill.title}
-                      {isCustom && <span className="text-[8px] bg-orange-100 text-orange-800 font-extrabold px-1.5 py-0.5 rounded">自购</span>}
+                      {isCustom && <span className="text-[8px] bg-orange-100 dark:bg-orange-900/40 text-orange-800 dark:text-orange-200 font-extrabold px-1.5 py-0.5 rounded">自购</span>}
                     </h4>
-                    <span className="text-[10px] text-slate-400 dark:text-gray-500 dark:text-gray-500 block mt-0.5">{bill.time}</span>
+                    <span className="text-[10px] text-slate-400 dark:text-gray-500 block mt-0.5">{bill.time}</span>
                   </div>
                 </div>
 
@@ -331,14 +331,14 @@ export default function SplitBillScreen({
                   {isCustom ? (
                     <button 
                       onClick={(e) => handleDeleteBill(bill.id, e)}
-                      className="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-650 rounded-lg flex items-center justify-center"
+                      className="w-7 h-7 bg-red-50 dark:bg-red-900/40 hover:bg-red-100 dark:hover:bg-red-900/60 text-red-650 rounded-lg flex items-center justify-center"
                       title="废除项目"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   ) : (
                     <div className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${
-                      isChecked ? 'bg-primary border-primary text-white' : 'border-blue-200 bg-white'
+                      isChecked ? 'bg-primary border-primary text-white' : 'border-blue-200 dark:border-gray-500 bg-white dark:bg-transparent'
                     }`}>
                       {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                     </div>
@@ -351,13 +351,13 @@ export default function SplitBillScreen({
       </section>
 
       {/* Split Allocation Mode Tabs */}
-      <section className="bg-slate-100 p-1 rounded-2xl flex gap-1 border border-slate-200 dark:border-gray-700 dark:border-gray-700/50">
+      <section className="bg-slate-100 dark:bg-gray-800 p-1 rounded-2xl flex gap-1 border border-slate-200 dark:border-gray-700">
         <button 
           onClick={() => setSplitMethod('even')}
           className={`flex-1 py-2 rounded-xl text-center text-xs font-bold transition-all cursor-pointer ${
-            splitMethod === 'even' 
-              ? 'bg-white text-primary shadow-sm' 
-              : 'text-slate-500 hover:text-slate-800'
+            splitMethod === 'even'
+              ? 'bg-white dark:bg-gray-700 text-primary shadow-sm'
+              : 'text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:hover:text-gray-200'
           }`}
         >
           按选择人数平均分（AA）
@@ -365,9 +365,9 @@ export default function SplitBillScreen({
         <button 
           onClick={() => setSplitMethod('ratio')}
           className={`flex-1 py-2 rounded-xl text-center text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
-            splitMethod === 'ratio' 
-              ? 'bg-white text-orange-600 shadow-sm' 
-              : 'text-slate-500 hover:text-slate-800'
+            splitMethod === 'ratio'
+              ? 'bg-white dark:bg-gray-700 text-orange-600 shadow-sm'
+              : 'text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:hover:text-gray-200'
           }`}
         >
           <Percent className="w-3.5 h-3.5" />
@@ -376,10 +376,10 @@ export default function SplitBillScreen({
       </section>
 
       {/* Roommates Checkbox Cards List */}
-      <section className="bg-white dark:bg-gray-900 dark:bg-gray-900 rounded-2xl p-4 border border-slate-150">
+      <section className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-slate-150 dark:border-gray-700">
         <div className="flex justify-between items-center mb-3">
           <h3 className="font-extrabold text-xs text-slate-700 dark:text-gray-200 uppercase">2. 设定参与分班及比重分摊</h3>
-          <span className="text-[10px] font-bold text-primary bg-indigo-50 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-bold text-primary dark:text-blue-300 bg-indigo-50 dark:bg-indigo-900/40 px-2 py-0.5 rounded-full">
             已加入 {peopleCount} 人
           </span>
         </div>
@@ -399,8 +399,8 @@ export default function SplitBillScreen({
                 key={rm.id}
                 onClick={() => handleToggleRoommate(rm.name)}
                 className={`p-3 rounded-xl flex items-center justify-between transition-colors border ${
-                  isChecked 
-                    ? 'border-slate-200 bg-slate-50/20' 
+                  isChecked
+                    ? 'border-slate-200 dark:border-gray-600 bg-slate-50/20 dark:bg-gray-700/30'
                     : 'border-transparent opacity-50'
                 }`}
               >
@@ -409,10 +409,10 @@ export default function SplitBillScreen({
                     {rm.name[0]}
                   </div>
                   <div>
-                    <span className="font-bold text-xs text-slate-800 dark:text-gray-100 dark:text-gray-100">
+                    <span className="font-bold text-xs text-slate-800 dark:text-gray-100">
                       {rm.name} {isSelf && '(我)'}
                     </span>
-                    <span className="text-[10px] text-slate-400 dark:text-gray-500 dark:text-gray-500 block mt-0.5">
+                    <span className="text-[10px] text-slate-400 dark:text-gray-500 block mt-0.5">
                       待转账: <strong className="text-slate-700 dark:text-gray-200">¥ {shareResult.toFixed(2)}</strong>
                     </span>
                   </div>
@@ -421,7 +421,7 @@ export default function SplitBillScreen({
                 {/* Sub Ratio input or Simple Checkbox */}
                 <div className="flex items-center gap-2.5">
                   {splitMethod === 'ratio' && isChecked && (
-                    <div className="flex items-center gap-1 bg-white dark:bg-gray-900 dark:bg-gray-900 border border-slate-250 p-1 rounded-lg">
+                    <div className="flex items-center gap-1 bg-white dark:bg-gray-700 border border-slate-250 dark:border-gray-600 p-1 rounded-lg">
                       <input 
                         type="number"
                         min="0"
@@ -429,18 +429,18 @@ export default function SplitBillScreen({
                         value={individualWeight}
                         onChange={(e) => handleRatioChange(rm.name, e.target.value)}
                         onClick={(e) => e.stopPropagation()} // stop toggle bubble
-                        className="w-11 text-center font-bold text-xs text-orange-600 outline-none"
+                        className="w-11 text-center font-bold text-xs text-orange-600 dark:text-orange-300 outline-none bg-transparent"
                       />
-                      <span className="text-[10px] text-slate-400 dark:text-gray-500 dark:text-gray-500 font-bold pr-1">%</span>
+                      <span className="text-[10px] text-slate-400 dark:text-gray-500 font-bold pr-1">%</span>
                     </div>
                   )}
 
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center border ${
-                    isSelf 
-                      ? 'bg-primary border-primary text-white cursor-not-allowed opacity-80' 
-                      : isChecked 
-                        ? 'bg-slate-800 border-slate-800 text-white' 
-                        : 'border-blue-200'
+                    isSelf
+                      ? 'bg-primary border-primary text-white cursor-not-allowed opacity-80'
+                      : isChecked
+                        ? 'bg-slate-800 dark:bg-gray-600 border-slate-800 dark:border-gray-600 text-white'
+                        : 'border-blue-200 dark:border-gray-500'
                   }`}>
                     {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
                   </div>
@@ -455,8 +455,8 @@ export default function SplitBillScreen({
           <div className="mt-4 pt-3 border-t border-dashed flex items-center justify-between text-[11px]">
             <div className="flex items-center gap-1">
               <AlertCircle className={`w-4 h-4 ${ratioSum === 100 ? 'text-emerald-600' : 'text-orange-500 animate-bounce'}`} />
-              <span className="text-slate-500 dark:text-gray-400 dark:text-gray-400">
-                加总份额比重：<strong className="text-xs text-slate-800 dark:text-gray-100 dark:text-gray-100">{ratioSum}%</strong>
+              <span className="text-slate-500 dark:text-gray-400">
+                加总份额比重：<strong className="text-xs text-slate-800 dark:text-gray-100">{ratioSum}%</strong>
               </span>
             </div>
             <span className={`font-bold ${ratioSum === 100 ? 'text-emerald-700' : 'text-orange-600'}`}>
