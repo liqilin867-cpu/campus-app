@@ -4,11 +4,11 @@ import {Search,Utensils,WashingMachine,Wrench,Store,Compass,Calendar,CheckCircle
 import {FleaItem,LostFoundItem,EventItem,RepairRecord} from '../types';
 
 const FOOD=[
-  {id:'c1',name:'二楼食堂',tag:'自选快餐',img:'https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=200',
+  {id:'c1',name:'二楼食堂',tag:'自选快餐',img:'',
     items:[{id:'f1',name:'麻辣香锅',price:18,desc:'牛肉+鱼豆腐+午餐肉',sales:156},{id:'f2',name:'黄焖鸡米饭',price:15,desc:'鸡腿肉+土豆',sales:98},{id:'f3',name:'番茄鸡蛋面',price:12,desc:'手工面+番茄鸡蛋',sales:72},{id:'f4',name:'鱼香肉丝饭',price:14,desc:'经典川味+例汤',sales:85}]},
-  {id:'c2',name:'三楼风味餐厅',tag:'特色窗口',img:'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&q=80&w=200',
+  {id:'c2',name:'三楼风味餐厅',tag:'特色窗口',img:'',
     items:[{id:'s1',name:'螺蛳粉',price:13,desc:'酸笋+腐竹+花生',sales:134},{id:'s2',name:'重庆小面',price:11,desc:'麻辣汤底+杂酱',sales:89},{id:'s3',name:'兰州拉面',price:13,desc:'牛肉+萝卜+香菜',sales:76}]},
-  {id:'c3',name:'西区小吃街',tag:'外卖点单',img:'https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&q=80&w=200',
+  {id:'c3',name:'西区小吃街',tag:'外卖点单',img:'',
     items:[{id:'w1',name:'煎饼果子',price:8,desc:'鸡蛋+薄脆+生菜',sales:201},{id:'w2',name:'烤冷面',price:10,desc:'加肠加蛋',sales:167},{id:'w3',name:'肉夹馍',price:9,desc:'腊汁肉+青椒',sales:143}]}
 ];
 
@@ -220,7 +220,7 @@ export default function ServicesTab(p:Props){
         <div className="p-4">
           {!done?<>
             <div className="flex gap-2 mb-3 overflow-x-auto scrollbar-none">{[...FOOD].map(r=><button key={r.id} onClick={()=>{setRes(r);setCart({})}} className={'shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition-all '+(res.id===r.id?'bg-orange-500 text-white shadow-md shadow-orange-200':'bg-slate-100 text-slate-600 hover:bg-slate-200')}>{r.name}</button>)}</div>
-            <div className="rounded-2xl overflow-hidden h-28 mb-3 relative shadow-md"><img src={res.img} className="w-full h-full object-cover"/><div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3"><p className="font-bold text-white text-lg drop-shadow-sm">{res.name}</p></div></div>
+            <div className="rounded-2xl overflow-hidden h-28 mb-3 relative shadow-md">{res.img?<img src={res.img} className="w-full h-full object-cover"/>:<div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-4xl">🍽️</div>}<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3"><p className="font-bold text-white text-lg drop-shadow-sm">{res.name}</p></div></div>
             <div className="space-y-2">{res.items.map(item=>{
               const q=cart[item.id]||0;
               return <div key={item.id} className="flex items-center justify-between bg-slate-50 p-3.5 rounded-2xl border border-slate-100 hover:border-orange-100 transition-colors">

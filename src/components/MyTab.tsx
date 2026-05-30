@@ -43,20 +43,25 @@ export default function MyTab({
     setInputName(currentUserName);
   }, [currentUserName]);
 
+  // Local SVG avatar generator (no external network requests)
+  const COLORS = ['#6366f1','#ec4899','#f59e0b','#06b6d4','#10b981','#f43f5e'];
+  const genSvg = (color: string, letter: string) =>
+    `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="${color}"/><text x="50" y="50" dominant-baseline="central" text-anchor="middle" fill="white" font-size="40" font-weight="700" font-family="sans-serif">${letter}</text></svg>`)}`;
+
   // Customizable Student Profile States
   const [studentName, setStudentName] = useState(currentUserName);
-  const [studentAvatar, setStudentAvatar] = useState('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80');
+  const [studentAvatar, setStudentAvatar] = useState(genSvg(COLORS[0], '我'));
   const [inputName, setInputName] = useState(currentUserName);
-  const [inputAvatar, setInputAvatar] = useState('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80');
+  const [inputAvatar, setInputAvatar] = useState(genSvg(COLORS[0], '我'));
 
-  // Pre-configured elegant student portal avatars
+  // Pre-configured elegant student portal avatars (local SVG, no external loading)
   const PRESET_AVATARS = [
-    { name: '智慧校草 (男)', url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80' },
-    { name: '学术学霸 (女)', url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80' },
-    { name: '科技达人 (男)', url: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&h=150&q=80' },
-    { name: '治愈甜心 (女)', url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&h=150&q=80' },
-    { name: '可爱萌宠 (喵)', url: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=150&h=150&q=80' },
-    { name: '阳光活力 (操场)', url: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=150&h=150&q=80' },
+    { name: '智慧校草 (男)', url: genSvg(COLORS[0], '智') },
+    { name: '学术学霸 (女)', url: genSvg(COLORS[1], '学') },
+    { name: '科技达人 (男)', url: genSvg(COLORS[2], '科') },
+    { name: '治愈甜心 (女)', url: genSvg(COLORS[3], '甜') },
+    { name: '可爱萌宠 (喵)', url: genSvg(COLORS[4], '萌') },
+    { name: '阳光活力 (操场)', url: genSvg(COLORS[5], '阳') },
   ];
 
   // 1. Payment Security Settings States
