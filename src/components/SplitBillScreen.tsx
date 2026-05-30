@@ -189,7 +189,7 @@ export default function SplitBillScreen({
       </div>
 
       {/* Hero Display Board (Dynamic Blue-Orange gradient theme) */}
-      <div className="bg-gradient-to-r from-primary to-orange-500 rounded-[24px] p-5 text-white shadow-md relative overflow-hidden">
+      <div className="bg-gradient-to-r from-primary to-orange-500 dark:from-blue-800 dark:to-orange-700 rounded-[24px] p-5 text-white shadow-md relative overflow-hidden">
         <div className="absolute right-0 bottom-0 opacity-10 translate-y-4 translate-x-2 pointer-events-none">
           <Coins className="w-40 h-40 text-white" />
         </div>
@@ -200,7 +200,7 @@ export default function SplitBillScreen({
           <h2 className="text-3xl font-extrabold tracking-tight">{billSum.toFixed(2)}</h2>
         </div>
 
-        <div className="mt-4 flex items-center justify-between text-xs bg-white dark:bg-gray-900 dark:bg-gray-900/10 rounded-xl p-2.5 backdrop-blur-md">
+        <div className="mt-4 flex items-center justify-between text-xs bg-white/90 dark:bg-gray-800/80 backdrop-blur-md rounded-xl p-2.5">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-orange-200 fill-current" />
             <span>免签授权，宿舍一卡通自动极速转账</span>
@@ -217,7 +217,7 @@ export default function SplitBillScreen({
           <button
             type="button"
             onClick={() => setShowAddForm(!showAddForm)}
-            className="flex items-center gap-1 px-3 py-1 bg-primary text-white text-[10px] font-extrabold rounded-full shadow-sm hover:bg-orange-500 transition-colors"
+            className="flex items-center gap-1 px-3 py-1 bg-primary dark:bg-blue-600 text-white text-[10px] font-extrabold rounded-full shadow-sm hover:bg-orange-500 transition-colors"
           >
             <Plus className="w-3.5 h-3.5" />
             添加公共自购
@@ -338,7 +338,7 @@ export default function SplitBillScreen({
                     </button>
                   ) : (
                     <div className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${
-                      isChecked ? 'bg-primary border-primary text-white' : 'border-blue-200 dark:border-gray-500 bg-white dark:bg-transparent'
+                      isChecked ? 'bg-primary dark:bg-blue-600 border-primary dark:border-blue-600 text-white' : 'border-blue-200 dark:border-gray-500 bg-white dark:bg-transparent'
                     }`}>
                       {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                     </div>
@@ -437,7 +437,7 @@ export default function SplitBillScreen({
 
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center border ${
                     isSelf
-                      ? 'bg-primary border-primary text-white cursor-not-allowed opacity-80'
+                      ? 'bg-primary dark:bg-blue-600 border-primary dark:border-blue-600 text-white cursor-not-allowed opacity-80'
                       : isChecked
                         ? 'bg-slate-800 dark:bg-gray-600 border-slate-800 dark:border-gray-600 text-white'
                         : 'border-blue-200 dark:border-gray-500'
