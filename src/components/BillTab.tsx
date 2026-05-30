@@ -119,7 +119,7 @@ export default function BillTab({
           <div className="flex items-center gap-1.5 mb-3">
             <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
             <h3 className="font-bold text-sm text-amber-900">分摊追踪</h3>
-            <span className="text-[10px] text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full font-semibold ml-auto">
+            <span className="text-[10px] text-amber-600 dark:text-amber-300 bg-amber-100 dark:bg-amber-900/40 px-2 py-0.5 rounded-full font-semibold ml-auto">
               {Object.values(billPaymentStatus).filter(p => Object.values(p).some(v => v === 'pending')).length} 项待缴
             </span>
           </div>
@@ -230,10 +230,10 @@ export default function BillTab({
                       <span className="font-extrabold text-xs text-slate-800 dark:text-gray-100">-{bill.amount.toFixed(2)} 元</span>
                       <span className={`text-[9px] px-2 py-0.5 rounded-full mt-1.5 font-bold border ${
                         bill.status === '已缴费'
-                          ? 'bg-green-50 text-green-700 border-green-200'
+                          ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800/40'
                           : bill.status === '分摊中'
-                            ? 'bg-amber-50 text-amber-700 border-amber-200'
-                            : 'bg-red-50 text-error border-red-200'
+                            ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/40'
+                            : 'bg-red-50 dark:bg-red-900/30 text-error dark:text-red-300 border-red-200 dark:border-red-800/40'
                       }`}>
                         {bill.status}
                       </span>
@@ -244,7 +244,7 @@ export default function BillTab({
                         const pendCount = Object.values(pStatus).filter(s => s === 'pending').length;
                         return (
                           <span className={`text-[8px] mt-1 font-bold px-1.5 py-0.5 rounded-full ${
-                            pendCount > 0 ? 'bg-amber-100 text-amber-700' : 'bg-green-100 text-green-700'
+                            pendCount > 0 ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300' : 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
                           }`}>
                             {pendCount > 0 ? `${pendCount}人待缴` : '全员已缴'}
                           </span>
@@ -285,7 +285,7 @@ export default function BillTab({
                   <h3 className="font-extrabold text-xs text-slate-800 dark:text-gray-100 mt-0.5">{selectedBill.title}</h3>
                 </div>
                 <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold ${
-                  selectedBill.status === '已缴费' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
+                  selectedBill.status === '已缴费' ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300' : 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300'
                 }`}>
                   {selectedBill.status === '已缴费' ? '已缴清' : '待处理'}
                 </span>
