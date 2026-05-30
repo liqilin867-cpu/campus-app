@@ -165,7 +165,7 @@ export default function ServicesTab(p:Props){
           const isHot=ratio>=80;
           return <div key={ev.id} onClick={()=>setM('events')} className="shrink-0 w-52 bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-3.5 shadow-sm hover:shadow-md transition-shadow cursor-pointer active:scale-[0.98]">
             <div className="flex items-center justify-between mb-2">
-              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${ev.tag==='讲座'?'bg-purple-100 text-purple-700':'bg-blue-100 text-blue-700'}`}>{ev.tag}</span>
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${ev.tag==='讲座'?'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-200':'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200'}`}>{ev.tag}</span>
               {isHot&&<span className="flex items-center gap-0.5 text-[9px] text-red-500 font-bold"><Flame className="w-3 h-3"/>火热</span>}
             </div>
             <p className="font-bold text-sm text-slate-800 dark:text-gray-100 mb-1">{ev.title}</p>
@@ -215,7 +215,7 @@ export default function ServicesTab(p:Props){
       <div className="bg-white dark:bg-gray-900 rounded-t-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-xl animate-slide-up">
         <div className="sticky top-0 bg-white dark:bg-gray-900 z-10 p-4 pb-2 border-b flex justify-between items-center">
           <h3 className="font-bold text-orange-600 flex items-center gap-2"><Utensils className="w-5 h-5"/> 订餐</h3>
-          <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
+          <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
         </div>
         <div className="p-4">
           {!done?<>
@@ -267,7 +267,7 @@ export default function ServicesTab(p:Props){
     {m==='laundry'&&<div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-t-2xl w-full max-w-md p-5 shadow-xl animate-slide-up">
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-bold text-teal-700 flex items-center gap-2"><WashingMachine className="w-5 h-5"/> 自助洗衣</h3>
-        <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
+        <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
       </div>
       <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-2xl p-3.5 border border-teal-100 mb-3 flex justify-between items-center">
         <span className="text-xs text-teal-700 font-medium">标准洗 ¥4/次</span>
@@ -286,7 +286,7 @@ export default function ServicesTab(p:Props){
     {m==='repair'&&<div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-t-2xl w-full max-w-md max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-slide-up">
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-bold text-blue-700 flex items-center gap-2"><Wrench className="w-5 h-5"/> 宿舍报修</h3>
-        <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
+        <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
       </div>
       <RepairForm onAdd={p.onAddRepairRecord} onClose={()=>setM(null)} onNotif={p.onAddSystemNotification}/>
     </div></div>}
@@ -294,14 +294,14 @@ export default function ServicesTab(p:Props){
     {m==='events'&&<div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-bold text-slate-800 dark:text-gray-100 flex items-center gap-2"><Calendar className="w-5 h-5 text-purple-600"/> 校园活动</h3>
-        <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
+        <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
       </div>
       {p.eventsList.map(ev=>{
         const ratio=ev.capacity>0?Math.round(ev.registeredCount/ev.capacity*100):0;
         const isHot=ratio>=80;
         return <div key={ev.id} className="bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 mb-3 border border-slate-100 dark:border-gray-700/50 hover:border-purple-100 transition-colors">
           <div className="flex justify-between items-start mb-2">
-            <span className={'text-[10px] font-semibold px-2 py-0.5 rounded-full '+(ev.tag==='讲座'?'bg-purple-100 text-purple-700':'bg-blue-100 text-blue-700')}>{ev.tag}</span>
+            <span className={'text-[10px] font-semibold px-2 py-0.5 rounded-full '+(ev.tag==='讲座'?'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-200':'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200')}>{ev.tag}</span>
             <div className="flex items-center gap-1">
               {isHot&&<Flame className="w-3 h-3 text-red-400"/>}
               <span className={'text-xs font-bold '+(isHot?'text-red-500':'text-purple-600')}>{ev.registeredCount}/{ev.capacity}</span>
@@ -313,14 +313,14 @@ export default function ServicesTab(p:Props){
             <span className="flex items-center gap-1"><Clock className="w-3 h-3"/>{ev.time}</span>
             <span className="flex items-center gap-1"><MapPin className="w-3 h-3"/>{ev.location}</span>
           </div>
-          <div className="h-1.5 bg-slate-200 rounded-full overflow-hidden mb-3">
+          <div className="h-1.5 bg-slate-200 dark:bg-gray-700 rounded-full overflow-hidden mb-3">
             <div className={'h-full rounded-full transition-all '+(isHot?'bg-gradient-to-r from-red-400 to-pink-500':'bg-gradient-to-r from-purple-400 to-pink-400')} style={{width:ratio+'%'}}></div>
           </div>
           {p.myEvents.includes(ev.id)?
-            <div className="space-y-1.5"><div className="bg-emerald-50 text-emerald-700 text-xs text-center py-2.5 rounded-xl border border-emerald-100 font-medium flex items-center justify-center gap-1.5"><CheckCircle className="w-3.5 h-3.5"/> 已报名</div>
-            <button onClick={()=>p.onToggleEventRegistration(ev.id)} className="w-full py-2 border border-red-200 text-red-500 text-xs rounded-xl font-medium hover:bg-red-50 transition-colors">取消报名</button></div>
+            <div className="space-y-1.5"><div className="bg-emerald-50 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200 text-xs text-center py-2.5 rounded-xl border border-emerald-100 dark:border-emerald-800/40 font-medium flex items-center justify-center gap-1.5"><CheckCircle className="w-3.5 h-3.5"/> 已报名</div>
+            <button onClick={()=>p.onToggleEventRegistration(ev.id)} className="w-full py-2 border border-red-200 dark:border-red-800/40 text-red-500 dark:text-red-300 text-xs rounded-xl font-medium hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">取消报名</button></div>
             :<button onClick={()=>p.onToggleEventRegistration(ev.id)} disabled={ev.registeredCount>=ev.capacity}
-              className={'w-full py-2.5 rounded-xl text-sm font-bold transition-all '+(ev.registeredCount>=ev.capacity?'bg-slate-200 text-slate-400 cursor-not-allowed':'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md shadow-purple-200 hover:shadow-lg active:scale-[0.98]')}>
+              className={'w-full py-2.5 rounded-xl text-sm font-bold transition-all '+(ev.registeredCount>=ev.capacity?'bg-slate-200 text-slate-400 cursor-not-allowed':'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md shadow-purple-200 dark:shadow-purple-950 hover:shadow-lg active:scale-[0.98]')}>
               {ev.registeredCount>=ev.capacity?'名额已满':'立即报名'}
             </button>}
         </div>;
@@ -338,20 +338,20 @@ function FleaModal({items,onAdd,onClose,balance,onBuyItem,onNotif}:{items:FleaIt
   return <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
     <div className="flex justify-between items-center mb-4">
       <div className="flex items-center gap-2"><h3 className="font-bold text-amber-700"><Store className="w-5 h-5 inline"/> 跳蚤市场</h3><span className="text-[10px] text-slate-500 dark:text-gray-400 bg-slate-100 px-2 py-1 rounded-full">余额 ¥{balance.toFixed(2)}</span></div>
-      <button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
+      <button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
     </div>
-    {items.map(f=><div key={f.id} className={'bg-slate-50 rounded-2xl p-4 mb-2.5 border transition-colors '+(f.purchased?'border-emerald-200 opacity-70':'border-slate-100 hover:border-amber-100')}>
+    {items.map(f=><div key={f.id} className={'bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 mb-2.5 border transition-colors '+(f.purchased?'border-emerald-200 opacity-70':'border-slate-100 hover:border-amber-100')}>
       <div className="flex justify-between items-start"><div><p className="font-semibold text-sm text-slate-800 dark:text-gray-100">{f.title}</p><p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">{f.description}</p></div><span className={'font-bold shrink-0 ml-2 '+(f.purchased?'text-emerald-500':'text-amber-700')}>¥{f.price}</span></div>
       <div className="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-gray-700/50 text-[10px] text-slate-400 dark:text-gray-500">
-        <span className="flex items-center gap-1"><span className="w-4 h-4 rounded-full bg-amber-100 text-amber-700 text-[8px] flex items-center justify-center font-bold">{f.seller[0]}</span>{f.seller} · {f.time}</span>
+        <span className="flex items-center gap-1"><span className="w-4 h-4 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 text-[8px] flex items-center justify-center font-bold">{f.seller[0]}</span>{f.seller} · {f.time}</span>
         <div className="flex gap-2">
-          <span className="text-blue-600 font-medium bg-blue-50 px-2 py-0.5 rounded-full">{f.contact}</span>
-          {f.purchased?<span className="px-3 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[9px] font-bold flex items-center gap-1"><CheckCircle className="w-2.5 h-2.5"/>已购买</span>
+          <span className="text-blue-600 font-medium bg-blue-50 dark:bg-blue-900/50 dark:text-blue-200 px-2 py-0.5 rounded-full">{f.contact}</span>
+          {f.purchased?<span className="px-3 py-0.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200 rounded-full text-[9px] font-bold flex items-center gap-1"><CheckCircle className="w-2.5 h-2.5"/>已购买</span>
           :<button onClick={()=>{if(balance<f.price){toast.error('校园卡余额不足，请先充值');return}onBuyItem(f.id,f.price);onNotif('缴费成功','购买成功','已购买 '+f.title+'，花费 ¥'+f.price+'，请联系卖家 '+f.contact+' 取货');}} className="px-3 py-0.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full text-[9px] font-bold shadow-sm hover:shadow-md transition-shadow">购买</button>}
         </div>
       </div>
     </div>)}
-    <button onClick={()=>setShow(!show)} className="w-full mt-2 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl text-xs font-bold shadow-md shadow-amber-200 hover:shadow-lg transition-shadow">{show?'取消':'发布闲置'}</button>
+    <button onClick={()=>setShow(!show)} className="w-full mt-2 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl text-xs font-bold shadow-md shadow-amber-200 dark:shadow-amber-950 hover:shadow-lg transition-shadow">{show?'取消':'发布闲置'}</button>
     {show&&<div className="mt-3 bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 space-y-2.5 border border-slate-200 dark:border-gray-700">
       <input value={title} onChange={e=>setTitle(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-amber-400 transition-colors" placeholder="物品名称"/>
       <input value={price} onChange={e=>setPrice(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-amber-400" placeholder="价格 ¥"/>
@@ -370,15 +370,15 @@ function FleaModal({items,onAdd,onClose,balance,onBuyItem,onNotif}:{items:FleaIt
 function LFModal({items,onAdd,onClose}:{items:LostFoundItem[];onAdd:(i:LostFoundItem)=>void;onClose:()=>void}){
   const [type,setType]=useState<'lost'|'found'>('lost');const [title,setTitle]=useState('');const [loc,setLoc]=useState('');const [contact,setContact]=useState('');const [desc,setDesc]=useState('');const [show,setShow]=useState(false);const [clue,setClue]=useState<{id:string;show:boolean;text:string}>({id:'',show:false,text:''});
   return <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
-    <div className="flex justify-between items-center mb-4"><h3 className="font-bold text-emerald-700 flex items-center gap-2"><Compass className="w-5 h-5"/> 失物招领</h3><button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button></div>
+    <div className="flex justify-between items-center mb-4"><h3 className="font-bold text-emerald-700 flex items-center gap-2"><Compass className="w-5 h-5"/> 失物招领</h3><button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button></div>
     {items.map(l=><div key={l.id} className="bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 mb-2.5 border border-slate-100 dark:border-gray-700/50 hover:border-emerald-100 transition-colors">
-      <div className="flex items-center gap-2 mb-2"><span className={'px-2 py-0.5 rounded-full text-[10px] font-semibold '+(l.type==='lost'?'bg-red-100 text-red-600':'bg-emerald-100 text-emerald-700')}>{l.type==='lost'?'寻物':'招领'}</span><p className="font-semibold text-sm text-slate-800 dark:text-gray-100">{l.title}</p></div>
+      <div className="flex items-center gap-2 mb-2"><span className={'px-2 py-0.5 rounded-full text-[10px] font-semibold '+(l.type==='lost'?'bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-200':'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200')}>{l.type==='lost'?'寻物':'招领'}</span><p className="font-semibold text-sm text-slate-800 dark:text-gray-100">{l.title}</p></div>
       <p className="text-xs text-slate-500 dark:text-gray-400">{l.description}</p>
       <div className="flex justify-between items-center text-[10px] text-slate-400 dark:text-gray-500 mt-3 pt-3 border-t border-slate-200 dark:border-gray-700/50">
         <span className="flex items-center gap-1"><MapPin className="w-3 h-3"/>{l.location}</span>
         <div className="flex items-center gap-2">
-          <span className="text-blue-600 font-medium bg-blue-50 px-2 py-0.5 rounded-full">{l.contact}</span>
-          <button onClick={()=>setClue({id:l.id,show:true,text:''})} className="px-3 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[9px] font-medium hover:bg-emerald-200 transition-colors">提供线索</button>
+          <span className="text-blue-600 font-medium bg-blue-50 dark:bg-blue-900/50 dark:text-blue-200 px-2 py-0.5 rounded-full">{l.contact}</span>
+          <button onClick={()=>setClue({id:l.id,show:true,text:''})} className="px-3 py-0.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200 rounded-full text-[9px] font-medium hover:bg-emerald-200 dark:hover:bg-emerald-800/60 transition-colors">提供线索</button>
         </div>
       </div>
       {clue.show&&clue.id===l.id&&<div className="mt-2 bg-white dark:bg-gray-900 rounded-xl p-2 border border-emerald-100 flex gap-2">
@@ -386,10 +386,10 @@ function LFModal({items,onAdd,onClose}:{items:LostFoundItem[];onAdd:(i:LostFound
         <button onClick={()=>{if(!clue.text.trim())return;toast.success('感谢您的线索！已通知失主。');setClue({id:'',show:false,text:''});}} className="shrink-0 px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg text-[10px] font-bold shadow-sm">发送</button>
       </div>}
     </div>)}
-    <button onClick={()=>setShow(!show)} className="w-full mt-2 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-200 hover:shadow-lg transition-shadow">{show?'取消':'发布信息'}</button>
+    <button onClick={()=>setShow(!show)} className="w-full mt-2 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-200 dark:shadow-emerald-950 hover:shadow-lg transition-shadow">{show?'取消':'发布信息'}</button>
     {show&&<div className="mt-3 bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 space-y-2.5 border border-slate-200 dark:border-gray-700">
-      <div className="flex gap-2"><button onClick={()=>setType('lost')} className={'flex-1 py-1.5 rounded-full text-xs font-semibold border transition-all '+(type==='lost'?'bg-red-500 text-white border-red-500 shadow-sm':'bg-white text-slate-600 border-slate-200 hover:border-red-200')}>寻物</button>
-      <button onClick={()=>setType('found')} className={'flex-1 py-1.5 rounded-full text-xs font-semibold border transition-all '+(type==='found'?'bg-emerald-500 text-white border-emerald-500 shadow-sm':'bg-white text-slate-600 border-slate-200 hover:border-emerald-200')}>招领</button></div>
+      <div className="flex gap-2"><button onClick={()=>setType('lost')} className={'flex-1 py-1.5 rounded-full text-xs font-semibold border transition-all '+(type==='lost'?'bg-red-500 text-white border-red-500 shadow-sm':'bg-white dark:bg-gray-800 text-slate-600 border-slate-200 dark:border-gray-600 hover:border-red-200')}>寻物</button>
+      <button onClick={()=>setType('found')} className={'flex-1 py-1.5 rounded-full text-xs font-semibold border transition-all '+(type==='found'?'bg-emerald-500 text-white border-emerald-500 shadow-sm':'bg-white dark:bg-gray-800 text-slate-600 border-slate-200 dark:border-gray-600 hover:border-emerald-200')}>招领</button></div>
       <div className="grid grid-cols-2 gap-2"><input value={title} onChange={e=>setTitle(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-emerald-400" placeholder="物品名称"/><input value={loc} onChange={e=>setLoc(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-emerald-400" placeholder="地点"/></div>
       <input value={contact} onChange={e=>setContact(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-emerald-400" placeholder="联系方式"/>
       <textarea value={desc} onChange={e=>setDesc(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none h-16 resize-none focus:border-emerald-400" placeholder="详细描述"/>
@@ -407,7 +407,7 @@ function RepairForm({onAdd,onClose,onNotif}:{onAdd:(r:RepairRecord)=>void;onClos
   const [cat,setCat]=useState('电路故障');const [desc,setDesc]=useState('');const [loc,setLoc]=useState('3号楼520室');const [ph,setPh]=useState('138xxxx9988');
   return <div>
     <div className="flex flex-wrap gap-2 mb-3">{['电路故障','水管漏水','家具损坏','网络故障','其他'].map(c=>
-      <button key={c} onClick={()=>setCat(c)} className={'px-3 py-1.5 rounded-full text-xs font-semibold border transition-all '+(cat===c?'bg-blue-600 text-white border-blue-600 shadow-sm':'bg-slate-50 text-slate-600 border-slate-200 hover:border-blue-200')}>{c}</button>
+      <button key={c} onClick={()=>setCat(c)} className={'px-3 py-1.5 rounded-full text-xs font-semibold border transition-all '+(cat===c?'bg-blue-600 text-white border-blue-600 shadow-sm':'bg-slate-50 dark:bg-gray-800 text-slate-600 border-slate-200 dark:border-gray-600 hover:border-blue-200')}>{c}</button>
     )}</div>
     <input value={loc} onChange={e=>setLoc(e.target.value)} className="w-full bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700 text-sm p-3 rounded-xl outline-none mb-2 focus:border-blue-400 transition-colors" placeholder="位置"/>
     <input value={ph} onChange={e=>setPh(e.target.value)} className="w-full bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700 text-sm p-3 rounded-xl outline-none mb-2 focus:border-blue-400" placeholder="电话"/>
