@@ -470,7 +470,7 @@ export default function SplitBillScreen({
       <section className="pt-2">
         <button 
           onClick={handleConfirmSplit}
-          className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 active:scale-[0.98] transition-all text-white font-extrabold text-sm rounded-full flex items-center justify-center gap-2 shadow-lg shadow-orange-200"
+          className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-700 dark:to-red-800 hover:from-orange-600 hover:to-red-600 active:scale-[0.98] transition-all text-white font-extrabold text-sm rounded-full flex items-center justify-center gap-2 shadow-lg shadow-orange-200 dark:shadow-orange-950"
         >
           <Send className="w-4 h-4" />
           立即向宿舍广播 并发起一卡通托管极速扣款
