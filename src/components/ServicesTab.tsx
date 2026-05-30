@@ -68,7 +68,7 @@ export default function ServicesTab(p:Props){
     const e=p.eventsList.filter(x=>x.title.includes(s)).map(x=>({label:x.title,tag:x.tag,type:'event'}));
     const all=[...r,...f,...l,...e];
     if(!all.length)return <div className="text-center py-8 text-xs text-slate-400 dark:text-gray-500">未找到匹配结果</div>;
-    return <div className="bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-gray-500 shadow-lg p-2 max-h-64 overflow-y-auto">{all.map((x,i)=>
+    return <div className="bg-white/95 dark:bg-gray-600/95 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-gray-400 shadow-lg p-2 max-h-64 overflow-y-auto">{all.map((x,i)=>
       <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-gray-600/50 cursor-pointer text-xs transition-colors" onClick={()=>{
         setSr('');
         if(x.type==='food')setM('food');
@@ -108,7 +108,7 @@ export default function ServicesTab(p:Props){
         </div>
         {/* Search */}
         <div className="relative">
-          <div className="bg-white/30 rounded-2xl border border-white/50 flex items-center px-4 h-11">
+          <div className="rounded-2xl border border-white/50 flex items-center px-4 h-11 bg-white/40 header-search">
             <Search className="w-4 h-4 text-white/70 shrink-0"/>
             <input value={sr} onChange={e=>setSr(e.target.value)} className="w-full bg-transparent text-sm text-white ml-2.5 outline-none placeholder:text-white/50" placeholder="搜索美食、活动、二手..."/>
             {sr&&<button onClick={()=>setSr('')} className="text-white/60 hover:text-white/90"><X className="w-4 h-4"/></button>}
@@ -220,7 +220,7 @@ export default function ServicesTab(p:Props){
         <div className="p-4">
           {!done?<>
             <div className="flex gap-2 mb-3 hscroll">{[...FOOD].map(r=><button key={r.id} onClick={()=>{setRes(r);setCart({})}} className={'shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition-all '+(res.id===r.id?'bg-orange-500 text-white shadow-md shadow-orange-200':'bg-slate-100 text-slate-600 hover:bg-slate-200')}>{r.name}</button>)}</div>
-            <div className="rounded-2xl overflow-hidden h-28 mb-3 relative shadow-md">{res.img?<img src={res.img} className="w-full h-full object-cover"/>:<div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-4xl">🍽️</div>}<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3"><p className="font-bold text-white text-lg drop-shadow-sm">{res.name}</p></div></div>
+            <div className="rounded-2xl overflow-hidden h-28 mb-3 relative shadow-md">{res.img?<img src={res.img} className="w-full h-full object-cover"/>:<div className={"w-full h-full flex items-center justify-center text-4xl bg-gradient-to-br "+(res.id==='c1'?'from-orange-400 to-red-500':res.id==='c2'?'from-red-400 to-pink-500':'from-amber-400 to-green-500')}>{res.id==='c1'?'🍚':res.id==='c2'?'🍜':'🌮'}</div>}<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3"><p className="font-bold text-white text-lg drop-shadow-sm">{res.name}</p></div></div>
             <div className="space-y-2">{res.items.map(item=>{
               const q=cart[item.id]||0;
               return <div key={item.id} className="flex items-center justify-between bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-2xl border border-slate-100 dark:border-gray-700/50 hover:border-orange-100 transition-colors">
@@ -269,9 +269,9 @@ export default function ServicesTab(p:Props){
         <h3 className="font-bold text-teal-700 flex items-center gap-2"><WashingMachine className="w-5 h-5"/> 自助洗衣</h3>
         <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
       </div>
-      <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-2xl p-3.5 border border-teal-100 mb-3 flex justify-between items-center">
-        <span className="text-xs text-teal-700 font-medium">标准洗 ¥4/次</span>
-        <span className="text-xs font-bold text-teal-800 bg-white dark:bg-gray-900 px-3 py-1 rounded-full shadow-sm">余额 ¥{p.cardBalance.toFixed(2)}</span>
+      <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/40 dark:to-cyan-900/40 rounded-2xl p-3.5 border border-teal-100 dark:border-teal-800/40 mb-3 flex justify-between items-center">
+        <span className="text-xs text-teal-700 dark:text-teal-200 font-medium">标准洗 ¥4/次</span>
+        <span className="text-xs font-bold text-teal-800 dark:text-teal-100 bg-white dark:bg-gray-800 px-3 py-1 rounded-full shadow-sm">余额 ¥{p.cardBalance.toFixed(2)}</span>
       </div>
       <div className="space-y-2.5">{ws.map(w=><div key={w.id} className="flex justify-between items-center bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-2xl border border-slate-100 dark:border-gray-700/50 hover:border-teal-100 transition-colors">
         <div><p className="font-semibold text-sm text-slate-800 dark:text-gray-100">{w.name}</p>
@@ -407,7 +407,7 @@ function RepairForm({onAdd,onClose,onNotif}:{onAdd:(r:RepairRecord)=>void;onClos
   const [cat,setCat]=useState('电路故障');const [desc,setDesc]=useState('');const [loc,setLoc]=useState('3号楼520室');const [ph,setPh]=useState('138xxxx9988');
   return <div>
     <div className="flex flex-wrap gap-2 mb-3">{['电路故障','水管漏水','家具损坏','网络故障','其他'].map(c=>
-      <button key={c} onClick={()=>setCat(c)} className={'px-3 py-1.5 rounded-full text-xs font-semibold border transition-all '+(cat===c?'bg-blue-600 text-white border-blue-600 shadow-sm':'bg-slate-50 dark:bg-gray-800 text-slate-600 border-slate-200 dark:border-gray-600 hover:border-blue-200')}>{c}</button>
+      <button key={c} onClick={()=>setCat(c)} className={'px-3 py-1.5 rounded-full text-xs font-semibold border transition-all '+(cat===c?'bg-blue-600 text-white border-blue-600 shadow-sm':'bg-slate-50 dark:bg-gray-800 text-slate-600 dark:text-gray-300 border-slate-200 dark:border-gray-600 hover:border-blue-200')}>{c}</button>
     )}</div>
     <input value={loc} onChange={e=>setLoc(e.target.value)} className="w-full bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700 text-sm p-3 rounded-xl outline-none mb-2 focus:border-blue-400 transition-colors" placeholder="位置"/>
     <input value={ph} onChange={e=>setPh(e.target.value)} className="w-full bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700 text-sm p-3 rounded-xl outline-none mb-2 focus:border-blue-400" placeholder="电话"/>

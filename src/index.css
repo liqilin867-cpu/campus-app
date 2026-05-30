@@ -398,6 +398,10 @@ html, body {
   color: #e2e8f0 !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
+.dark .header-search input {
+  background: transparent !important;
+  color: white !important;
+}
 
 /* === Dark mode override for common hardcoded color utilities === */
 .dark .bg-\[\#faf9ff\] { background: #16162a !important; }
