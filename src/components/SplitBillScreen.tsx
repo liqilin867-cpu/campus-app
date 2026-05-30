@@ -4,21 +4,22 @@
  */
 
 import React, { useState } from 'react';
-import { 
-  ArrowLeft, 
-  Send, 
-  Check, 
-  Zap, 
-  Droplet, 
-  Flame, 
-  Plus, 
-  Trash2, 
-  Percent, 
-  TrendingUp, 
+import {
+  ArrowLeft,
+  Send,
+  Check,
+  Zap,
+  Droplet,
+  Flame,
+  Plus,
+  Trash2,
+  Percent,
+  TrendingUp,
   Coins,
   ShieldCheck,
   AlertCircle
 } from 'lucide-react';
+import { toast } from 'sonner';
 import { BillItem, Roommate } from '../types';
 
 interface SplitBillScreenProps {
@@ -109,11 +110,11 @@ export default function SplitBillScreen({
     e.preventDefault();
     const amt = parseFloat(customAmount);
     if (!customTitle.trim()) {
-      alert('请先输入有温度的垫付款项目名称！');
+      toast.error('请先输入垫付款项目名称！');
       return;
     }
     if (isNaN(amt) || amt <= 0) {
-      alert('请键入合规的代付款金额哟！');
+      toast.error('请输入合规的代付款金额！');
       return;
     }
 
@@ -145,23 +146,23 @@ export default function SplitBillScreen({
   // Submit trigger handler
   const handleConfirmSplit = () => {
     if (selectedBillIds.length === 0) {
-      alert('⚠️ 请至少勾选一个想要分摊的账单项目！');
+      toast.error('请至少勾选一个想要分摊的账单项目！');
       return;
     }
     if (selectedRoommates.length === 0) {
-      alert('⚠️ 请至少选择 1 位参与代扣分摊的学生！');
+      toast.error('请至少选择 1 位参与代扣分摊的学生！');
       return;
     }
 
     if (splitMethod === 'ratio' && ratioSum !== 100) {
-      alert(`⚠️ 自定义分摊比重当前之和为 ${ratioSum}%！\n比例总和必须严格等于 100% 才能正确分配扣款单！`);
+      toast.error(`自定义分摊比重当前之和为 ${ratioSum}%！比例总和必须严格等于 100%`);
       return;
     }
 
     if (splitMethod === 'ratio') {
       // Simulate successful ratio dispatching
       const shareBreakdown = selectedRoommates.map(n => `${n} 分担 ¥ ${(billSum * (roommatePercentages[n] || 0) / 100).toFixed(2)}`).join('\n');
-      alert(`🎉 自定义比例分摊通知已发送！\n${shareBreakdown}`);
+      toast.success(`自定义比例分摊通知已发送！\n${shareBreakdown}`);
       const customSplitBills = bills.filter(b => b.id.startsWith('custom-') && selectedBillIds.includes(b.id));
       onInitiateSuccess(billSum, billSum * (roommatePercentages[currentUserName] || 0) / 100, selectedBillIds, selectedRoommates, customSplitBills);
     } else {

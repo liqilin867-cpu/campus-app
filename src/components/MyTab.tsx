@@ -4,7 +4,10 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { User, Settings, Check, HelpCircle, ChevronRight, CreditCard, LogOut, BellRing, Leaf, AlertCircle, FileText, Info, Award, Smartphone, X, Home, Droplet, Bolt } from 'lucide-react';
+import { toast } from 'sonner';
+import { useTheme } from 'next-themes';
+import { User, Settings, Check, HelpCircle, ChevronRight, CreditCard, LogOut, BellRing, Leaf, AlertCircle, FileText, Info, Award, Smartphone, Home, Droplet, Bolt, Moon, Sun } from 'lucide-react';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '../../components/ui/dialog';
 import { Roommate } from '../types';
 
 interface MyTabProps {
@@ -30,6 +33,7 @@ export default function MyTab({
   onNavigateToPowerGuarantee,
   onQuickRecharge
 }: MyTabProps) {
+  const { theme, setTheme } = useTheme();
   const [activeModal, setActiveModal] = useState<null | 'ranking' | 'about' | 'feedback' | 'simpleSetup' | 'paymentSecurity' | 'outageSettings' | 'editProfile' | 'changePassword'>(null);
   const [feedbackText, setFeedbackText] = useState('');
 
@@ -70,10 +74,10 @@ export default function MyTab({
   const handleFeedbackSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!feedbackText.trim()) {
-      alert('请先填写您的有价值反馈！');
+      toast.error('请先填写您的有价值反馈！');
       return;
     }
-    alert('感谢您的深度回馈！宿舍生活助手产品团队已收到您的申请，我们将不断改进体验！');
+    toast.success('感谢您的反馈！产品团队将不断改进体验！');
     setFeedbackText('');
     setActiveModal(null);
   };
@@ -241,7 +245,22 @@ export default function MyTab({
           </button>
 
 
-          <button 
+          <button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-700">
+                {theme === 'dark' ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
+              </div>
+              <span className="font-semibold text-sm text-on-surface">{theme === 'dark' ? '浅色模式' : '深色模式'}</span>
+            </div>
+            <div className={`w-9 h-5 rounded-full transition-colors ${theme === 'dark' ? 'bg-purple-600' : 'bg-slate-300'} relative`}>
+              <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${theme === 'dark' ? 'translate-x-[18px]' : 'translate-x-0.5'}`}></div>
+            </div>
+          </button>
+
+          <button
             onClick={onNavigateToPowerGuarantee}
             className="flex items-center justify-between p-4 border-b border-slate-200/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
           >
@@ -303,7 +322,7 @@ export default function MyTab({
         </div>
 
         <button
-          onClick={() => { if (window.confirm('确认重置所有数据？这将清除所有账单和记录，演示账号将恢复初始状态。')) { localStorage.clear(); window.location.reload(); } }}
+          onClick={() => { if (window.confirm('确认重置所有数据？这将清除所有账单和记录，演示账号将恢复初始状态。')) { localStorage.removeItem('campus_data'); window.location.reload(); } }}
           className="w-full py-3 rounded-2xl text-xs text-red-400 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
         >
           重置所有数据
@@ -319,82 +338,64 @@ export default function MyTab({
 
 
       {/* -------------------- RANKING MODAL -------------------- */}
-      {activeModal === 'ranking' && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200">
-            <button onClick={() => setActiveModal(null)} className="absolute right-4 top-4 text-on-surface-variant hover:text-on-surface cursor-pointer">
-              <X className="w-5 h-5" />
-            </button>
-            <h2 className="font-bold text-lg text-emerald-800 flex items-center gap-1.5 mb-1">
-              <Award className="w-5 h-5" /> 绿色校园：节能先锋寝室
-            </h2>
-            
-            <div className="text-center bg-emerald-50/50 p-4 rounded-2xl border border-emerald-200">
-              <p className="text-xs text-emerald-800 mb-1">本月 3号楼520室 用电用水指标</p>
-              <h3 className="text-3xl font-bold text-emerald-700 tracking-tight">全校前 4.2%</h3>
-              <p className="text-[10px] text-on-surface-variant mt-1.5">已节约碳排放 16.5 kg，获得学校“白金环保寝室”奖章！ 🍃</p>
-            </div>
+      <Dialog open={activeModal === 'ranking'} onOpenChange={(o) => { if (!o) setActiveModal(null); }}>
+        <DialogContent>
+          <DialogTitle className="font-bold text-lg text-emerald-800 flex items-center gap-1.5">
+            <Award className="w-5 h-5" /> 绿色校园：节能先锋寝室
+          </DialogTitle>
 
-            <div className="space-y-3 pt-1 text-xs">
-              <div className="flex justify-between items-center pb-2 border-b">
-                <span>🏆 1. 1号楼202室 (白金)</span>
-                <span className="font-bold text-emerald-700">100% 节能率</span>
-              </div>
-              <div className="flex justify-between items-center pb-2 border-b">
-                <span>🥈 2. 7号楼104室 (白金)</span>
-                <span className="font-bold text-emerald-700">98% 节能率</span>
-              </div>
-              <div className="flex justify-between items-center pb-2 border-b">
-                <span>🥉 3. 3号楼520室 (我们, 全校第15)</span>
-                <span className="font-bold text-emerald-700">96.3% 节能率</span>
-              </div>
-            </div>
-
-            <button 
-              onClick={() => setActiveModal(null)}
-              className="w-full mt-2 py-3 bg-gradient-to-r from-emerald-600 to-green-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
-            >
-              继续保持环保
-            </button>
+          <div className="text-center bg-emerald-50/50 p-4 rounded-2xl border border-emerald-200">
+            <p className="text-xs text-emerald-800 mb-1">本月 3号楼520室 用电用水指标</p>
+            <h3 className="text-3xl font-bold text-emerald-700 tracking-tight">全校前 4.2%</h3>
+            <p className="text-[10px] text-on-surface-variant mt-1.5">已节约碳排放 16.5 kg，获得学校"白金环保寝室"奖章！ 🍃</p>
           </div>
-        </div>
-      )}
+
+          <div className="space-y-3 pt-1 text-xs">
+            <div className="flex justify-between items-center pb-2 border-b">
+              <span>🏆 1. 1号楼202室 (白金)</span>
+              <span className="font-bold text-emerald-700">100% 节能率</span>
+            </div>
+            <div className="flex justify-between items-center pb-2 border-b">
+              <span>🥈 2. 7号楼104室 (白金)</span>
+              <span className="font-bold text-emerald-700">98% 节能率</span>
+            </div>
+            <div className="flex justify-between items-center pb-2 border-b">
+              <span>🥉 3. 3号楼520室 (我们, 全校第15)</span>
+              <span className="font-bold text-emerald-700">96.3% 节能率</span>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setActiveModal(null)}
+            className="w-full mt-2 py-3 bg-gradient-to-r from-emerald-600 to-green-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
+          >
+            继续保持环保
+          </button>
+        </DialogContent>
+      </Dialog>
 
       {/* -------------------- ABOUT MODAL -------------------- */}
-      {activeModal === 'about' && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200">
-            <button onClick={() => setActiveModal(null)} className="absolute right-4 top-4 text-on-surface-variant hover:text-on-surface cursor-pointer">
-              <X className="w-5 h-5" />
-            </button>
-            <h2 className="font-bold text-lg text-primary flex items-center gap-1.5 mb-1">
-              <Info className="w-5 h-5" /> 关于校园生活助手 🎓
-            </h2>
+      <Dialog open={activeModal === 'about'} onOpenChange={(o) => { if (!o) setActiveModal(null); }}>
+        <DialogContent>
+          <DialogTitle className="font-bold text-lg text-primary flex items-center gap-1.5">
+            <Info className="w-5 h-5" /> 关于校园生活助手
+          </DialogTitle>
 
-            <div className="space-y-3 text-xs leading-relaxed text-on-surface-variant">
-              <p>
-                <strong>版本</strong>：Version 2.4.1 (Stable Build)
-              </p>
-              <p>
-                「校园生活助手」是专门为高校学子打造的一站式校园事务缴费、多人水电度数平摊以及便捷生活工具微服务平台。
-              </p>
-              <p>
-                目前已接入由校内后勤、一卡通中心、食堂结算以及青年创客中心提供的多项官方API，力保学生数据的高度安全与高实效交付。
-              </p>
-              <p className="border-t pt-2 text-[10px] text-outline">
-                项目归属于高校后勤信息化建设部门。如有Bug、故障等问题，请点击“功能建议反馈”联系我们，我们将24小时内为您修正体验优点！
-              </p>
-            </div>
-
-            <button 
-              onClick={() => setActiveModal(null)}
-              className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
-            >
-              我知道了
-            </button>
+          <div className="space-y-3 text-xs leading-relaxed text-on-surface-variant">
+            <p><strong>版本</strong>：Version 2.4.1 (Stable Build)</p>
+            <p>「校园生活助手」是专门为高校学子打造的一站式校园事务缴费、多人水电度数平摊以及便捷生活工具微服务平台。</p>
+            <p>目前已接入由校内后勤、一卡通中心、食堂结算以及青年创客中心提供的多项官方API，力保学生数据的高度安全与高实效交付。</p>
+            <p className="border-t pt-2 text-[10px] text-outline">项目归属于高校后勤信息化建设部门。如有Bug、故障等问题，请点击"功能建议反馈"联系我们，我们将24小时内为您修正体验优点！</p>
           </div>
-        </div>
-      )}
+
+          <button
+            onClick={() => setActiveModal(null)}
+            className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
+          >
+            我知道了
+          </button>
+        </DialogContent>
+      </Dialog>
 
       {/* -------------------- CHANGE PASSWORD MODAL -------------------- */}
       {activeModal === 'changePassword' && (
@@ -402,351 +403,283 @@ export default function MyTab({
       )}
 
       {/* -------------------- FEEDBACK MODAL -------------------- */}
-      {activeModal === 'feedback' && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200">
-            <button onClick={() => setActiveModal(null)} className="absolute right-4 top-4 text-on-surface-variant hover:text-on-surface cursor-pointer">
-              <X className="w-5 h-5" />
-            </button>
-            <h2 className="font-bold text-lg text-primary flex items-center gap-1.5 mb-1">
-              <FileText className="w-5 h-5" /> 意见与功能建议反馈 📝
-            </h2>
+      <Dialog open={activeModal === 'feedback'} onOpenChange={(o) => { if (!o) setActiveModal(null); }}>
+        <DialogContent>
+          <DialogTitle className="font-bold text-lg text-primary flex items-center gap-1.5">
+            <FileText className="w-5 h-5" /> 意见与功能建议反馈
+          </DialogTitle>
 
-            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
-              <textarea 
-                value={feedbackText}
-                onChange={(e) => setFeedbackText(e.target.value)}
-                className="w-full h-32 bg-surface-container border-none text-xs p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none resize-none leading-relaxed"
-                placeholder="请倾诉并写下您发现的系统交互缺陷，或您希望添加的炫酷校内新服务（例如：宿舍热水表远程锁扣，订自习座等）..."
-                required
-              ></textarea>
-              <button 
-                type="submit"
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
-              >
-                递交反馈给我们
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
+          <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+            <textarea
+              value={feedbackText}
+              onChange={(e) => setFeedbackText(e.target.value)}
+              className="w-full h-32 bg-surface-container border-none text-xs p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none resize-none leading-relaxed"
+              placeholder="请倾诉并写下您发现的系统交互缺陷，或您希望添加的炫酷校内新服务（例如：宿舍热水表远程锁扣，订自习座等）..."
+              required
+            ></textarea>
+            <button
+              type="submit"
+              className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
+            >
+              递交反馈给我们
+            </button>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       {/* -------------------- SIMPLE SETUP DIALOG -------------------- */}
-      {activeModal === 'simpleSetup' && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200">
-            <button onClick={() => setActiveModal(null)} className="absolute right-4 top-4 text-on-surface-variant hover:text-on-surface cursor-pointer">
-              <X className="w-5 h-5" />
-            </button>
-            <h2 className="font-bold text-lg text-primary flex items-center gap-1.5 mb-1">
-              <Settings className="w-5 h-5 animate-spin" /> 设备全局偏好设置
-            </h2>
-            <div className="space-y-4 text-xs">
-              <div className="flex justify-between items-center pb-2 border-b">
-                <span>推送允许 (Push Notifications)</span>
-                <input type="checkbox" defaultChecked className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
-              </div>
-              <div className="flex justify-between items-center pb-2 border-b">
-                <span>扣款自动免密授信交易限制</span>
-                <span className="font-semibold text-primary">¥ 50以内</span>
-              </div>
-              <div className="flex justify-between items-center pb-2 border-b">
-                <span>网络硬件断链重拨极速策略</span>
-                <input type="checkbox" defaultChecked className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
-              </div>
-              <p className="text-[10px] text-outline">这些硬件高级选项将同步于您的寝室智能电盘网盘盒设备中生效。</p>
+      <Dialog open={activeModal === 'simpleSetup'} onOpenChange={(o) => { if (!o) setActiveModal(null); }}>
+        <DialogContent>
+          <DialogTitle className="font-bold text-lg text-primary flex items-center gap-1.5">
+            <Settings className="w-5 h-5" /> 设备全局偏好设置
+          </DialogTitle>
+          <div className="space-y-4 text-xs">
+            <div className="flex justify-between items-center pb-2 border-b">
+              <span>推送允许 (Push Notifications)</span>
+              <input type="checkbox" defaultChecked className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
             </div>
-            <button 
-              onClick={() => {
-                alert('策略配置保存成功！已通过物联网网盘系统同步至520房间网合路由器设置中。');
-                setActiveModal(null);
-              }}
-              className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
-            >
-              保存并退回
-            </button>
+            <div className="flex justify-between items-center pb-2 border-b">
+              <span>扣款自动免密授信交易限制</span>
+              <span className="font-semibold text-primary">¥ 50以内</span>
+            </div>
+            <div className="flex justify-between items-center pb-2 border-b">
+              <span>网络硬件断链重拨极速策略</span>
+              <input type="checkbox" defaultChecked className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
+            </div>
+            <p className="text-[10px] text-outline">这些硬件高级选项将同步于您的寝室智能电盘网盘盒设备中生效。</p>
           </div>
-        </div>
-      )}
+          <button
+            onClick={() => {
+              toast.success('策略配置保存成功！已同步至寝室路由器设置中。');
+              setActiveModal(null);
+            }}
+            className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
+          >
+            保存并退回
+          </button>
+        </DialogContent>
+      </Dialog>
 
       {/* -------------------- 1. PAYMENT SECURITY & AUTO RECHARGE MODAL -------------------- */}
-      {activeModal === 'paymentSecurity' && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200">
-            <button onClick={() => setActiveModal(null)} className="absolute right-4 top-4 text-on-surface-variant hover:text-on-surface cursor-pointer">
-              <X className="w-5 h-5" />
-            </button>
-            <h2 className="font-bold text-lg text-primary flex items-center gap-1.5 mb-1">
-              <CreditCard className="w-5 h-5 text-primary" /> 缴费安全与第三方代扣
-            </h2>
-            <div className="space-y-4 text-xs">
-              
-              <div>
-                <label className="block text-[11px] text-outline font-semibold mb-1.5">扣款绑定主渠道</label>
-                <div className="grid grid-cols-1 gap-2">
-                  {[
-                    { key: 'Agricultural', label: '农业银行储蓄卡 (尾号 4045)' },
-                    { key: 'WeChat', label: '微信支付 (自动调用零钱通)' },
-                    { key: 'Alipay', label: '支付宝 (自动调用余额宝)' },
-                  ].map(item => (
-                    <button
-                      key={item.key}
-                      type="button"
-                      onClick={() => setPayMethod(item.key)}
-                      className={`flex justify-between items-center px-4 py-2.5 rounded-xl border-2 text-left transition-all ${
-                        payMethod === item.key 
-                          ? 'border-primary bg-primary/5 font-semibold text-primary' 
-                          : 'border-slate-100 hover:border-slate-200 text-on-surface-variant'
-                      }`}
-                    >
-                      <span>{item.label}</span>
-                      {payMethod === item.key && <Check className="w-4 h-4 text-primary" />}
-                    </button>
-                  ))}
-                </div>
+      <Dialog open={activeModal === 'paymentSecurity'} onOpenChange={(o) => { if (!o) setActiveModal(null); }}>
+        <DialogContent>
+          <DialogTitle className="font-bold text-lg text-primary flex items-center gap-1.5">
+            <CreditCard className="w-5 h-5 text-primary" /> 缴费安全与第三方代扣
+          </DialogTitle>
+          <div className="space-y-4 text-xs">
+            <div>
+              <label className="block text-[11px] text-outline font-semibold mb-1.5">扣款绑定主渠道</label>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { key: 'Agricultural', label: '农业银行储蓄卡 (尾号 4045)' },
+                  { key: 'WeChat', label: '微信支付 (自动调用零钱通)' },
+                  { key: 'Alipay', label: '支付宝 (自动调用余额宝)' },
+                ].map(item => (
+                  <button
+                    key={item.key}
+                    type="button"
+                    onClick={() => setPayMethod(item.key)}
+                    className={`flex justify-between items-center px-4 py-2.5 rounded-xl border-2 text-left transition-all ${
+                      payMethod === item.key
+                        ? 'border-primary bg-primary/5 font-semibold text-primary'
+                        : 'border-slate-100 hover:border-slate-200 text-on-surface-variant'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    {payMethod === item.key && <Check className="w-4 h-4 text-primary" />}
+                  </button>
+                ))}
               </div>
-
-              <div className="pt-1.5">
-                <label className="block text-[11px] text-outline font-semibold mb-1.5">单次水电免密代扣额度限制</label>
-                <div className="grid grid-cols-4 gap-2">
-                  {[
-                    { val: '20', label: '¥20' },
-                    { val: '50', label: '¥50' },
-                    { val: '100', label: '¥100' },
-                    { val: 'none', label: '无限' },
-                  ].map(lim => (
-                    <button
-                      key={lim.val}
-                      type="button"
-                      onClick={() => setNoPasswordLimit(lim.val)}
-                      className={`py-2 rounded-xl border text-center font-bold text-[11px] ${
-                        noPasswordLimit === lim.val
-                          ? 'bg-primary text-white border-primary shadow-sm'
-                          : 'bg-white text-outline border-slate-200'
-                      }`}
-                    >
-                      {lim.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center py-2 bg-slate-50 px-3 rounded-xl">
-                <div>
-                  <span className="font-bold">指纹 / 面容 FaceID 闪付保驾</span>
-                  <p className="text-[9px] text-outline mt-0.5">大额充缴一键验证防误触</p>
-                </div>
-                <input 
-                  type="checkbox" 
-                  checked={quickBiometrics} 
-                  onChange={(e) => setQuickBiometrics(e.target.checked)}
-                  className="h-4.5 w-4.5 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" 
-                />
-              </div>
-
             </div>
-            
-            <button 
-              onClick={() => {
-                alert('缴费安全与自动扣划新策略已保存并全面生效！');
-                setActiveModal(null);
-              }}
-              className="w-full mt-2 py-3 bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-full shadow-md active:scale-95 duration-150"
-            >
-              应用并保存修改
-            </button>
+
+            <div className="pt-1.5">
+              <label className="block text-[11px] text-outline font-semibold mb-1.5">单次水电免密代扣额度限制</label>
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { val: '20', label: '¥20' },
+                  { val: '50', label: '¥50' },
+                  { val: '100', label: '¥100' },
+                  { val: 'none', label: '无限' },
+                ].map(lim => (
+                  <button
+                    key={lim.val}
+                    type="button"
+                    onClick={() => setNoPasswordLimit(lim.val)}
+                    className={`py-2 rounded-xl border text-center font-bold text-[11px] ${
+                      noPasswordLimit === lim.val
+                        ? 'bg-primary text-white border-primary shadow-sm'
+                        : 'bg-white text-outline border-slate-200'
+                    }`}
+                  >
+                    {lim.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center py-2 bg-slate-50 px-3 rounded-xl">
+              <div>
+                <span className="font-bold">指纹 / 面容 FaceID 闪付保驾</span>
+                <p className="text-[9px] text-outline mt-0.5">大额充缴一键验证防误触</p>
+              </div>
+              <input
+                type="checkbox"
+                checked={quickBiometrics}
+                onChange={(e) => setQuickBiometrics(e.target.checked)}
+                className="h-4.5 w-4.5 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer"
+              />
+            </div>
           </div>
-        </div>
-      )}
+
+          <button
+            onClick={() => {
+              toast.success('缴费安全与自动扣划新策略已保存并全面生效！');
+              setActiveModal(null);
+            }}
+            className="w-full mt-2 py-3 bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-full shadow-md active:scale-95 duration-150"
+          >
+            应用并保存修改
+          </button>
+        </DialogContent>
+      </Dialog>
 
       {/* -------------------- 2. OUTAGE WARNINGS MODAL -------------------- */}
-      {activeModal === 'outageSettings' && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200">
-            <button onClick={() => setActiveModal(null)} className="absolute right-4 top-4 text-on-surface-variant hover:text-on-surface cursor-pointer">
-              <X className="w-5 h-5" />
-            </button>
-            <h2 className="font-bold text-lg text-[#006474] flex items-center gap-1.5 mb-1">
-              <BellRing className="w-5 h-5 text-[#006474]" /> 防断电强提醒预警设置
-            </h2>
-            <p className="text-[11px] text-outline -mt-3">当宿舍（520寝室）发生用电用水余额告急时极速推送</p>
-            <div className="space-y-4 text-xs">
-              
-              <div>
-                <label className="block text-[11px] text-outline font-semibold mb-1.5">电费透支强行断电警报阀值</label>
-                <div className="grid grid-cols-4 gap-2">
-                  {[
-                    { val: '5', label: '≤ 5度' },
-                    { val: '10', label: '≤ 10度' },
-                    { val: '15', label: '≤ 15度' },
-                    { val: '20', label: '≤ 20度' },
-                  ].map(lev => (
+      <Dialog open={activeModal === 'outageSettings'} onOpenChange={(o) => { if (!o) setActiveModal(null); }}>
+        <DialogContent>
+          <DialogTitle className="font-bold text-lg text-[#006474] flex items-center gap-1.5">
+            <BellRing className="w-5 h-5 text-[#006474]" /> 防断电强提醒预警设置
+          </DialogTitle>
+          <p className="text-[11px] text-outline">当宿舍（520寝室）发生用电用水余额告急时极速推送</p>
+          <div className="space-y-4 text-xs">
+            <div>
+              <label className="block text-[11px] text-outline font-semibold mb-1.5">电费透支强行断电警报阀值</label>
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { val: '5', label: '≤ 5度' },
+                  { val: '10', label: '≤ 10度' },
+                  { val: '15', label: '≤ 15度' },
+                  { val: '20', label: '≤ 20度' },
+                ].map(lev => (
+                  <button
+                    key={lev.val}
+                    type="button"
+                    onClick={() => setOutageThreshold(lev.val)}
+                    className={`py-2 rounded-xl border text-center font-bold text-[11px] ${
+                      outageThreshold === lev.val
+                        ? 'bg-[#006474] text-white border-[#006474] shadow-sm'
+                        : 'bg-white text-outline border-slate-200'
+                    }`}
+                  >
+                    {lev.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-[11px] text-outline font-semibold">消息接收通道配置</label>
+              <div className="space-y-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                <div className="flex justify-between items-center">
+                  <span>短信提醒 (扣取 0.05元 / 条)</span>
+                  <input type="checkbox" checked={notifySms} onChange={(e) => setNotifySms(e.target.checked)} className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>微信服务号模板消息推送 (免费)</span>
+                  <input type="checkbox" checked={notifyWechat} onChange={(e) => setNotifyWechat(e.target.checked)} className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>校内App横幅呼吸浮层弱提醒 (免费)</span>
+                  <input type="checkbox" checked={notifyInApp} onChange={(e) => setNotifyInApp(e.target.checked)} className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[11px] text-outline font-semibold mb-1.5">备用接收紧急联系手机号</label>
+              <input type="tel" value={backupPhone} onChange={(e) => setBackupPhone(e.target.value)} className="w-full bg-slate-100 border-none p-3 text-xs font-semibold rounded-xl text-on-surface focus:ring-2 focus:ring-[#006474] outline-none" placeholder="请输入手机号" />
+            </div>
+          </div>
+
+          <button
+            onClick={() => {
+              toast.success(`防断电提醒设置已保存！已绑定备用紧急短信通道：${backupPhone}`);
+              setActiveModal(null);
+            }}
+            className="w-full mt-2 py-3 bg-gradient-to-r from-[#006474] to-teal-500 text-white font-bold rounded-full shadow-md active:scale-95 duration-150"
+          >
+            开启防断电保驾护航
+          </button>
+        </DialogContent>
+      </Dialog>
+
+      {/* -------------------- PROFILE EDIT MODAL -------------------- */}
+      <Dialog open={activeModal === 'editProfile'} onOpenChange={(o) => { if (!o) setActiveModal(null); }}>
+        <DialogContent>
+          <DialogTitle className="font-extrabold text-base text-slate-900">修改个人信息</DialogTitle>
+          <p className="text-[11px] text-slate-500">点击下方精选校园照片，或手动输入照片网址</p>
+
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <label className="block text-[10px] font-bold text-slate-400 uppercase">学籍登记姓名</label>
+              <input
+                type="text"
+                value={inputName}
+                onChange={(e) => setInputName(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200 p-3 text-xs font-bold rounded-xl text-slate-800 outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                placeholder="请输入您的姓名"
+                maxLength={12}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="block text-[10px] font-bold text-slate-400 uppercase">选择精选照片/头像</label>
+              <div className="grid grid-cols-3 gap-2">
+                {PRESET_AVATARS.map((avatar, idx) => {
+                  const isSelected = inputAvatar === avatar.url;
+                  return (
                     <button
-                      key={lev.val}
+                      key={idx}
                       type="button"
-                      onClick={() => setOutageThreshold(lev.val)}
-                      className={`py-2 rounded-xl border text-center font-bold text-[11px] ${
-                        outageThreshold === lev.val
-                          ? 'bg-[#006474] text-white border-[#006474] shadow-sm'
-                          : 'bg-white text-outline border-slate-200'
+                      onClick={() => setInputAvatar(avatar.url)}
+                      className={`p-1 rounded-xl bg-slate-50 border transition-all flex flex-col items-center gap-1.5 cursor-pointer hover:bg-orange-50/50 ${
+                        isSelected ? 'border-orange-500 ring-2 ring-orange-500/20 bg-orange-50/20' : 'border-slate-200'
                       }`}
                     >
-                      {lev.label}
+                      <img src={avatar.url} alt={avatar.name} className="w-11 h-11 rounded-full object-cover border border-white" referrerPolicy="no-referrer" />
+                      <span className="text-[9px] font-medium text-slate-600 truncate max-w-full">{avatar.name}</span>
                     </button>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-
-              <div className="space-y-2">
-                <label className="block text-[11px] text-outline font-semibold">消息接收通道配置</label>
-                <div className="space-y-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                  <div className="flex justify-between items-center">
-                    <span>短信提醒 (扣取 0.05元 / 条)</span>
-                    <input 
-                      type="checkbox" 
-                      checked={notifySms} 
-                      onChange={(e) => setNotifySms(e.target.checked)}
-                      className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" 
-                    />
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>微信服务号模板消息推送 (免费)</span>
-                    <input 
-                      type="checkbox" 
-                      checked={notifyWechat} 
-                      onChange={(e) => setNotifyWechat(e.target.checked)}
-                      className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" 
-                    />
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>校内App横幅呼吸浮层弱提醒 (免费)</span>
-                    <input 
-                      type="checkbox" 
-                      checked={notifyInApp} 
-                      onChange={(e) => setNotifyInApp(e.target.checked)}
-                      className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" 
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[11px] text-outline font-semibold mb-1.5">备用接收紧急联系手机号</label>
-                <input 
-                  type="tel"
-                  value={backupPhone}
-                  onChange={(e) => setBackupPhone(e.target.value)}
-                  className="w-full bg-slate-100 border-none p-3 text-xs font-semibold rounded-xl text-on-surface focus:ring-2 focus:ring-[#006474] outline-none"
-                  placeholder="请输入手机号"
-                />
-              </div>
-
             </div>
-            
-            <button 
+
+            <div className="space-y-1">
+              <label className="block text-[10px] font-bold text-slate-400 uppercase">粘贴自定义照片链接 (URL)</label>
+              <input
+                type="text"
+                value={inputAvatar}
+                onChange={(e) => setInputAvatar(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200 p-2.5 text-[10px] font-mono rounded-xl text-slate-700 outline-none focus:ring-1 focus:ring-primary focus:bg-white transition-all"
+                placeholder="网址以 http / https 开头"
+              />
+            </div>
+
+            <button
+              type="button"
               onClick={() => {
-                alert(`防断电提醒设置已保存！已绑定备用紧急短息通道：${backupPhone}`);
+                if (!inputName.trim()) { toast.error('请输入合规的学籍姓名'); return; }
+                setStudentName(inputName.trim());
+                setStudentAvatar(inputAvatar);
+                toast.success('个人姓名及照片已成功更改！');
                 setActiveModal(null);
               }}
-              className="w-full mt-2 py-3 bg-gradient-to-r from-[#006474] to-teal-500 text-white font-bold rounded-full shadow-md active:scale-95 duration-150"
+              className="w-full py-3 bg-gradient-to-r from-primary to-orange-500 hover:from-primary/95 text-white font-bold text-xs rounded-full flex items-center justify-center gap-1 shadow-md active:scale-[0.98] transition-all cursor-pointer mt-1"
             >
-              开启防断电保驾护航
+              保存并同步修改
             </button>
           </div>
-        </div>
-      )}
-
-      {/* -------------------- 3. ROOMMATE ALLOCATION SETTINGS MODAL -------------------- */}
-      {/* -------------------- PROFILE EDIT MODAL -------------------- */}
-      {activeModal === 'editProfile' && (
-        <div className="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[28px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200 shadow-2xl border border-slate-100">
-            <button 
-              onClick={() => setActiveModal(null)} 
-              className="absolute right-4 top-4 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors cursor-pointer"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            <div>
-              <h2 className="font-extrabold text-base text-slate-900">修改个人信息</h2>
-              <p className="text-[11px] text-slate-500">点击下方精选校园照片，或手动输入照片网址</p>
-            </div>
-
-            {/* Editing Form */}
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <label className="block text-[10px] font-bold text-slate-400 uppercase">学籍登记姓名</label>
-                <input 
-                  type="text"
-                  value={inputName}
-                  onChange={(e) => setInputName(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 p-3 text-xs font-bold rounded-xl text-slate-800 outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                  placeholder="请输入您的姓名"
-                  maxLength={12}
-                />
-              </div>
-
-              {/* Preset Avatars Selection Grid */}
-              <div className="space-y-1.5">
-                <label className="block text-[10px] font-bold text-slate-400 uppercase">选择精选照片/头像</label>
-                <div className="grid grid-cols-3 gap-2">
-                  {PRESET_AVATARS.map((avatar, idx) => {
-                    const isSelected = inputAvatar === avatar.url;
-                    return (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => setInputAvatar(avatar.url)}
-                        className={`p-1 rounded-xl bg-slate-50 border transition-all flex flex-col items-center gap-1.5 cursor-pointer hover:bg-orange-50/50 ${
-                          isSelected ? 'border-orange-500 ring-2 ring-orange-500/20 bg-orange-50/20' : 'border-slate-200'
-                        }`}
-                      >
-                        <img 
-                          src={avatar.url} 
-                          alt={avatar.name} 
-                          className="w-11 h-11 rounded-full object-cover border border-white"
-                          referrerPolicy="no-referrer"
-                        />
-                        <span className="text-[9px] font-medium text-slate-600 truncate max-w-full">{avatar.name}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Custom Image URL input */}
-              <div className="space-y-1">
-                <label className="block text-[10px] font-bold text-slate-400 uppercase">粘贴自定义照片链接 (URL)</label>
-                <input 
-                  type="text"
-                  value={inputAvatar}
-                  onChange={(e) => setInputAvatar(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 p-2.5 text-[10px] font-mono rounded-xl text-slate-700 outline-none focus:ring-1 focus:ring-primary focus:bg-white transition-all"
-                  placeholder="网址以 http / https 开头"
-                />
-              </div>
-
-              {/* Submit Trigger */}
-              <button 
-                type="button"
-                onClick={() => {
-                  if (!inputName.trim()) {
-                    alert('请输入合规的学籍姓名');
-                    return;
-                  }
-                  setStudentName(inputName.trim());
-                  setStudentAvatar(inputAvatar);
-                  alert('🎉 个人姓名及照片已成功更改，并在学校数据中进行同步！');
-                  setActiveModal(null);
-                }}
-                className="w-full py-3 bg-gradient-to-r from-primary to-orange-500 hover:from-primary/95 text-white font-bold text-xs rounded-full flex items-center justify-center gap-1 shadow-md active:scale-[0.98] transition-all cursor-pointer mt-1"
-              >
-                保存并同步修改
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
 
     </div>
   );
@@ -765,31 +698,24 @@ function ChangePasswordModal({ onClose, currentUserName }: { onClose: () => void
     if (!oldPw || !newPw || !confirmPw) { setMsg('请填写所有字段'); return; }
     if (newPw.length < 6) { setMsg('新密码不能少于6位'); return; }
     if (newPw !== confirmPw) { setMsg('两次密码不一致'); return; }
-    // Update password on server
-    (async () => {
-      try {
-        const res = await fetch('/api/data');
-        const server = await res.json();
-        const users = server.registeredUsers || [];
-        const user = users.find((u: any) => u.name === currentUserName);
-        if (!user) { setMsg('未找到用户信息'); return; }
-        if (user.password !== oldPw) { setMsg('旧密码不正确'); return; }
-        user.password = newPw;
-        server.registeredUsers = users;
-        await fetch('/api/data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(server) });
-        alert('密码修改成功！');
-        onClose();
-      } catch { setMsg('修改失败，请重试'); }
-    })();
+    try {
+      const saved = JSON.parse(localStorage.getItem('campus_data') || '{}');
+      const users = saved.registeredUsers || [];
+      const user = users.find((u: any) => u.name === currentUserName);
+      if (!user) { setMsg('未找到用户信息'); return; }
+      if (user.password !== oldPw) { setMsg('旧密码不正确'); return; }
+      user.password = newPw;
+      saved.registeredUsers = users;
+      localStorage.setItem('campus_data', JSON.stringify(saved));
+      toast.success('密码修改成功！');
+      onClose();
+    } catch { setMsg('修改失败，请重试'); }
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white rounded-[24px] w-full max-w-sm p-6 shadow-xl animate-in zoom-in-95 duration-200">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-bold text-base text-slate-900">修改密码</h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 cursor-pointer"><X className="w-5 h-5" /></button>
-        </div>
+    <Dialog open onOpenChange={(o) => { if (!o) onClose(); }}>
+      <DialogContent>
+        <DialogTitle className="font-bold text-base text-slate-900">修改密码</DialogTitle>
         <form onSubmit={handleSubmit} className="space-y-3">
           <input type="password" value={oldPw} onChange={e => setOldPw(e.target.value)}
             className="w-full border border-slate-200 rounded-xl p-3 text-xs outline-none focus:border-blue-500"
@@ -806,7 +732,7 @@ function ChangePasswordModal({ onClose, currentUserName }: { onClose: () => void
             确认修改
           </button>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

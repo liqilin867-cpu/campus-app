@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Bell, ChevronDown, Check, ArrowRight, Wallet, CreditCard, Wifi, Zap, Droplet, Flame, Shuffle, Users, AlertTriangle, X, TrendingDown, TrendingUp, BarChart3, Clock, CheckCircle } from 'lucide-react';
+import { toast } from 'sonner';
+import { MapPin, Bell, ChevronDown, Check, ArrowRight, Wallet, CreditCard, Wifi, Zap, Droplet, Flame, Shuffle, Users, AlertTriangle, TrendingDown, TrendingUp, BarChart3, Clock, CheckCircle } from 'lucide-react';
+import { Dialog, DialogContent, DialogTitle } from '../../components/ui/dialog';
 import { BillItem } from '../types';
 
 interface HomeTabProps {
@@ -146,7 +148,7 @@ export default function HomeTab(props: HomeTabProps) {
                 {bill.category === '空调' && <Flame className="w-4 h-4 text-indigo-500" />}
                 <div><p className="text-xs font-semibold">{bill.title}</p><p className="text-[10px] text-slate-400">您需缴 ¥{perPerson.toFixed(2)}</p></div>
               </div>
-              <button onClick={() => { if (cardBalance < perPerson) { alert('余额不足'); return; } if (confirm('缴纳 ¥'+perPerson.toFixed(2)+'？')) onPayForRoommate(billId, currentUserName, perPerson); }}
+              <button onClick={() => { if (cardBalance < perPerson) { toast.error('余额不足'); return; } if (confirm('缴纳 ¥'+perPerson.toFixed(2)+'？')) onPayForRoommate(billId, currentUserName, perPerson); }}
                 className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-full text-[10px] font-bold cursor-pointer active:scale-95">立即缴费</button>
             </div>
           ))}
@@ -154,35 +156,30 @@ export default function HomeTab(props: HomeTabProps) {
       </section>
 
       {/* Quick Split Modal */}
-      {qsCat && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-xs p-5 shadow-xl animate-in zoom-in-95 duration-200">
-            <div className="flex items-center gap-2 mb-3">
-              {qsCat === '电费' ? <Zap className="w-5 h-5 text-orange-500" /> : <Droplet className="w-5 h-5 text-cyan-500" />}
-              <h3 className="font-bold text-sm">{qsCat}快速分摊</h3>
-            </div>
-            <p className="text-[10px] text-slate-400 mb-3">输入金额后将自动向全寝发起分摊</p>
-            <input type="number" value={qsAmt} onChange={e => setQsAmt(e.target.value)} className="w-full bg-slate-50 border border-slate-200 text-lg p-3 rounded-xl outline-none text-center font-bold" placeholder="输入金额" autoFocus />
-            <div className="flex gap-2 mt-3">
-              <button onClick={() => setQsCat(null)} className="flex-1 py-2.5 bg-slate-100 text-slate-600 text-xs font-semibold rounded-xl cursor-pointer">取消</button>
-              <button onClick={() => {
-                const n = Number(qsAmt);
-                if (isNaN(n) || n <= 0) return;
-                setQsCat(null);
-                onQuickSplit(qsCat, n);
-              }} className="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-sm cursor-pointer disabled:opacity-50" disabled={!qsAmt || Number(qsAmt) <= 0}>发起分摊</button>
-            </div>
+      <Dialog open={!!qsCat} onOpenChange={(o) => { if (!o) setQsCat(null); }}>
+        <DialogContent>
+          <DialogTitle className="font-bold text-sm flex items-center gap-2">
+            {qsCat === '电费' ? <Zap className="w-5 h-5 text-orange-500" /> : <Droplet className="w-5 h-5 text-cyan-500" />}
+            {qsCat}快速分摊
+          </DialogTitle>
+          <p className="text-[10px] text-slate-400 mb-3">输入金额后将自动向全寝发起分摊</p>
+          <input type="number" value={qsAmt} onChange={e => setQsAmt(e.target.value)} className="w-full bg-slate-50 border border-slate-200 text-lg p-3 rounded-xl outline-none text-center font-bold" placeholder="输入金额" autoFocus />
+          <div className="flex gap-2 mt-3">
+            <button onClick={() => setQsCat(null)} className="flex-1 py-2.5 bg-slate-100 text-slate-600 text-xs font-semibold rounded-xl cursor-pointer">取消</button>
+            <button onClick={() => {
+              const n = Number(qsAmt);
+              if (isNaN(n) || n <= 0) return;
+              setQsCat(null);
+              onQuickSplit(qsCat, n);
+            }} className="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-sm cursor-pointer disabled:opacity-50" disabled={!qsAmt || Number(qsAmt) <= 0}>发起分摊</button>
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
 
       {/* Trend Modal */}
-      {showTrend && <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl w-full max-w-sm p-5 shadow-xl">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-bold text-sm flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" />用能走势</h3>
-            <button onClick={() => setShowTrend(false)} className="text-slate-400 cursor-pointer"><X className="w-5 h-5" /></button>
-          </div>
+      <Dialog open={showTrend} onOpenChange={(o) => { if (!o) setShowTrend(false); }}>
+        <DialogContent>
+          <DialogTitle className="font-bold text-sm flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" />用能走势</DialogTitle>
           <div className="flex gap-1 bg-slate-100 p-1 rounded-lg mb-3">
             {(['电费', '水费'] as const).map(t => <button key={t} onClick={() => setTrendTab(t)} className={'flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer '+(trendTab===t?'bg-white text-primary shadow-sm':'text-slate-500')}>{t}走势</button>)}
           </div>
@@ -195,8 +192,8 @@ export default function HomeTab(props: HomeTabProps) {
             </div>;
           })}
           <button onClick={() => setShowTrend(false)} className="w-full mt-3 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-full cursor-pointer">关闭</button>
-        </div>
-      </div>}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { CreditCard, Zap, Droplet, Wifi, Flame, WashingMachine, CheckCircle, Clock, AlertCircle, X, Receipt, Download, ShieldCheck, UserCheck, UserX } from 'lucide-react';
+import { toast } from 'sonner';
 import { BillItem } from '../types';
 
 interface BillTabProps {
@@ -53,7 +54,7 @@ export default function BillTab({
 
   const handleDownloadInvoice = (bill: BillItem) => {
     const txnId = bill.orderNo || `TXN${bill.id.toUpperCase()}`;
-    alert(`电子凭证下载成功\n单号：${txnId}\n金额：¥${bill.amount.toFixed(2)}`);
+    toast.success(`电子凭证下载成功\n单号：${txnId}\n金额：¥${bill.amount.toFixed(2)}`);
   };
 
   // Check which bill IDs have payment tracking
@@ -63,13 +64,9 @@ export default function BillTab({
 
   const handlePayForRoommateClick = (billId: string, name: string, amount: number) => {
     if (cardBalance < amount) {
-      alert(`余额不足！需 ¥${amount.toFixed(2)}，当前余额 ¥${cardBalance.toFixed(2)}`);
+      toast.error(`余额不足！需 ¥${amount.toFixed(2)}，当前余额 ¥${cardBalance.toFixed(2)}`);
       return;
     }
-
-    const confirmed = window.confirm(`确认帮 ${name} 代付 ¥${amount.toFixed(2)} 吗？将从您的一卡通扣除。`);
-    if (!confirmed) return;
-
     onPayForRoommate(billId, name, amount);
   };
 

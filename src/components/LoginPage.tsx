@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import {toast} from 'sonner';
 import {
   User,
   Lock,
@@ -45,27 +46,21 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
     { name: '王五', studentId: '20240003', phone: '13800000004', password: 'wangwu123', room: '3号楼520室' },
   ]);
 
-  // Load registered users from server on mount
+  // Load registered users from localStorage on mount
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch('/api/data');
-        const server = await res.json();
-        if (server.registeredUsers?.length >= 4) setRegisteredUsers(server.registeredUsers);
-      } catch {}
-    })();
+    try {
+      const saved = JSON.parse(localStorage.getItem('campus_data') || '{}');
+      if (saved.registeredUsers?.length >= 4) setRegisteredUsers(saved.registeredUsers);
+    } catch {}
   }, []);
 
-  // Save registered users to server whenever they change
+  // Save registered users to localStorage whenever they change
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch('/api/data');
-        const server = await res.json();
-        server.registeredUsers = registeredUsers;
-        await fetch('/api/data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(server) });
-      } catch {}
-    })();
+    try {
+      const saved = JSON.parse(localStorage.getItem('campus_data') || '{}');
+      saved.registeredUsers = registeredUsers;
+      localStorage.setItem('campus_data', JSON.stringify(saved));
+    } catch {}
   }, [registeredUsers]);
 
   const [studentId, setStudentId] = useState('20241234');
@@ -169,19 +164,16 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
 
     const newUser = { name: regName.trim(), studentId: regStudentId.trim(), phone: regPhone.trim(), password: regPassword, room: regRoom };
     setRegisteredUsers([newUser, ...registeredUsers]);
-    // Add new user to room members on server
-    (async () => {
-      try {
-        const res = await fetch('/api/data');
-        const server = await res.json();
-        const roomKey = `room_${newUser.room}`;
-        if (!server.rooms) server.rooms = {};
-        if (!server.rooms[roomKey]) server.rooms[roomKey] = {};
-        if (!server.rooms[roomKey].members) server.rooms[roomKey].members = [];
-        server.rooms[roomKey].members.push(newUser.name);
-        await fetch('/api/data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(server) });
-      } catch {}
-    })();
+    // Add new user to room members in localStorage
+    try {
+      const saved = JSON.parse(localStorage.getItem('campus_data') || '{}');
+      const roomKey = `room_${newUser.room}`;
+      if (!saved.rooms) saved.rooms = {};
+      if (!saved.rooms[roomKey]) saved.rooms[roomKey] = {};
+      if (!saved.rooms[roomKey].members) saved.rooms[roomKey].members = [];
+      saved.rooms[roomKey].members.push(newUser.name);
+      localStorage.setItem('campus_data', JSON.stringify(saved));
+    } catch {}
     setStudentId(newUser.studentId);
     setPassword(newUser.password);
     setPhone(newUser.phone);
@@ -194,7 +186,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
   const handleSendCode = () => {
     if (!phone.trim() || phone.length < 11) { setErrorMsg('请输入正确的手机号'); return; }
     setSmsSent(true);
-    alert('【智慧校园】短信验证码已发送！本次验证码为：8888');
+    toast.success('【智慧校园】短信验证码已发送！本次验证码为：8888');
     setErrorMsg('');
   };
 
@@ -500,7 +492,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
                       className="bg-transparent w-full text-xs text-slate-800 outline-none placeholder:text-slate-400"
                       placeholder="密码" required />
-                    <button type="button" onClick={() => alert('请携带学生证前往宿舍楼值班室重置密码，或切换到短信验证码登录。')}
+                    <button type="button" onClick={() => toast.error('请携带学生证前往宿舍楼值班室重置密码，或切换到短信验证码登录。')}
                       className="text-[10px] text-blue-500 hover:text-blue-700 font-medium shrink-0">
                       忘记密码？
                     </button>

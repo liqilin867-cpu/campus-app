@@ -7,6 +7,8 @@ import {Toaster} from '../components/ui/sonner';
 import {toast} from 'sonner';
 import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription} from '../components/ui/dialog';
 import {Message,BillItem,Roommate,FleaItem,LostFoundItem,EventItem,RepairRecord,PowerGuaranteeRecord,RoommatePaymentStatus} from './types';
+import ErrorBoundary from './components/ErrorBoundary';
+import {ThemeProvider} from 'next-themes';
 import LoginPage from './components/LoginPage';
 import HomeTab from './components/HomeTab';
 import ServicesTab from './components/ServicesTab';
@@ -25,34 +27,34 @@ export default function App(){
   const [sid,setSid]=useState('');const [load,setLoad]=useState(false);
   const showT=(m,t='success')=>{if(t==='error')toast.error(m);else toast.success(m);};
   const [fi,setFi]=useState([{id:'f1',title:'九成新小米千兆路由器',price:49,description:'考研退舍',seller:'张三',time:'1小时前',contact:'13888321288'},{id:'f2',title:'2024考研政治全套书',price:15,description:'全新',seller:'李四',time:'3小时前',contact:'19983421233'},{id:'f3',title:'美利达勇士300',price:180,description:'通勤代步',seller:'王五',time:'昨天',contact:'13593212999'}]);
-  const [li2,setLi2]=useState([{id:'l1',type:'lost',title:'黑色充电盒',location:'操场',time:'2小时前',contact:'15893322112',status:'processing',description:'皮卡丘壳'},{id:'l2',type:'found',title:'钥匙串',location:'实训楼',time:'昨天',contact:'19823469988',status:'processing',description:'3把钥匙'}]);
+  const [li2,setLi2]=useState<LostFoundItem[]>([{id:'l1',type:'lost',title:'黑色充电盒',location:'操场',time:'2小时前',contact:'15893322112',status:'processing',description:'皮卡丘壳'},{id:'l2',type:'found',title:'钥匙串',location:'实训楼',time:'昨天',contact:'19823469988',status:'processing',description:'3把钥匙'}]);
   const [ev,setEv]=useState([{id:'e1',title:'创客沙龙',time:'今晚19:30',location:'活动中心',description:'校友分享',capacity:200,registeredCount:189,registered:false,tag:'讲座'},{id:'e2',title:'模拟面试',time:'明日14:00',location:'图书馆',description:'外企指导',capacity:120,registeredCount:118,registered:false,tag:'就业'}]);
-  const [rp2,setRp2]=useState([{id:'r1',category:'水管漏水',description:'龙头渗水',location:'520',time:'11-26',status:'pending',contact:'13888'},{id:'r2',category:'家具损坏',description:'空调叶片断',location:'520',time:'11-10',status:'completed',contact:'13888'}]);
+  const [rp2,setRp2]=useState<RepairRecord[]>([{id:'r1',category:'水管漏水',description:'龙头渗水',location:'520',time:'11-26',status:'pending',contact:'13888'},{id:'r2',category:'家具损坏',description:'空调叶片断',location:'520',time:'11-10',status:'completed',contact:'13888'}]);
   const [msg,setMsg]=useState([]);const [bps,setBps]=useState({});const [myEv,setMyEv]=useState<string[]>([]);
-  const [gh,setGh]=useState([{id:'g1',title:'保电',timeSlot:'23:00-07:00',date:'2026-05-19',status:'已批准'},{id:'g2',title:'保电2',timeSlot:'22:30-06:00',date:'2026-05-10',status:'已拒绝'}]);
+  const [gh,setGh]=useState<PowerGuaranteeRecord[]>([{id:'g1',title:'保电',timeSlot:'23:00-07:00',date:'2026-05-19',status:'已批准'},{id:'g2',title:'保电2',timeSlot:'22:30-06:00',date:'2026-05-10',status:'已拒绝'}]);
   const fr=useRef(true);const [sc,setSc]=useState('');
   const pu=useRef<any[]>([]);
-  const save=(d)=>{try{fetch('/api/data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})}catch{}};
-  const loadD=async()=>{try{const r=await fetch('/api/data');return await r.json()}catch{return{}}};
+  const save=(d)=>{try{localStorage.setItem('campus_data',JSON.stringify(d))}catch{}try{fetch('/api/data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})}catch{}};
+  const loadD=()=>{try{return JSON.parse(localStorage.getItem('campus_data')||'{}')}catch{return{}}};
 
   useEffect(()=>{if(!cu)return;const rk='room_'+cu.room;
     const d={rooms:{[rk]:{billsList:bl,billPaymentStatus:bps,guaranteeHistory:gh,fleaItems:fi,lostFoundItems:li2,eventsList:ev,repairRecords:rp2,members:rm.map(r=>r.name)}},
     users:{[cu.name]:{cardBalance:b1,netBalance:b2,waterBalance:b3,elecBalance:b4,messages:msg,isNetAutoDeduct:ad,unpaidBills:ub,billsList:bl,myEvents:myEv}}};
-    (async()=>{const ex=await loadD();const ss=ex.sessions?.[cu.name];
+    (()=>{const ex=loadD();const ss=ex.sessions?.[cu.name];
     if(sid&&ss&&ss!==''&&ss!==sid){alert('已在其他设备登录');handleLogout();return}
     const users={...(ex.users||{}),...d.users};
     if(pu.current.length){pu.current.forEach(({name,data})=>{const eu=users[name]||{};if(data.messages)eu.messages=[...data.messages,...(eu.messages||[])];if(data.billsList)eu.billsList=[...data.billsList,...(eu.billsList||[])];users[name]=eu;});pu.current=[];}
     save({rooms:{...(ex.rooms||{}),...d.rooms},users,sessions:{...(ex.sessions||{}),[cu.name]:sid}})})()},
   [ub,bl,bps,gh,b1,b2,b3,b4,msg,ad,ev,fi,li2,rp2,rm,sid,myEv]);
 
-  useEffect(()=>{if(!cu||!sid)return;let iv;const dl=setTimeout(()=>{iv=setInterval(async()=>{try{const d=await loadD();const s=d.sessions?.[cu.name];if(s&&s!==''&&s!==sid){alert('已在其他设备登录');handleLogout()}}catch{}},3000)},5000);return()=>{clearTimeout(dl);if(iv)clearInterval(iv)}},[cu?.name,sid]);
+  useEffect(()=>{if(!cu||!sid)return;let iv;const dl=setTimeout(()=>{iv=setInterval(()=>{const d=loadD();const s=d.sessions?.[cu.name];if(s&&s!==''&&s!==sid){alert('已在其他设备登录');handleLogout()}},3000)},5000);return()=>{clearTimeout(dl);if(iv)clearInterval(iv)}},[cu?.name,sid]);
 
   const notif=(c,t,ct)=>{setMsg(p=>[{id:String(Date.now()),category:c,title:t,content:ct,time:new Date().toLocaleTimeString().slice(0,5),date:new Date().toLocaleDateString(),unread:true},...p])};
 
   const handleLoginSuccess = async (userName, studentId, room) => {
     setLoad(true);setUb([]);setBl([]);setBps({});setMsg([]);setRm([]);setMyEv([]);setSd(null);
     setB1(0);setB2(0);setB3(0);setB4(0);setAd(false);setEv([{id:'e1',title:'创客沙龙',time:'今晚19:30',location:'活动中心',description:'校友分享',capacity:200,registeredCount:189,registered:false,tag:'讲座'},{id:'e2',title:'模拟面试',time:'明日14:00',location:'图书馆',description:'外企指导',capacity:120,registeredCount:118,registered:false,tag:'就业'}]);
-    let saved:any={};try{saved=await loadD()}catch{}
+    const saved=loadD()
     const rk='room_'+room;const rd=saved.rooms?.[rk];const ud=saved.users?.[userName];
     if(rd){
       if(rd.billsList)setBl(rd.billsList);
@@ -77,12 +79,12 @@ export default function App(){
       if(ud.unpaidBills)setUb(ud.unpaidBills);if(ud.billsList)setBl(ud.billsList);
       if(ud.myEvents)setMyEv(ud.myEvents);
     }else{notif('系统通知','欢迎','欢迎您，'+userName+'！');}
-    const ns=Math.random().toString(36).slice(2)+Date.now().toString(36);try{const ex=await loadD();await fetch('/api/data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...(ex||{}),sessions:{...(ex?.sessions||{}),[userName]:ns}})});}catch{}setSid(ns);
+    const ns=Math.random().toString(36).slice(2)+Date.now().toString(36);try{const ex=loadD();await fetch('/api/data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...(ex||{}),sessions:{...(ex?.sessions||{}),[userName]:ns}})});}catch{}setSid(ns);
     setCu({name:userName,studentId,room});setLi(true);setLoad(false);fr.current=false;
   };
 
   const handleLogout=()=>{
-    if(cu){(async()=>{try{const ex=await loadD();save({rooms:{...(ex.rooms||{}),['room_'+cu.room]:{billsList:bl,billPaymentStatus:bps,guaranteeHistory:gh,fleaItems:fi,lostFoundItems:li2,eventsList:ev,repairRecords:rp2,members:rm.map(r=>r.name)}},users:{...(ex.users||{}),[cu.name]:{cardBalance:b1,netBalance:b2,waterBalance:b3,elecBalance:b4,messages:msg,isNetAutoDeduct:ad,unpaidBills:ub,billsList:bl,myEvents:myEv}},sessions:{...(ex.sessions||{}),[cu.name]:''}})}catch{}})();}
+    if(cu){try{const ex=loadD();save({rooms:{...(ex.rooms||{}),['room_'+cu.room]:{billsList:bl,billPaymentStatus:bps,guaranteeHistory:gh,fleaItems:fi,lostFoundItems:li2,eventsList:ev,repairRecords:rp2,members:rm.map(r=>r.name)}},users:{...(ex.users||{}),[cu.name]:{cardBalance:b1,netBalance:b2,waterBalance:b3,elecBalance:b4,messages:msg,isNetAutoDeduct:ad,unpaidBills:ub,billsList:bl,myEvents:myEv}},sessions:{...(ex.sessions||{}),[cu.name]:''}})}catch{}}
     setCu(null);setLi(false);setTab('home');setSub(null);
   };
 
@@ -156,7 +158,8 @@ export default function App(){
 
   if(load)return <div className="h-screen bg-[#f2f5ff] flex items-center justify-center"><div className="flex flex-col items-center gap-3"><div className="w-10 h-10 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div><p className="text-sm text-slate-500">加载中...</p></div></div>;
   if(!li)return <LoginPage onLoginSuccess={handleLoginSuccess} />;
-  return (
+  return (<ErrorBoundary>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
     <div className="min-h-screen flex flex-col pb-16 bg-[#f2f5ff]">
       <Toaster richColors position="top-center" />
       <Dialog open={!!sd} onOpenChange={()=>setSd(null)}>
@@ -210,5 +213,6 @@ export default function App(){
         })}
       </nav>}
     </div>
-  );
+    </ThemeProvider>
+  </ErrorBoundary>);
 }

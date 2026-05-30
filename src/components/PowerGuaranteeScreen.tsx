@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { ArrowLeft, Zap, CheckCircle2, XCircle, Clock, Send, Calendar, ChevronDown } from 'lucide-react';
+import { toast } from 'sonner';
 import { PowerGuaranteeRecord } from '../types';
 
 interface PowerGuaranteeScreenProps {
@@ -26,7 +27,7 @@ export default function PowerGuaranteeScreen({
     e.preventDefault();
     onSubmitGuarantee('夜间断电保电申请', startTime, endTime);
     setAppliedToday(true);
-    alert('提交保电申请成功！系统由于您的良好寝室节能绩点分，特予【由系统机制极速秒批通过】！您的宿舍在今天夜间将不会被拉闸停电。');
+    toast.success('提交保电申请成功！系统已极速秒批通过，您的宿舍在今天夜间将不会被拉闸停电。');
   };
 
   return (

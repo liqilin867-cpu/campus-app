@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import {toast} from 'sonner';
 import {Search,Utensils,WashingMachine,Wrench,Store,Compass,Calendar,CheckCircle,X,ChevronRight,Flame,Star,Shield,Sparkles,Clock,MapPin} from 'lucide-react';
 import {FleaItem,LostFoundItem,EventItem,RepairRecord} from '../types';
 
@@ -250,7 +251,7 @@ export default function ServicesTab(p:Props){
                 })}
                 <div className="flex justify-between font-bold text-sm text-orange-800 pt-2 mt-1 border-t border-orange-200"><span>合计</span><span>¥{total.toFixed(2)}</span></div>
                 <button onClick={()=>{
-                  if(p.cardBalance<total){alert('余额不足');return;}
+                  if(p.cardBalance<total){toast.error('余额不足');return;}
                   p.onUpdateCardBalance(p.cardBalance-total);
                   const ns=entries.map(([id,q])=>{const i=allItems.find((x:any)=>x.id===id);return i?.name+'x'+q;}).join('、');
                   setOd({restaurant:res.name,items:ns,total});setDone(true);
@@ -278,7 +279,7 @@ export default function ServicesTab(p:Props){
           {w.rm>0&&<span className="text-slate-400 ml-2">排队{w.rm}人</span>}</p></div>
         {w.st==='故障'?<button className="px-3 py-1.5 bg-red-50 text-red-400 rounded-full text-xs border border-red-100">不可用</button>
         :w.bk?<button onClick={()=>setWs(ws.map(x=>x.id===w.id?{...x,bk:false,st:'空闲',rm:0}:x))} className="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-medium border border-blue-100 hover:bg-blue-100">取消</button>
-        :<button onClick={()=>{if(p.cardBalance<4){alert('余额不足');return}p.onUpdateCardBalance(p.cardBalance-4);p.onAddSystemNotification('缴费成功','洗衣预约成功','已支付 ¥4，请在预约时间使用洗衣机');setWs(ws.map(x=>x.id===w.id?{...x,bk:true,st:'工作中',rm:35}:x));}} disabled={w.st==='使用中'} className={'px-4 py-1.5 rounded-full text-xs font-bold transition-all '+(w.st==='使用中'?'bg-slate-100 text-slate-400':'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-sm shadow-teal-200 hover:shadow-md')}>预约 ¥4</button>}
+        :<button onClick={()=>{if(p.cardBalance<4){toast.error('余额不足');return}p.onUpdateCardBalance(p.cardBalance-4);p.onAddSystemNotification('缴费成功','洗衣预约成功','已支付 ¥4，请在预约时间使用洗衣机');setWs(ws.map(x=>x.id===w.id?{...x,bk:true,st:'工作中',rm:35}:x));}} disabled={w.st==='使用中'} className={'px-4 py-1.5 rounded-full text-xs font-bold transition-all '+(w.st==='使用中'?'bg-slate-100 text-slate-400':'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-sm shadow-teal-200 hover:shadow-md')}>预约 ¥4</button>}
       </div>)}</div>
     </div></div>}
 
@@ -357,10 +358,10 @@ function FleaModal({items,onAdd,onClose,balance,onBuyItem,onNotif}:{items:FleaIt
       <input value={contact} onChange={e=>setContact(e.target.value)} className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-xs outline-none focus:border-amber-400" placeholder="联系方式"/>
       <textarea value={desc} onChange={e=>setDesc(e.target.value)} className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-xs outline-none h-16 resize-none focus:border-amber-400" placeholder="物品描述"/>
       <button onClick={()=>{
-        if(!title.trim()||!price.trim()){alert('请填写名称和价格');return;}
+        if(!title.trim()||!price.trim()){toast.error('请填写名称和价格');return;}
         onAdd({id:String(Date.now()),title:title.trim(),price:Number(price),description:desc||'暂无描述',seller:'我',time:'刚刚',contact:contact||'无'});
         setTitle('');setPrice('');setDesc('');setContact('');setShow(false);
-        alert('发布成功！');
+        toast.success('发布成功！');
       }} className="w-full py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition-shadow">确认发布</button>
     </div>}
   </div></div>;
@@ -382,7 +383,7 @@ function LFModal({items,onAdd,onClose}:{items:LostFoundItem[];onAdd:(i:LostFound
       </div>
       {clue.show&&clue.id===l.id&&<div className="mt-2 bg-white rounded-xl p-2 border border-emerald-100 flex gap-2">
         <input value={clue.text} onChange={e=>setClue({...clue,text:e.target.value})} className="flex-1 text-xs outline-none" placeholder="输入您知道的线索..." autoFocus/>
-        <button onClick={()=>{if(!clue.text.trim())return;alert('感谢您的线索！已通知失主。');setClue({id:'',show:false,text:''});}} className="shrink-0 px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg text-[10px] font-bold shadow-sm">发送</button>
+        <button onClick={()=>{if(!clue.text.trim())return;toast.success('感谢您的线索！已通知失主。');setClue({id:'',show:false,text:''});}} className="shrink-0 px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg text-[10px] font-bold shadow-sm">发送</button>
       </div>}
     </div>)}
     <button onClick={()=>setShow(!show)} className="w-full mt-2 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-200 hover:shadow-lg transition-shadow">{show?'取消':'发布信息'}</button>
@@ -393,10 +394,10 @@ function LFModal({items,onAdd,onClose}:{items:LostFoundItem[];onAdd:(i:LostFound
       <input value={contact} onChange={e=>setContact(e.target.value)} className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-xs outline-none focus:border-emerald-400" placeholder="联系方式"/>
       <textarea value={desc} onChange={e=>setDesc(e.target.value)} className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-xs outline-none h-16 resize-none focus:border-emerald-400" placeholder="详细描述"/>
       <button onClick={()=>{
-        if(!title.trim()||!loc.trim()){alert('请填写名称和地点');return;}
+        if(!title.trim()||!loc.trim()){toast.error('请填写名称和地点');return;}
         onAdd({id:String(Date.now()),type,title:title.trim(),location:loc,time:'刚刚',contact:contact||'无',status:'processing',description:desc||'暂无详细描述'});
         setTitle('');setLoc('');setContact('');setDesc('');setShow(false);
-        alert('发布成功！');
+        toast.success('发布成功！');
       }} className="w-full py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition-shadow">确认发布</button>
     </div>}
   </div></div>;
@@ -412,10 +413,10 @@ function RepairForm({onAdd,onClose,onNotif}:{onAdd:(r:RepairRecord)=>void;onClos
     <input value={ph} onChange={e=>setPh(e.target.value)} className="w-full bg-slate-50 border border-slate-200 text-sm p-3 rounded-xl outline-none mb-2 focus:border-blue-400" placeholder="电话"/>
     <textarea value={desc} onChange={e=>setDesc(e.target.value)} className="w-full bg-slate-50 border border-slate-200 text-sm p-3 rounded-xl outline-none h-20 resize-none mb-2 focus:border-blue-400" placeholder="描述故障"/>
     <button onClick={()=>{
-      if(!desc.trim()){alert('请描述故障');return;}
+      if(!desc.trim()){toast.error('请描述故障');return;}
       onAdd({id:String(Date.now()),category:cat as any,description:desc,location:loc,time:new Date().toLocaleDateString(),status:'pending',contact:ph});
       onNotif('系统通知','报修已受理','您的报修已提交');
-      alert('报修成功！');onClose();
+      toast.success('报修成功！');onClose();
     }} className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-md shadow-blue-200 hover:shadow-lg transition-shadow">提交报修</button>
   </div>;
 }
