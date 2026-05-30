@@ -405,6 +405,12 @@ html, body {
 .dark .ratio-input input {
   background: transparent !important;
 }
+.ratio-input input::-webkit-inner-spin-button {
+  opacity: 1;
+}
+.ratio-input input::-webkit-outer-spin-button {
+  opacity: 1;
+}
 
 /* === Dark mode override for common hardcoded color utilities === */
 .dark .bg-\[\#faf9ff\] { background: #16162a !important; }
