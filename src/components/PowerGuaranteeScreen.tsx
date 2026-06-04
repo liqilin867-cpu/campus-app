@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -27,7 +27,7 @@ export default function PowerGuaranteeScreen({
     e.preventDefault();
     onSubmitGuarantee('夜间断电保电申请', startTime, endTime);
     setAppliedToday(true);
-    toast.success('提交保电申请成功！系统已极速秒批通过，您的宿舍在今天夜间将不会被拉闸停电。');
+    toast.success('申请已提交，后勤值班老师将在系统内完成确认。');
   };
 
   return (
@@ -37,7 +37,7 @@ export default function PowerGuaranteeScreen({
       <div className="flex items-center justify-between">
         <button 
           onClick={onBack}
-          className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors cursor-pointer"
+          className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-container transition-colors cursor-pointer border border-border bg-card"
         >
           <ArrowLeft className="w-5 h-5 text-on-surface" />
         </button>
@@ -51,36 +51,35 @@ export default function PowerGuaranteeScreen({
       </div>
 
       {/* Current Status Core Card */}
-      <section className="glass-panel rounded-[24px] p-6 text-center shadow-glass relative overflow-hidden">
-        <div className="absolute -right-10 -top-10 w-36 h-36 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <section className="workbench-card p-6 text-center relative overflow-hidden">
         <div className="relative z-10 flex flex-col items-center justify-center gap-3">
-          <div className="w-14 h-14 rounded-full bg-primary-fixed flex items-center justify-center text-primary shadow-sm border border-white/50">
+          <div className="w-14 h-14 rounded-xl bg-primary-fixed flex items-center justify-center text-primary border border-primary-fixed-dim/60">
             <Zap className="w-7 h-7 fill-current" />
           </div>
           <div>
             <p className="text-xs text-on-surface-variant font-medium mb-1">当前宿舍保电状态</p>
-            <h2 className={`text-2xl font-bold ${appliedToday ? 'text-green-600' : 'text-primary animate-pulse'}`}>
-              {appliedToday ? '已批准 (今日生效)' : '未申请 / 常规断电模式'}
+            <h2 className={`text-2xl font-bold ${appliedToday ? 'text-green-600' : 'text-primary'}`}>
+              {appliedToday ? '已提交 (待值班确认)' : '未申请 / 常规断电模式'}
             </h2>
           </div>
         </div>
       </section>
 
       {/* Main Form selection */}
-      <section className="glass-panel rounded-[24px] p-5">
+      <section className="workbench-card p-5">
         <div className="flex items-center gap-2 mb-4 text-primary">
           <Clock className="w-5 h-5" />
-          <h3 className="font-bold text-sm">自定夜间不断电时段</h3>
+          <h3 className="font-bold text-sm">设置夜间保电时段</h3>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-on-surface-variant mb-1">开始时间 (开始避免被拉闸)</label>
+            <label className="block text-xs font-semibold text-on-surface-variant mb-1">开始时间</label>
             <div className="relative">
               <select 
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
-                className="w-full bg-[#f1f3ff] dark:bg-gray-800 border-none text-sm p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer dark:text-gray-100"
+                className="w-full bg-[#f1f3ff] dark:bg-gray-800 border-none text-sm p-3.5 rounded-xl focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer dark:text-gray-100"
               >
                 <option value="22:30">22:30 (下自习时段)</option>
                 <option value="23:00">23:00 (常规熄灯关灯时段)</option>
@@ -92,12 +91,12 @@ export default function PowerGuaranteeScreen({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-on-surface-variant mb-1">结束时间 (系统自动恢复常规托管)</label>
+            <label className="block text-xs font-semibold text-on-surface-variant mb-1">结束时间</label>
             <div className="relative">
               <select
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
-                className="w-full bg-[#f1f3ff] dark:bg-gray-800 border-none text-sm p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer dark:text-gray-100"
+                className="w-full bg-[#f1f3ff] dark:bg-gray-800 border-none text-sm p-3.5 rounded-xl focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer dark:text-gray-100"
               >
                 <option value="06:00">06:00 (次日清晨)</option>
                 <option value="07:00">07:00 (次日洗漱醒来)</option>
@@ -108,21 +107,21 @@ export default function PowerGuaranteeScreen({
           </div>
 
           {appliedToday ? (
-            <div className="bg-green-50 dark:bg-green-900/30 p-3 rounded-2xl border border-green-200 dark:border-green-800/40 text-center text-xs text-green-700 dark:text-green-300 font-semibold flex items-center justify-center gap-1.5">
-              <CheckCircle2 className="w-4.5 h-4.5" /> 申请今日已绿灯放行通过，夜间将维持持续电源供应！
+            <div className="bg-green-50 dark:bg-green-900/30 p-3 rounded-xl border border-green-200 dark:border-green-800/40 text-center text-xs text-green-700 dark:text-green-300 font-semibold flex items-center justify-center gap-1.5">
+              <CheckCircle2 className="w-4.5 h-4.5" /> 申请已提交，请等待后勤值班确认。
             </div>
           ) : (
             <button
               type="submit"
-              className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-800 text-white font-bold text-base rounded-full shadow-lg shadow-blue-200 dark:shadow-blue-950 active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              className="w-full py-3.5 workbench-primary-action font-bold text-base rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <Send className="w-4 h-4" />
-              提交今日保电极速审批
+              提交今日保电申请
             </button>
           )}
 
           <p className="text-[10px] text-outline text-center">
-            ⚠️ 提示：递交不断电批复后由学校水电网络后勤办自动核准，请注意绿色安全用能！
+            提示：提交后由后勤值班人员确认，请按宿舍安全用电规范使用。
           </p>
         </form>
       </section>
@@ -136,7 +135,7 @@ export default function PowerGuaranteeScreen({
 
         <div className="space-y-2.5">
           {guaranteeHistory.map((rec) => (
-            <div key={rec.id} className="bg-white dark:bg-gray-800 p-3 rounded-2xl border border-white/50 dark:border-gray-700/50 flex justify-between items-center shadow-sm">
+            <div key={rec.id} className="workbench-card p-3 flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border ${
                   rec.status === '已批准'

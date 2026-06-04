@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+﻿import React,{useState} from 'react';
 import {toast} from 'sonner';
 import {Search,Utensils,WashingMachine,Wrench,Store,Compass,Calendar,CheckCircle,X,ChevronRight,Flame,Star,Shield,Sparkles,Clock,MapPin} from 'lucide-react';
 import {FleaItem,LostFoundItem,EventItem,RepairRecord} from '../types';
@@ -68,7 +68,7 @@ export default function ServicesTab(p:Props){
     const e=p.eventsList.filter(x=>x.title.includes(s)).map(x=>({label:x.title,tag:x.tag,type:'event'}));
     const all=[...r,...f,...l,...e];
     if(!all.length)return <div className="text-center py-8 text-xs text-slate-400 dark:text-gray-500">未找到匹配结果</div>;
-    return <div className="bg-white/95 dark:bg-gray-600/95 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-gray-400 shadow-lg p-2 max-h-64 overflow-y-auto">{all.map((x,i)=>
+    return <div className="bg-white/95 dark:bg-gray-600/95 backdrop-blur-sm rounded-xl border border-slate-200 dark:border-gray-400 shadow-lg p-2 max-h-64 overflow-y-auto">{all.map((x,i)=>
       <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-gray-600/50 cursor-pointer text-xs transition-colors" onClick={()=>{
         setSr('');
         if(x.type==='food')setM('food');
@@ -86,31 +86,27 @@ export default function ServicesTab(p:Props){
   };
 
   return <div className="flex flex-col gap-0">
-    {/* ===== Gradient Header ===== */}
-    <div className="relative -mx-4 -mt-6 px-4 pt-6 pb-20 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 rounded-b-[28px] shadow-lg shadow-indigo-200/50">
-      <div className="absolute inset-0 rounded-b-[28px] overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
-        <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-20 left-1/3 w-20 h-20 bg-blue-400/10 rounded-full blur-xl"></div>
-      </div>
-      <div className="relative z-10">
+    {/* ===== Workbench Header ===== */}
+    <div className="relative -mx-4 -mt-6 px-4 pt-6 pb-20 bg-primary dark:bg-[#172033] rounded-b-xl border-b border-primary/20 dark:border-white/10">
+
+      <div className="relative">
         <div className="flex items-center justify-between mb-3">
           <div>
             <h2 className="text-xl font-extrabold text-white flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-yellow-300"/> 校园生活
             </h2>
-            <p className="text-xs text-white/70 mt-0.5">一站式解决课余生活需求</p>
+            <p className="text-xs text-white/70 mt-0.5">一站式处理订餐、报修、活动与校园互助</p>
           </div>
-          <div className="bg-white/15 backdrop-blur-sm rounded-2xl px-3 py-1.5 flex items-center gap-1.5">
+          <div className="bg-white/15 dark:bg-white/8 rounded-xl px-3 py-1.5 flex items-center gap-1.5 border border-white/15 dark:border-white/10">
             <Shield className="w-3.5 h-3.5 text-yellow-300"/>
             <span className="text-[10px] text-white font-medium">安全校园</span>
           </div>
         </div>
         {/* Search */}
         <div className="relative">
-          <div className="rounded-2xl border border-white/50 flex items-center px-4 h-11 bg-white/40 header-search">
+          <div className="rounded-xl border border-white/35 dark:border-white/10 flex items-center px-4 h-11 bg-white/25 dark:bg-white/8 header-search">
             <Search className="w-4 h-4 text-white/70 shrink-0"/>
-            <input value={sr} onChange={e=>setSr(e.target.value)} className="w-full bg-transparent text-sm text-white ml-2.5 outline-none placeholder:text-white/50" placeholder="搜索美食、活动、二手..."/>
+            <input value={sr} onChange={e=>setSr(e.target.value)} className="w-full bg-transparent text-sm text-white dark:text-slate-100 ml-2.5 outline-none placeholder:text-white/55 dark:placeholder:text-slate-400" placeholder="搜索美食、活动、二手..."/>
             {sr&&<button onClick={()=>setSr('')} className="text-white/60 hover:text-white/90"><X className="w-4 h-4"/></button>}
           </div>
         </div>
@@ -121,12 +117,12 @@ export default function ServicesTab(p:Props){
     {sr&&<div className="relative z-30 mx-1 -mt-3">{renderSearchResults()}</div>}
 
     {/* ===== Quick Service Grid (overlapping the header) ===== */}
-    <div className="relative z-10 -mt-14 px-1">
-      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-gray-900/30 border border-white/50 dark:border-gray-600/30 p-4 mx-1">
+    <div className="relative -mt-14 px-1">
+      <div className="workbench-card p-4 mx-1">
         <div className="grid grid-cols-4 gap-2">
           {HOT_SERVICES.map(s=>(
             <div key={s.key} onClick={()=>{setM(s.key)}} className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-slate-50 dark:bg-gray-800/50 active:scale-95 transition-all cursor-pointer group">
-              <div className={`w-11 h-11 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center shadow-sm group-active:scale-90 transition-transform`}>
+              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${s.gradient} flex items-center justify-center shadow-sm group-active:scale-90 transition-transform`}>
                 <s.icon className="w-5 h-5 text-white"/>
               </div>
               <span className="text-[11px] font-semibold text-slate-700 dark:text-gray-200">{s.label}</span>
@@ -138,7 +134,7 @@ export default function ServicesTab(p:Props){
     </div>
 
     {/* ===== Banner Carousel ===== */}
-    {bannerShow&&<div className="mt-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl border border-amber-100 dark:border-amber-700/30 p-3 flex items-center justify-between">
+    {bannerShow&&<div className="mt-4 bg-secondary-container/50 dark:bg-amber-950/20 rounded-xl border border-amber-200 dark:border-amber-900/40 p-3 flex items-center justify-between">
       <div className="flex items-center gap-2.5">
         <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shrink-0">
           <Flame className="w-3.5 h-3.5 text-white"/>
@@ -163,7 +159,7 @@ export default function ServicesTab(p:Props){
         {p.eventsList.slice(0,3).map(ev=>{
           const ratio=ev.capacity>0?Math.round(ev.registeredCount/ev.capacity*100):0;
           const isHot=ratio>=80;
-          return <div key={ev.id} onClick={()=>setM('events')} className="shrink-0 w-52 bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-3.5 shadow-sm hover:shadow-md transition-shadow cursor-pointer active:scale-[0.98]">
+          return <div key={ev.id} onClick={()=>setM('events')} className="shrink-0 w-52 workbench-card p-3.5 hover:bg-muted/40 transition-colors cursor-pointer active:scale-[0.98]">
             <div className="flex items-center justify-between mb-2">
               <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${ev.tag==='讲座'?'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-200':'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200'}`}>{ev.tag}</span>
               {isHot&&<span className="flex items-center gap-0.5 text-[9px] text-red-500 font-bold"><Flame className="w-3 h-3"/>火热</span>}
@@ -190,8 +186,8 @@ export default function ServicesTab(p:Props){
       </div>
       <div className="grid grid-cols-2 gap-3">
         {OTHER_SERVICES.map(s=>(
-          <div key={s.key} onClick={()=>setM(s.key)} className="bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700/50 p-4 shadow-sm hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex items-center gap-3">
-            <div className={`w-11 h-11 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center shadow-sm shrink-0`}>
+          <div key={s.key} onClick={()=>setM(s.key)} className="workbench-card p-4 hover:bg-muted/40 transition-all cursor-pointer active:scale-[0.98] flex items-center gap-3">
+            <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${s.gradient} flex items-center justify-center shadow-sm shrink-0`}>
               <s.icon className="w-5 h-5 text-white"/>
             </div>
             <div>
@@ -220,21 +216,21 @@ export default function ServicesTab(p:Props){
         <div className="p-4">
           {!done?<>
             <div className="flex gap-2 mb-3 hscroll">{[...FOOD].map(r=><button key={r.id} onClick={()=>{setRes(r);setCart({})}} className={'shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition-all '+(res.id===r.id?'bg-orange-500 text-white shadow-md shadow-orange-200':'bg-slate-100 text-slate-600 hover:bg-slate-200')}>{r.name}</button>)}</div>
-            <div className="rounded-2xl overflow-hidden h-28 mb-3 relative shadow-md">{res.img?<img src={res.img} className="w-full h-full object-cover"/>:<div className={"w-full h-full flex items-center justify-center text-4xl bg-gradient-to-br "+(res.id==='c1'?'from-orange-400 to-red-500':res.id==='c2'?'from-red-400 to-pink-500':'from-amber-400 to-green-500')}>{res.id==='c1'?'🍚':res.id==='c2'?'🍜':'🌮'}</div>}<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3"><p className="font-bold text-white text-lg drop-shadow-sm">{res.name}</p></div></div>
+            <div className="rounded-xl overflow-hidden h-28 mb-3 relative shadow-md">{res.img?<img src={res.img} className="w-full h-full object-cover"/>:<div className={"w-full h-full flex items-center justify-center text-4xl bg-gradient-to-br "+(res.id==='c1'?'from-orange-400 to-red-500':res.id==='c2'?'from-red-400 to-pink-500':'from-amber-400 to-green-500')}>{res.id==='c1'?'🍚':res.id==='c2'?'🍜':'🌮'}</div>}<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3"><p className="font-bold text-white text-lg drop-shadow-sm">{res.name}</p></div></div>
             <div className="space-y-2">{res.items.map(item=>{
               const q=cart[item.id]||0;
-              return <div key={item.id} className="flex items-center justify-between bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-2xl border border-slate-100 dark:border-gray-700/50 hover:border-orange-100 transition-colors">
+              return <div key={item.id} className="flex items-center justify-between bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-xl border border-slate-100 dark:border-gray-700/50 hover:border-orange-100 transition-colors">
                 <div>
                   <p className="font-semibold text-sm text-slate-800 dark:text-gray-100">{item.name} <span className="text-[10px] text-slate-400 dark:text-gray-500 font-normal">已售{item.sales}</span></p>
                   <p className="text-[10px] text-slate-500 dark:text-gray-400 mt-0.5">{item.desc}</p>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <span className="font-bold text-sm text-orange-600">¥{item.price}</span>
-                  {q===0?<button onClick={()=>setCart({...cart,[item.id]:1})} className="w-7 h-7 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-bold shadow-sm shadow-orange-200 hover:shadow-md transition-shadow">+</button>
+                  {q===0?<button onClick={()=>setCart({...cart,[item.id]:1})} className="w-7 h-7 rounded-full workbench-warning-action text-white text-sm font-bold shadow-sm shadow-orange-200 hover:shadow-md transition-shadow">+</button>
                   :<div className="flex items-center gap-1 bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-full px-1.5 py-0.5 shadow-sm">
                     <button onClick={()=>setCart(c=>{const n={...c};n[item.id]=Math.max(0,(n[item.id]||0)-1);return n;})} className="w-5 h-5 rounded-full bg-slate-100 text-xs font-bold hover:bg-slate-200">-</button>
                     <span className="text-xs font-bold w-5 text-center text-slate-700 dark:text-gray-200">{q}</span>
-                    <button onClick={()=>setCart(c=>{const n={...c};n[item.id]=(n[item.id]||0)+1;return n;})} className="w-5 h-5 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold">+</button>
+                    <button onClick={()=>setCart(c=>{const n={...c};n[item.id]=(n[item.id]||0)+1;return n;})} className="w-5 h-5 rounded-full workbench-warning-action text-white text-xs font-bold">+</button>
                   </div>}
                 </div>
               </div>;
@@ -243,7 +239,7 @@ export default function ServicesTab(p:Props){
               const entries=(Object.entries(cart) as [string,number][]).filter(([,q])=>q>0);
               if(!entries.length)return null;
               const total=entries.reduce((s,[id,q])=>{const i=allItems.find((x:any)=>x.id===id);return s+(i?.price||0)*Number(q);},0);
-              return <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-2xl border border-orange-100 mt-3 shadow-sm">
+              return <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-xl border border-orange-100 mt-3 shadow-sm">
                 <p className="text-xs font-semibold text-orange-700 mb-2">购物清单</p>
                 {entries.map(([id,q])=>{
                   const i=allItems.find((x:any)=>x.id===id);
@@ -256,7 +252,7 @@ export default function ServicesTab(p:Props){
                   const ns=entries.map(([id,q])=>{const i=allItems.find((x:any)=>x.id===id);return i?.name+'x'+q;}).join('、');
                   setOd({restaurant:res.name,items:ns,total});setDone(true);
                   p.onAddSystemNotification('缴费成功','订餐成功','已购买 '+ns+'，共 ¥'+total.toFixed(2));
-                }} className="w-full mt-3 py-2.5 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-full text-sm shadow-md shadow-orange-200 hover:shadow-lg transition-shadow cursor-pointer">确认下单 ¥{total.toFixed(2)}</button>
+                }} className="w-full mt-3 py-2.5 workbench-warning-action text-white font-bold rounded-full text-sm shadow-md shadow-orange-200 hover:shadow-lg transition-shadow cursor-pointer">确认下单 ¥{total.toFixed(2)}</button>
               </div>;
             })()}
           </>:<div className="text-center py-10"><div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg"><CheckCircle className="w-8 h-8 text-white"/></div><p className="font-bold text-lg text-emerald-700">下单成功！</p><p className="text-xs text-slate-500 dark:text-gray-400 mt-1">已扣款 ¥{od?.total.toFixed(2)}</p><div className="bg-orange-50 rounded-xl p-3 mt-3 inline-block"><p className="text-xs text-orange-600 font-medium">{od?.restaurant}</p><p className="text-[10px] text-orange-400 mt-0.5">{od?.items}</p></div></div>}
@@ -269,11 +265,11 @@ export default function ServicesTab(p:Props){
         <h3 className="font-bold text-teal-700 flex items-center gap-2"><WashingMachine className="w-5 h-5"/> 自助洗衣</h3>
         <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
       </div>
-      <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/40 dark:to-cyan-900/40 rounded-2xl p-3.5 border border-teal-100 dark:border-teal-800/40 mb-3 flex justify-between items-center">
+      <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/40 dark:to-cyan-900/40 rounded-xl p-3.5 border border-teal-100 dark:border-teal-800/40 mb-3 flex justify-between items-center">
         <span className="text-xs text-teal-700 dark:text-teal-200 font-medium">标准洗 ¥4/次</span>
         <span className="text-xs font-bold text-teal-800 dark:text-teal-100 bg-white dark:bg-gray-800 px-3 py-1 rounded-full shadow-sm">余额 ¥{p.cardBalance.toFixed(2)}</span>
       </div>
-      <div className="space-y-2.5">{ws.map(w=><div key={w.id} className="flex justify-between items-center bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-2xl border border-slate-100 dark:border-gray-700/50 hover:border-teal-100 transition-colors">
+      <div className="space-y-2.5">{ws.map(w=><div key={w.id} className="flex justify-between items-center bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-xl border border-slate-100 dark:border-gray-700/50 hover:border-teal-100 transition-colors">
         <div><p className="font-semibold text-sm text-slate-800 dark:text-gray-100">{w.name}</p>
           <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-0.5">状态：<span className={'font-semibold '+(w.st==='空闲'?'text-green-600':w.st==='工作中'?'text-blue-500':'text-red-500')}>{w.st}</span>
           {w.rm>0&&<span className="text-slate-400 dark:text-gray-500 ml-2">排队{w.rm}人</span>}</p></div>
@@ -291,7 +287,7 @@ export default function ServicesTab(p:Props){
       <RepairForm onAdd={p.onAddRepairRecord} onClose={()=>setM(null)} onNotif={p.onAddSystemNotification}/>
     </div></div>}
 
-    {m==='events'&&<div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
+    {m==='events'&&<div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-bold text-slate-800 dark:text-gray-100 flex items-center gap-2"><Calendar className="w-5 h-5 text-purple-600"/> 校园活动</h3>
         <button onClick={()=>setM(null)} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
@@ -299,7 +295,7 @@ export default function ServicesTab(p:Props){
       {p.eventsList.map(ev=>{
         const ratio=ev.capacity>0?Math.round(ev.registeredCount/ev.capacity*100):0;
         const isHot=ratio>=80;
-        return <div key={ev.id} className="bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 mb-3 border border-slate-100 dark:border-gray-700/50 hover:border-purple-100 transition-colors">
+        return <div key={ev.id} className="bg-slate-50 dark:bg-gray-800/50 rounded-xl p-4 mb-3 border border-slate-100 dark:border-gray-700/50 hover:border-purple-100 transition-colors">
           <div className="flex justify-between items-start mb-2">
             <span className={'text-[10px] font-semibold px-2 py-0.5 rounded-full '+(ev.tag==='讲座'?'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-200':'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200')}>{ev.tag}</span>
             <div className="flex items-center gap-1">
@@ -335,12 +331,12 @@ export default function ServicesTab(p:Props){
 
 function FleaModal({items,onAdd,onClose,balance,onBuyItem,onNotif}:{items:FleaItem[];onAdd:(i:FleaItem)=>void;onClose:()=>void;balance:number;onBuyItem:(id:string,c:number)=>void;onNotif:(c:string,t:string,ct:string)=>void}){
   const [title,setTitle]=useState('');const [price,setPrice]=useState('');const [desc,setDesc]=useState('');const [contact,setContact]=useState('');const [show,setShow]=useState(false);
-  return <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
+  return <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
     <div className="flex justify-between items-center mb-4">
       <div className="flex items-center gap-2"><h3 className="font-bold text-amber-700"><Store className="w-5 h-5 inline"/> 跳蚤市场</h3><span className="text-[10px] text-slate-500 dark:text-gray-400 bg-slate-100 px-2 py-1 rounded-full">余额 ¥{balance.toFixed(2)}</span></div>
       <button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button>
     </div>
-    {items.map(f=><div key={f.id} className={'bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 mb-2.5 border transition-colors '+(f.purchased?'border-emerald-200 opacity-70':'border-slate-100 hover:border-amber-100')}>
+    {items.map(f=><div key={f.id} className={'bg-slate-50 dark:bg-gray-800/50 rounded-xl p-4 mb-2.5 border transition-colors '+(f.purchased?'border-emerald-200 opacity-70':'border-slate-100 hover:border-amber-100')}>
       <div className="flex justify-between items-start"><div><p className="font-semibold text-sm text-slate-800 dark:text-gray-100">{f.title}</p><p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">{f.description}</p></div><span className={'font-bold shrink-0 ml-2 '+(f.purchased?'text-emerald-500':'text-amber-700')}>¥{f.price}</span></div>
       <div className="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-gray-700/50 text-[10px] text-slate-400 dark:text-gray-500">
         <span className="flex items-center gap-1"><span className="w-4 h-4 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 text-[8px] flex items-center justify-center font-bold">{f.seller[0]}</span>{f.seller} · {f.time}</span>
@@ -352,7 +348,7 @@ function FleaModal({items,onAdd,onClose,balance,onBuyItem,onNotif}:{items:FleaIt
       </div>
     </div>)}
     <button onClick={()=>setShow(!show)} className="w-full mt-2 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl text-xs font-bold shadow-md shadow-amber-200 dark:shadow-amber-950 hover:shadow-lg transition-shadow">{show?'取消':'发布闲置'}</button>
-    {show&&<div className="mt-3 bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 space-y-2.5 border border-slate-200 dark:border-gray-700">
+    {show&&<div className="mt-3 bg-slate-50 dark:bg-gray-800/50 rounded-xl p-4 space-y-2.5 border border-slate-200 dark:border-gray-700">
       <input value={title} onChange={e=>setTitle(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-amber-400 transition-colors" placeholder="物品名称"/>
       <input value={price} onChange={e=>setPrice(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-amber-400" placeholder="价格 ¥"/>
       <input value={contact} onChange={e=>setContact(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-amber-400" placeholder="联系方式"/>
@@ -369,9 +365,9 @@ function FleaModal({items,onAdd,onClose,balance,onBuyItem,onNotif}:{items:FleaIt
 
 function LFModal({items,onAdd,onClose}:{items:LostFoundItem[];onAdd:(i:LostFoundItem)=>void;onClose:()=>void}){
   const [type,setType]=useState<'lost'|'found'>('lost');const [title,setTitle]=useState('');const [loc,setLoc]=useState('');const [contact,setContact]=useState('');const [desc,setDesc]=useState('');const [show,setShow]=useState(false);const [clue,setClue]=useState<{id:string;show:boolean;text:string}>({id:'',show:false,text:''});
-  return <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
+  return <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"><div className="bg-white dark:bg-gray-900 rounded-xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 shadow-xl animate-scale-in">
     <div className="flex justify-between items-center mb-4"><h3 className="font-bold text-emerald-700 flex items-center gap-2"><Compass className="w-5 h-5"/> 失物招领</h3><button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center hover:bg-slate-200"><X className="w-4 h-4 text-slate-500 dark:text-gray-400"/></button></div>
-    {items.map(l=><div key={l.id} className="bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 mb-2.5 border border-slate-100 dark:border-gray-700/50 hover:border-emerald-100 transition-colors">
+    {items.map(l=><div key={l.id} className="bg-slate-50 dark:bg-gray-800/50 rounded-xl p-4 mb-2.5 border border-slate-100 dark:border-gray-700/50 hover:border-emerald-100 transition-colors">
       <div className="flex items-center gap-2 mb-2"><span className={'px-2 py-0.5 rounded-full text-[10px] font-semibold '+(l.type==='lost'?'bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-200':'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200')}>{l.type==='lost'?'寻物':'招领'}</span><p className="font-semibold text-sm text-slate-800 dark:text-gray-100">{l.title}</p></div>
       <p className="text-xs text-slate-500 dark:text-gray-400">{l.description}</p>
       <div className="flex justify-between items-center text-[10px] text-slate-400 dark:text-gray-500 mt-3 pt-3 border-t border-slate-200 dark:border-gray-700/50">
@@ -387,7 +383,7 @@ function LFModal({items,onAdd,onClose}:{items:LostFoundItem[];onAdd:(i:LostFound
       </div>}
     </div>)}
     <button onClick={()=>setShow(!show)} className="w-full mt-2 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-200 dark:shadow-emerald-950 hover:shadow-lg transition-shadow">{show?'取消':'发布信息'}</button>
-    {show&&<div className="mt-3 bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 space-y-2.5 border border-slate-200 dark:border-gray-700">
+    {show&&<div className="mt-3 bg-slate-50 dark:bg-gray-800/50 rounded-xl p-4 space-y-2.5 border border-slate-200 dark:border-gray-700">
       <div className="flex gap-2"><button onClick={()=>setType('lost')} className={'flex-1 py-1.5 rounded-full text-xs font-semibold border transition-all '+(type==='lost'?'bg-red-500 text-white border-red-500 shadow-sm':'bg-white dark:bg-gray-800 text-slate-600 border-slate-200 dark:border-gray-600 hover:border-red-200')}>寻物</button>
       <button onClick={()=>setType('found')} className={'flex-1 py-1.5 rounded-full text-xs font-semibold border transition-all '+(type==='found'?'bg-emerald-500 text-white border-emerald-500 shadow-sm':'bg-white dark:bg-gray-800 text-slate-600 border-slate-200 dark:border-gray-600 hover:border-emerald-200')}>招领</button></div>
       <div className="grid grid-cols-2 gap-2"><input value={title} onChange={e=>setTitle(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-emerald-400" placeholder="物品名称"/><input value={loc} onChange={e=>setLoc(e.target.value)} className="w-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl p-2.5 text-xs outline-none focus:border-emerald-400" placeholder="地点"/></div>

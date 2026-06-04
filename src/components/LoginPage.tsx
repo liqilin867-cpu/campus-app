@@ -227,18 +227,18 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[#f2f5ff]">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-animated text-slate-900 dark:text-slate-100">
 
       {/* Decorative Orbs */}
-      <div className="absolute top-10 left-5 w-80 h-80 bg-gradient-to-br from-blue-400/15 to-indigo-300/15 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-20 right-5 w-96 h-96 bg-gradient-to-tr from-purple-300/10 to-orange-300/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      
 
       {/* OAuth bind form — ask for student ID and phone */}
       {oauthPlatform && !oauthLoading && (
         <div className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-[24px] w-full max-w-sm p-6 shadow-xl animate-in zoom-in-95 duration-200">
+          <div className="workbench-card w-full max-w-sm p-6 animate-in zoom-in-95 duration-200">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white">
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
                 {oauthPlatform === 'wechat' ? <MessageSquare className="w-5 h-5" /> : <CreditCard className="w-5 h-5" />}
               </div>
               <div>
@@ -260,7 +260,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
                   placeholder="注册时使用的11位手机号" />
               </div>
               <button onClick={handleOauthBind}
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-lg shadow-blue-200 active:scale-95 transition-all cursor-pointer text-xs">
+                className="w-full py-3 workbench-primary-action font-bold rounded-xl active:scale-95 transition-all cursor-pointer text-xs">
                 绑定并登录
               </button>
               <button onClick={() => setOauthPlatform(null)}
@@ -275,10 +275,10 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
       {/* OAuth loading spinner */}
       {oauthLoading && (
         <div className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 max-w-xs w-full text-center shadow-2xl flex flex-col items-center gap-4">
+          <div className="workbench-card p-8 max-w-xs w-full text-center flex flex-col items-center gap-4">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-blue-50 animate-ping opacity-75"></div>
-              <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center text-primary relative z-10">
+              <div className="w-16 h-16 rounded-xl bg-primary-fixed flex items-center justify-center text-primary relative z-10">
                 <Loader2 className="w-8 h-8 animate-spin text-blue-700" />
               </div>
             </div>
@@ -295,20 +295,20 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
       <main className="w-full max-w-sm relative z-10 my-auto">
         {/* Header Badge */}
         <div className="text-center mb-5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200 dark:border-gray-700/60 rounded-full shadow-sm text-[10px] text-blue-700 font-bold tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-full text-[10px] text-primary font-bold tracking-wider mb-3">
             <ShieldCheck className="w-3.5 h-3.5" />
             统一身份认证门户
           </div>
         </div>
 
         {/* Login Card */}
-        <div className="glass-panel rounded-[28px] p-7 flex flex-col items-center w-full shadow-lg relative overflow-hidden">
+        <div className="workbench-card p-6 flex flex-col items-center w-full relative overflow-visible">
           {/* Card top gradient line */}
-          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-400 to-orange-400 rounded-t-[28px]"></div>
+          <div className="absolute top-0 inset-x-0 h-1 bg-primary rounded-t-xl"></div>
 
           {/* Logo */}
           <div className="flex flex-col items-center text-center mb-5 relative z-10">
-            <div className="w-16 h-16 rounded-2xl shadow-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center mb-3 transform hover:scale-105 transition-transform duration-300">
+            <div className="w-15 h-15 rounded-xl shadow-sm bg-primary flex items-center justify-center mb-3 transform hover:scale-105 transition-transform duration-300">
               <GraduationCap className="w-9 h-9 text-white" />
             </div>
             <h1 className="text-xl text-slate-900 font-extrabold tracking-tight">智慧校园生活助手</h1>
@@ -318,7 +318,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
           {/* Tab Switch */}
           <div className="w-full mb-4">
             {!isRegistering ? (
-              <div className="grid grid-cols-2 bg-slate-100/80 p-1 rounded-2xl w-full">
+              <div className="grid grid-cols-2 bg-muted p-1 rounded-xl w-full">
                 <button
                   type="button"
                   onClick={() => { setLoginTab('sso'); setErrorMsg(''); setSuccessMsg(''); }}
@@ -345,7 +345,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
                 </button>
               </div>
             ) : (
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-800 px-4 py-2.5 rounded-2xl text-center flex items-center justify-center gap-2">
+              <div className="bg-primary-fixed text-primary px-4 py-2.5 rounded-xl text-center flex items-center justify-center gap-2">
                 <UserPlus className="w-4 h-4 text-blue-600" />
                 <span className="text-xs font-extrabold text-blue-900">新同学自助注册</span>
               </div>
@@ -465,7 +465,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
               </div>
 
               <button type="submit"
-                className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-xs font-bold shadow-sm active:scale-[0.98] transition-all cursor-pointer">
+                className="w-full py-2.5 workbench-primary-action rounded-xl text-xs font-bold active:scale-[0.98] transition-all cursor-pointer">
                 注册
               </button>
 
@@ -544,7 +544,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
               </label>
 
               <button type="submit"
-                className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-xs font-bold shadow-sm active:scale-[0.98] transition-all cursor-pointer">
+                className="w-full py-2.5 workbench-primary-action rounded-xl text-xs font-bold active:scale-[0.98] transition-all cursor-pointer">
                 登录
               </button>
             </form>
@@ -574,12 +574,12 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
           {/* Third Party */}
           <div className="grid grid-cols-2 gap-3 w-full relative z-10">
             <button type="button" onClick={() => handleThirdPartyAction('wechat')}
-              className="py-2.5 rounded-xl bg-slate-50/80 border border-slate-200 dark:border-gray-700 hover:bg-emerald-50 hover:border-emerald-200 text-xs text-slate-600 hover:text-emerald-700 flex items-center justify-center gap-1.5 font-bold transition-all active:scale-95 cursor-pointer">
+              className="py-2.5 rounded-xl bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 hover:bg-emerald-50 text-xs text-slate-600 dark:text-slate-300 hover:text-emerald-700 flex items-center justify-center gap-1.5 font-bold transition-all active:scale-95 cursor-pointer">
               <MessageSquare className="w-4 h-4 text-emerald-500 fill-current" />
               <span>微信登录</span>
             </button>
             <button type="button" onClick={() => handleThirdPartyAction('alipay')}
-              className="py-2.5 rounded-xl bg-slate-50/80 border border-slate-200 dark:border-gray-700 hover:bg-blue-50 hover:border-blue-200 text-xs text-slate-600 hover:text-blue-700 flex items-center justify-center gap-1.5 font-bold transition-all active:scale-95 cursor-pointer">
+              className="py-2.5 rounded-xl bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 hover:bg-blue-50 text-xs text-slate-600 dark:text-slate-300 hover:text-blue-700 flex items-center justify-center gap-1.5 font-bold transition-all active:scale-95 cursor-pointer">
               <CreditCard className="w-4 h-4 text-sky-500" />
               <span>支付宝登录</span>
             </button>
@@ -587,7 +587,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
 
           {/* Demo Accounts Hint */}
           <div className="mt-3 w-full px-2">
-            <div className="bg-slate-50/80 border border-slate-200 dark:border-gray-700/60 rounded-2xl p-3">
+            <div className="bg-muted/70 border border-border rounded-xl p-3">
               <p className="text-[9px] text-slate-400 dark:text-gray-500 font-semibold text-center mb-2">演示账号 · 3号楼520室（4/4 满员）</p>
               <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[9px] text-slate-500 dark:text-gray-400">
                 <div className="flex items-center gap-1">

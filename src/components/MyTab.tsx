@@ -97,7 +97,7 @@ export default function MyTab({
           setInputAvatar(studentAvatar);
           setActiveModal('editProfile');
         }}
-        className="flex items-center justify-between px-1 bg-white/50 border border-slate-100 dark:border-gray-700/50 p-3 rounded-[24px] cursor-pointer group hover:bg-white dark:bg-gray-900 hover:shadow-xs transition-all duration-250 active:scale-[0.99]"
+        className="flex items-center justify-between px-1 bg-white/50 border border-slate-100 dark:border-gray-700/50 p-3 rounded-xl cursor-pointer group hover:bg-white dark:bg-gray-900 hover:shadow-xs transition-all duration-250 active:scale-[0.99]"
         title="点击修改姓名与学生照片"
       >
         <div className="flex items-center gap-4">
@@ -141,7 +141,7 @@ export default function MyTab({
       </section>
 
       {/* Dormitory Card (Smart Hub Style) */}
-      <section className="glass-panel rounded-[24px] p-4 relative overflow-hidden group">
+      <section className="workbench-card p-4 relative overflow-hidden group">
         <div className="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none transition-colors duration-500"></div>
         <div className="flex items-start justify-between mb-2.5 relative z-10">
           <div className="flex items-center gap-2">
@@ -179,7 +179,7 @@ export default function MyTab({
         <h3 className="font-semibold text-base text-on-surface mb-3 px-1">我的钱包</h3>
         <div className="grid grid-cols-2 gap-3">
           {/* Card 1 */}
-          <div className="neumorphic-convex rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
+          <div className="workbench-card p-4 flex flex-col justify-between relative overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
             <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none">
               <CreditCard className="w-20 h-20 text-primary" />
             </div>
@@ -194,7 +194,7 @@ export default function MyTab({
           </div>
 
           {/* Card 2 */}
-          <div className="neumorphic-convex rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
+          <div className="workbench-card p-4 flex flex-col justify-between relative overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
             <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none text-secondary">
               <Droplet className="w-20 h-20 text-[#006474]" />
             </div>
@@ -211,7 +211,7 @@ export default function MyTab({
           {/* Quick Recharge triggers home recharge flow */}
           <button 
             onClick={() => onQuickRecharge('校园卡')}
-            className="col-span-2 mt-1 h-12 rounded-full bg-gradient-to-r from-primary to-primary-container dark:from-blue-800 dark:to-blue-950 text-white font-semibold text-sm flex items-center justify-center gap-1.5 shadow-[0_4px_14px_0_rgba(0,6,102,0.3)] duration-200 hover:shadow-md cursor-pointer active:scale-95"
+            className="col-span-2 mt-1 h-12 rounded-full workbench-primary-action font-semibold text-sm flex items-center justify-center gap-1.5 duration-200 hover:shadow-md cursor-pointer active:scale-95"
           >
             <Bolt className="w-5 h-5" />
             快速充值
@@ -220,7 +220,7 @@ export default function MyTab({
       </section>
 
       {/* Settings Grid Panel */}
-      <section className="neumorphic-convex rounded-2xl overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
+      <section className="workbench-card overflow-hidden bg-[#faf9ff] dark:bg-[#16162a]">
         <div className="flex flex-col">
           
           <button 
@@ -299,7 +299,7 @@ export default function MyTab({
 
       {/* System info & Help */}
       <section className="flex flex-col gap-2">
-        <div className="neumorphic-convex rounded-2xl overflow-hidden bg-[#faf9ff] dark:bg-[#16162a] flex flex-col">
+        <div className="workbench-card overflow-hidden bg-[#faf9ff] dark:bg-[#16162a] flex flex-col">
           <button 
             onClick={() => setActiveModal('feedback')}
             className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-gray-700/50 hover:bg-surface-container/30 active:bg-surface-container transition-colors cursor-pointer"
@@ -328,13 +328,13 @@ export default function MyTab({
 
         <button
           onClick={() => { if (window.confirm('确认重置所有数据？这将清除所有账单和记录，演示账号将恢复初始状态。')) { localStorage.removeItem('campus_data'); window.location.reload(); } }}
-          className="w-full py-3 rounded-2xl text-xs text-red-400 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+          className="w-full py-3 rounded-xl text-xs text-red-400 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
         >
           重置所有数据
         </button>
         <button 
           onClick={onLogout}
-          className="mt-3 w-full p-4 neumorphic-convex rounded-2xl font-bold text-base text-error bg-[#faf9ff] dark:bg-[#16162a] hover:text-red-800 transition-colors flex items-center justify-center gap-2 cursor-pointer transition-transform active:scale-[0.98]"
+          className="mt-3 w-full p-4 workbench-card font-bold text-base text-error bg-[#faf9ff] dark:bg-[#16162a] hover:text-red-800 transition-colors flex items-center justify-center gap-2 cursor-pointer transition-transform active:scale-[0.98]"
         >
           <LogOut className="w-5 h-5" />
           安全退出登录账号
@@ -349,7 +349,7 @@ export default function MyTab({
             <Award className="w-5 h-5" /> 绿色校园：节能先锋寝室
           </DialogTitle>
 
-          <div className="text-center bg-emerald-50/50 p-4 rounded-2xl border border-emerald-200">
+          <div className="text-center bg-emerald-50/50 p-4 rounded-xl border border-emerald-200">
             <p className="text-xs text-emerald-800 mb-1">本月 3号楼520室 用电用水指标</p>
             <h3 className="text-3xl font-bold text-emerald-700 tracking-tight">全校前 4.2%</h3>
             <p className="text-[10px] text-on-surface-variant mt-1.5">已节约碳排放 16.5 kg，获得学校"白金环保寝室"奖章！ 🍃</p>
@@ -395,7 +395,7 @@ export default function MyTab({
 
           <button
             onClick={() => setActiveModal(null)}
-            className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
+            className="w-full mt-2 py-3 workbench-primary-action font-bold rounded-xl active:scale-95 transition-transform cursor-pointer"
           >
             我知道了
           </button>
@@ -418,13 +418,13 @@ export default function MyTab({
             <textarea
               value={feedbackText}
               onChange={(e) => setFeedbackText(e.target.value)}
-              className="w-full h-32 bg-surface-container border-none text-xs p-3.5 rounded-2xl focus:ring-2 focus:ring-primary outline-none resize-none leading-relaxed"
+              className="w-full h-32 bg-surface-container border-none text-xs p-3.5 rounded-xl focus:ring-2 focus:ring-primary outline-none resize-none leading-relaxed"
               placeholder="请倾诉并写下您发现的系统交互缺陷，或您希望添加的炫酷校内新服务（例如：宿舍热水表远程锁扣，订自习座等）..."
               required
             ></textarea>
             <button
               type="submit"
-              className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
+              className="w-full py-3 workbench-primary-action font-bold rounded-xl active:scale-95 transition-transform cursor-pointer"
             >
               递交反馈给我们
             </button>
@@ -458,7 +458,7 @@ export default function MyTab({
               toast.success('策略配置保存成功！已同步至寝室路由器设置中。');
               setActiveModal(null);
             }}
-            className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
+            className="w-full mt-2 py-3 workbench-primary-action font-bold rounded-xl active:scale-95 transition-transform cursor-pointer"
           >
             保存并退回
           </button>
@@ -583,7 +583,7 @@ export default function MyTab({
 
             <div className="space-y-2">
               <label className="block text-[11px] text-outline font-semibold">消息接收通道配置</label>
-              <div className="space-y-2 bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-2xl border border-slate-100 dark:border-gray-700/50">
+              <div className="space-y-2 bg-slate-50 dark:bg-gray-800/50 p-3.5 rounded-xl border border-slate-100 dark:border-gray-700/50">
                 <div className="flex justify-between items-center">
                   <span>短信提醒 (扣取 0.05元 / 条)</span>
                   <input type="checkbox" checked={notifySms} onChange={(e) => setNotifySms(e.target.checked)} className="h-4 w-4 accent-blue-600 rounded focus:ring-blue-400 border-blue-300 cursor-pointer" />
@@ -733,7 +733,7 @@ function ChangePasswordModal({ onClose, currentUserName }: { onClose: () => void
             placeholder="确认新密码" />
           {msg && <p className="text-xs text-red-500">{msg}</p>}
           <button type="submit"
-            className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-all cursor-pointer text-xs">
+            className="w-full py-3 workbench-primary-action font-bold rounded-xl active:scale-95 transition-all cursor-pointer text-xs">
             确认修改
           </button>
         </form>

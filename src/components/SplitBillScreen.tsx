@@ -178,7 +178,7 @@ export default function SplitBillScreen({
       <div className="flex items-center justify-between pb-1">
         <button
           onClick={onBack}
-          className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors cursor-pointer border border-slate-200 dark:border-gray-600"
+          className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-muted transition-colors cursor-pointer border border-border bg-card"
         >
           <ArrowLeft className="w-5 h-5 text-slate-800 dark:text-gray-100" />
         </button>
@@ -189,18 +189,18 @@ export default function SplitBillScreen({
       </div>
 
       {/* Hero Display Board (Dynamic Blue-Orange gradient theme) */}
-      <div className="bg-gradient-to-r from-primary to-orange-500 dark:from-blue-800 dark:to-orange-700 rounded-[24px] p-5 text-white shadow-md relative overflow-hidden">
+      <div className="workbench-card p-5 relative overflow-hidden">
         <div className="absolute right-0 bottom-0 opacity-10 translate-y-4 translate-x-2 pointer-events-none">
           <Coins className="w-40 h-40 text-white" />
         </div>
         
-        <p className="text-[11px] text-white/85 font-mono uppercase tracking-wider">学生端网格均帐助手 — 直连后勤代缴系统</p>
+        <p className="text-[11px] text-muted-foreground font-semibold">学生端网格均帐助手 — 直连后勤代缴系统</p>
         <div className="mt-2.5 flex items-baseline gap-1">
-          <span className="text-sm font-semibold">待平摊金额 ¥</span>
-          <h2 className="text-3xl font-extrabold tracking-tight">{billSum.toFixed(2)}</h2>
+          <span className="text-sm font-semibold text-primary">待平摊金额 ¥</span>
+          <h2 className="text-3xl font-extrabold tracking-normal text-slate-950 dark:text-slate-50">{billSum.toFixed(2)}</h2>
         </div>
 
-        <div className="mt-4 flex items-center justify-between text-xs bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl p-2.5">
+        <div className="mt-4 flex items-center justify-between text-xs bg-muted/60 rounded-xl p-2.5 border border-border">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-orange-600 dark:text-orange-200 fill-current" />
             <span className="text-slate-700 dark:text-gray-200">免签授权，宿舍一卡通自动极速转账</span>
@@ -228,7 +228,7 @@ export default function SplitBillScreen({
         {showAddForm && (
           <form 
             onSubmit={handleAddCustomBill}
-            className="bg-slate-100 dark:bg-gray-800 p-4 rounded-2xl border border-slate-200 dark:border-gray-700 shadow-inner flex flex-col gap-3 animate-in slide-in-from-top-3 duration-200"
+            className="workbench-card p-4 flex flex-col gap-3 animate-in slide-in-from-top-3 duration-200"
           >
             <span className="text-xs font-bold text-slate-700 dark:text-gray-200 block border-b pb-1.5 border-slate-200 dark:border-gray-700 flex items-center gap-1.5">
               <TrendingUp className="w-4 h-4 text-orange-500 animate-pulse" />
@@ -300,7 +300,7 @@ export default function SplitBillScreen({
               <div 
                 key={bill.id}
                 onClick={() => handleToggleBill(bill.id)}
-                className={`p-3.5 rounded-2xl flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all bg-white dark:bg-gray-800 border ${
+                className={`p-3.5 rounded-xl flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all bg-white dark:bg-gray-800 border ${
                   isChecked
                     ? 'border-primary ring-2 ring-primary/5 bg-slate-50/50 dark:bg-gray-700/50'
                     : 'border-slate-150 dark:border-gray-600 opacity-75 hover:opacity-90 bg-white dark:bg-gray-800'
@@ -351,7 +351,7 @@ export default function SplitBillScreen({
       </section>
 
       {/* Split Allocation Mode Tabs */}
-      <section className="bg-slate-100 dark:bg-gray-800 p-1 rounded-2xl flex gap-1 border border-slate-200 dark:border-gray-700">
+      <section className="bg-muted p-1 rounded-xl flex gap-1 border border-border">
         <button 
           onClick={() => setSplitMethod('even')}
           className={`flex-1 py-2 rounded-xl text-center text-xs font-bold transition-all cursor-pointer ${
@@ -376,7 +376,7 @@ export default function SplitBillScreen({
       </section>
 
       {/* Roommates Checkbox Cards List */}
-      <section className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-slate-150 dark:border-gray-700">
+      <section className="workbench-card p-4">
         <div className="flex justify-between items-center mb-3">
           <h3 className="font-extrabold text-xs text-slate-700 dark:text-gray-200 uppercase">2. 设定参与分班及比重分摊</h3>
           <span className="text-[10px] font-bold text-primary dark:text-blue-300 bg-indigo-50 dark:bg-indigo-900/40 px-2 py-0.5 rounded-full">
@@ -470,10 +470,10 @@ export default function SplitBillScreen({
       <section className="pt-2">
         <button 
           onClick={handleConfirmSplit}
-          className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-700 dark:to-red-800 hover:from-orange-600 hover:to-red-600 active:scale-[0.98] transition-all text-white font-extrabold text-sm rounded-full flex items-center justify-center gap-2 shadow-lg shadow-orange-200 dark:shadow-orange-950"
+          className="w-full py-4 workbench-warning-action active:scale-[0.98] transition-all font-extrabold text-sm rounded-xl flex items-center justify-center gap-2"
         >
           <Send className="w-4 h-4" />
-          立即向宿舍广播 并发起一卡通托管极速扣款
+          确认发起分摊
         </button>
       </section>
 

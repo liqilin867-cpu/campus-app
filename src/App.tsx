@@ -156,21 +156,21 @@ export default function App(){
     setSd({title:cat+'分摊成功',content:'¥'+amt.toFixed(2)+' 已分给 '+rm.length+' 人\\n每人 ¥'+pp.toFixed(2)+'（余额 ¥'+fb.toFixed(2)+'）',actionText:'查看',onAction:()=>setTab('bill')});
   };
 
-  if(load)return <div className="h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center"><div className="flex flex-col items-center gap-4"><div className="w-12 h-12 rounded-full border-4 border-blue-600 border-t-transparent animate-spin shadow-lg shadow-blue-200"></div><p className="text-sm font-semibold text-slate-500">加载中...</p></div></div>;
+  if(load)return <div className="h-screen bg-animated flex items-center justify-center"><div className="workbench-card flex flex-col items-center gap-4 px-8 py-7"><div className="w-11 h-11 rounded-full border-4 border-primary border-t-transparent animate-spin"></div><p className="text-sm font-semibold text-muted-foreground">加载中...</p></div></div>;
   if(!li)return <LoginPage onLoginSuccess={handleLoginSuccess} />;
   return (<ErrorBoundary>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-    <div className="min-h-screen flex flex-col pb-16 bg-animated">
+    <div className="min-h-screen flex flex-col pb-20 bg-animated text-slate-900 dark:text-slate-100">
       <Toaster richColors position="top-center" />
       <Dialog open={!!sd} onOpenChange={()=>setSd(null)}>
         <DialogContent className="sm:max-w-sm">
           <div className="text-center py-2">
-            <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white mx-auto mb-3"><CheckCircle2 className="w-8 h-8"/></div>
+            <div className="w-14 h-14 bg-emerald-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3 shadow-sm"><CheckCircle2 className="w-8 h-8"/></div>
             <DialogTitle className="text-lg">{sd?.title}</DialogTitle>
             <DialogDescription className="text-xs text-gray-500 mt-2 whitespace-pre-line">{sd?.content}</DialogDescription>
           </div>
-          <div className="flex gap-2.5 justify-center">{sd?.actionText&&sd?.onAction?<><button onClick={()=>{setSd(null);sd?.onAction?.()}} className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-lg text-xs cursor-pointer">{sd?.actionText}</button>
-          <button onClick={()=>setSd(null)} className="py-3 px-5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold rounded-full cursor-pointer">关闭</button></>:<button onClick={()=>setSd(null)} className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-lg cursor-pointer">我知道了</button>}</div>
+          <div className="flex gap-2.5 justify-center">{sd?.actionText&&sd?.onAction?<><button onClick={()=>{setSd(null);sd?.onAction?.()}} className="flex-1 py-3 workbench-primary-action font-bold rounded-xl text-xs cursor-pointer">{sd?.actionText}</button>
+          <button onClick={()=>setSd(null)} className="py-3 px-5 bg-muted hover:bg-muted/80 text-muted-foreground text-xs font-semibold rounded-xl cursor-pointer">关闭</button></>:<button onClick={()=>setSd(null)} className="w-full py-3 workbench-primary-action font-bold rounded-xl cursor-pointer">我知道了</button>}</div>
         </DialogContent>
       </Dialog>
       <Dialog open={!!rt} onOpenChange={()=>setRt(null)}>
@@ -195,7 +195,7 @@ export default function App(){
       <div className="bg-blob bg-blob-1"></div>
       <div className="bg-blob bg-blob-2"></div>
       <div className="bg-blob bg-blob-3"></div>
-      <div className="max-w-md mx-auto w-full flex-1 px-4 py-6 relative z-10">
+      <div className="max-w-md mx-auto w-full flex-1 px-4 pt-5 pb-7 relative z-10">
         {sub==='split'?<SplitBillScreen unpaidBills={ub} roommates={rm} currentUserName={cu?.name||''} defaultCategory={sc} onBack={()=>{setSub(null);setSc('')}} onInitiateSuccess={handleSplit} />
         :sub==='guarantee'?<PowerGuaranteeScreen guaranteeHistory={gh} onBack={()=>setSub(null)} onSubmitGuarantee={doPower} />
         :<>
@@ -206,11 +206,11 @@ export default function App(){
           {tab==='my'&&<MyTab currentRoom={room} currentUserName={cu?.name||''} studentId={cu?.studentId||''} roommates={rm} cardBalance={b1} waterBalance={b3} onLogout={handleLogout} onNavigateToPowerGuarantee={()=>setSub('guarantee')} onQuickRecharge={openR} />}
         </>}
       </div>
-      {!sub&&<nav className="fixed bottom-0 left-0 w-full z-40 pb-safe tab-bar-glass border-t border-white/40 flex justify-around items-center h-[72px] px-2">
+      {!sub&&<nav className="fixed bottom-0 left-0 w-full z-40 pb-safe tab-bar-glass flex justify-around items-center h-[72px] px-3">
         {[{key:'home',label:'首页',icon:Home},{key:'services',label:'服务',icon:Wallet},{key:'bill',label:'账单',icon:ReceiptText},{key:'message',label:'消息',icon:Bell},{key:'my',label:'我的',icon:User}].map(({key,label,icon:Icon})=>{const a=tab===key;
-          return <button key={key} onClick={()=>setTab(key)} className={'flex flex-col items-center justify-center relative py-1 px-4 cursor-pointer transition-all duration-200 '+(a?'scale-100':'hover:opacity-70')}>
-            {a&&<span className="absolute inset-0 bg-gradient-to-t from-blue-50/90 dark:from-blue-900/40 to-transparent rounded-2xl shadow-sm border border-blue-100/40 dark:border-blue-800/40"></span>}
-            <div className="relative flex flex-col items-center"><div className={'mb-0.5 transition-all duration-300 '+(a?'scale-110 -translate-y-0.5':'scale-100')}><Icon className={'w-[22px] h-[22px] transition-all duration-300 '+(a?'text-blue-600 dark:text-blue-400 drop-shadow-sm':'text-slate-400')}/></div><span className={'text-[10px] transition-all duration-300 '+(a?'text-blue-700 dark:text-blue-300 font-bold':'text-slate-400')}>{label}</span></div>
+          return <button key={key} onClick={()=>setTab(key)} className={'flex flex-col items-center justify-center relative py-1 px-3 cursor-pointer transition-all duration-200 '+(a?'scale-100':'hover:opacity-70')}>
+            {a&&<span className="absolute inset-0 bg-[#e8eef7] dark:bg-[#203450] rounded-xl border border-[#dbe3ee] dark:border-white/10"></span>}
+            <div className="relative flex flex-col items-center"><div className={'mb-0.5 transition-all duration-300 '+(a?'scale-110 -translate-y-0.5':'scale-100')}><Icon className={'w-[22px] h-[22px] transition-all duration-300 '+(a?'text-primary dark:text-blue-200':'text-slate-400 dark:text-slate-500')}/></div><span className={'text-[10px] transition-all duration-300 '+(a?'text-primary dark:text-blue-200 font-bold':'text-slate-400 dark:text-slate-500')}>{label}</span></div>
             {key==='message'&&msg.some(m=>m.unread)&&<span className="absolute top-1 right-2 w-2.5 h-2.5 bg-gradient-to-br from-red-400 to-red-500 rounded-full border-2 border-white shadow-sm animate-subtle-pulse"></span>}
           </button>;
         })}

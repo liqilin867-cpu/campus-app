@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -37,7 +37,7 @@ export default function MessageTab({
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       
       {/* Filters (Chips) */}
       <div className="flex gap-2 overflow-x-auto py-1 scrollbar-hide no-scrollbar -mx-4 px-4">
@@ -69,13 +69,13 @@ export default function MessageTab({
 
       {/* Header controls: Mark all as read */}
       <div className="flex justify-between items-center px-1">
-        <p className="text-xs text-outline">
+        <p className="text-xs text-muted-foreground">
           展示 {filteredMessages.length} 条通知消息
         </p>
         <div className="flex items-center gap-2">
           <button 
             onClick={onMarkAllAsRead}
-            className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 cursor-pointer"
+            className="rounded-lg bg-primary-fixed px-2.5 py-1.5 text-xs font-bold text-primary flex items-center gap-1 cursor-pointer"
           >
             <MailOpen className="w-3.5 h-3.5" />
             全部已读
@@ -90,17 +90,17 @@ export default function MessageTab({
             <div
               key={msg.id}
               onClick={() => handleMessageClick(msg)}
-              className={`rounded-[24px] p-4 flex gap-3 relative cursor-pointer active:scale-[0.98] transition-all hover:shadow-md ${
+              className={`workbench-card p-4 flex gap-3 relative cursor-pointer active:scale-[0.98] transition-all hover:bg-muted/40 ${
                 msg.unread
-                  ? 'bg-white dark:bg-gray-800 border border-blue-100 dark:border-blue-900/50 shadow-sm'
-                  : 'bg-white/60 dark:bg-gray-800/40 border border-slate-100/60 dark:border-gray-700/30 opacity-80'
+                  ? 'border-primary/25'
+                  : 'opacity-75'
               }`}
             >
               {/* Icon */}
-              <div className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 border ${
+              <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border ${
                 msg.unread
-                  ? 'bg-primary-fixed dark:bg-blue-900/50 border-white/50 dark:border-gray-600 text-[#003d9b] dark:text-blue-200'
-                  : 'bg-surface-container-highest dark:bg-gray-700/50 border-white/40 dark:border-gray-600 text-outline dark:text-gray-400'
+                  ? 'bg-primary-fixed border-primary-fixed-dim/60 text-primary'
+                  : 'bg-muted border-border text-muted-foreground'
               }`}>
                 {msg.category === '系统通知' && <MessageSquare className="w-5 h-5" />}
                 {msg.category === '缴费提醒' && <Zap className="w-5 h-5 fill-current" />}
@@ -112,7 +112,7 @@ export default function MessageTab({
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-start mb-1">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className={`px-2 py-0.5 rounded-full font-semibold text-[9px] border ${
+                    <span className={`px-2 py-0.5 rounded-md font-semibold text-[9px] border ${
                       msg.category === '缴费提醒'
                         ? 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-900/40 dark:text-amber-200 dark:border-amber-700/50'
                         : msg.category === '分摊通知'
@@ -149,12 +149,12 @@ export default function MessageTab({
 
               {/* Unread Dot */}
               {msg.unread && (
-                <div className="w-2.5 h-2.5 rounded-full bg-secondary-container absolute top-4 right-4 shadow-[0_0_8px_rgba(0,113,230,0.6)]"></div>
+                <div className="absolute right-4 top-4 h-2.5 w-2.5 rounded-full bg-primary"></div>
               )}
             </div>
           ))
         ) : (
-          <div className="text-center py-12 text-outline bg-white/50 dark:bg-gray-800/50 rounded-[24px] border border-white/40 dark:border-gray-700/30">
+          <div className="workbench-card py-12 text-center text-muted-foreground">
             <MailOpen className="w-10 h-10 mx-auto mb-2 opacity-50" />
             暂无此分类的信息消息
           </div>
@@ -164,7 +164,7 @@ export default function MessageTab({
       {/* -------------------- DETAIL MODAL -------------------- */}
       {readingMessage && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-[24px] w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200 shadow-xl">
+          <div className="workbench-card w-full max-w-sm p-6 flex flex-col gap-4 relative animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setReadingMessage(null)}
               className="absolute right-4 top-4 text-slate-400 dark:text-gray-500 hover:text-slate-600 cursor-pointer"
@@ -185,18 +185,18 @@ export default function MessageTab({
               <h3 className="font-bold text-base text-on-surface">{readingMessage.title}</h3>
             </div>
 
-            <p className="text-sm text-on-surface-variant leading-relaxed bg-surface-container-low p-4 rounded-2xl border border-white/50 whitespace-pre-wrap">
+            <p className="text-sm text-muted-foreground leading-relaxed bg-muted/50 p-4 rounded-xl border border-border whitespace-pre-wrap">
               {readingMessage.content}
             </p>
 
-            <div className="flex justify-between items-center text-xs text-outline px-1">
+            <div className="flex justify-between items-center text-xs text-muted-foreground px-1">
               <span>日期: {readingMessage.date}</span>
               <span>接收时间: {readingMessage.time}</span>
             </div>
 
             <button
               onClick={() => setReadingMessage(null)}
-              className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full shadow-md active:scale-95 transition-transform cursor-pointer"
+              className="w-full mt-2 py-3 workbench-primary-action font-bold rounded-xl active:scale-95 transition-transform cursor-pointer"
             >
               我已阅读
             </button>

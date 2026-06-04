@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -71,27 +71,24 @@ export default function BillTab({
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
 
       {/* Summary */}
-      <section className="bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700/80 rounded-[24px] p-5 relative overflow-hidden">
-        <div className="absolute -right-10 -top-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+      <section className="workbench-card p-5 relative overflow-hidden">
 
         <div className="relative z-10 flex flex-col items-center justify-center py-1">
           <p className="font-semibold text-xs text-slate-500 dark:text-gray-400 mb-1">累计消费</p>
           <div className="flex items-baseline gap-1 mb-4">
-            <span className="text-4xl font-extrabold text-[#001f5c] dark:text-blue-300 tracking-tight">
+            <span className="text-4xl font-extrabold text-slate-950 dark:text-slate-50 tracking-normal">
               ¥ {totalSpent.toFixed(2)}
             </span>
           </div>
           <div className="flex gap-3.5 w-full mt-1">
-            <div className="flex-1 bg-white dark:bg-gray-900 rounded-2xl p-3 flex flex-col items-center border border-slate-100 dark:border-gray-700/50 shadow-xs">
+            <div className="flex-1 rounded-xl bg-muted/50 p-3 flex flex-col items-center border border-border">
               <span className="font-semibold text-[10px] text-slate-400 dark:text-gray-500 mb-0.5">已缴费</span>
               <span className="font-extrabold text-sm text-primary">¥ {paidSpent.toFixed(2)}</span>
             </div>
-            <div className="flex-1 bg-white dark:bg-gray-900 rounded-2xl p-3 flex flex-col items-center border border-slate-100 dark:border-gray-700/50 shadow-xs">
+            <div className="flex-1 rounded-xl bg-muted/50 p-3 flex flex-col items-center border border-border">
               <span className="font-semibold text-[10px] text-slate-400 dark:text-gray-500 mb-0.5">待缴/代付</span>
               <span className="font-extrabold text-sm text-orange-500">¥ {unpaidSpent.toFixed(2)}</span>
             </div>
@@ -107,7 +104,7 @@ export default function BillTab({
           const rows = billsList.map(b => [b.title, b.amount, b.time, b.status].join(",")).join(String.fromCharCode(10));
           const blob = new Blob(["项目,金额,时间,状态" + String.fromCharCode(10) + rows], {type:"text/csv;charset=utf-8;"});
           const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "账单导出.csv"; a.click();
-        }} className="px-4 py-2 bg-white dark:bg-gray-900 border border-slate-100 dark:border-gray-700/50 rounded-2xl shadow-sm flex items-center gap-2 hover:bg-slate-50 dark:bg-gray-800/50 transition-colors cursor-pointer active:scale-[0.98] text-xs text-blue-600 font-semibold">
+        }} className="px-3 py-2 bg-card border border-border rounded-xl flex items-center gap-2 hover:bg-muted transition-colors cursor-pointer active:scale-[0.98] text-xs text-primary font-bold">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           导出CSV
         </button>
@@ -115,10 +112,10 @@ export default function BillTab({
 
 {/* ===== 分摊追踪板块：显示所有有室友待缴的分摊账单 ===== */}
       {Object.values(billPaymentStatus).some(p => Object.values(p).some(v => v === 'pending')) && (
-        <section className="rounded-[24px] bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 border border-amber-200 dark:border-amber-700/30 p-4 shadow-sm" id="split_tracking">
+        <section className="workbench-card bg-amber-50/80 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50 p-4" id="split_tracking">
           <div className="flex items-center gap-1.5 mb-3">
             <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
-            <h3 className="font-bold text-sm text-amber-900">分摊追踪</h3>
+            <h3 className="font-bold text-sm text-amber-900 dark:text-amber-200">分摊追踪</h3>
             <span className="text-[10px] text-amber-600 dark:text-amber-300 bg-amber-100 dark:bg-amber-900/40 px-2 py-0.5 rounded-full font-semibold ml-auto">
               {Object.values(billPaymentStatus).filter(p => Object.values(p).some(v => v === 'pending')).length} 项待缴
             </span>
@@ -132,7 +129,7 @@ export default function BillTab({
               const perPerson = bill ? bill.amount / totalCount : 0;
 
               return (
-                <div key={billId} className="bg-white/80 dark:bg-gray-800/80 rounded-2xl p-3.5 border border-amber-100 dark:border-amber-800/30 shadow-sm">
+                <div key={billId} className="bg-white dark:bg-slate-900/40 rounded-xl p-3.5 border border-amber-100 dark:border-amber-800/30">
                   <div className="flex justify-between items-center mb-2">
                     <div>
                       <span className="font-bold text-xs text-slate-800 dark:text-gray-100">{bill?.title||'分摊账单'}</span>
@@ -203,16 +200,16 @@ export default function BillTab({
           const monthBills = billsList.filter((b) => b.month === month);
           return (
             <div key={month}>
-              <h2 className="font-extrabold text-xs text-slate-400 dark:text-gray-500 uppercase tracking-widest mb-2 px-1">{month}</h2>
+              <h2 className="font-extrabold text-[11px] text-muted-foreground mb-2 px-1">{month}</h2>
               <div className="flex flex-col gap-2">
                 {monthBills.map((bill) => (
                   <div
                     key={bill.id}
                     onClick={() => setSelectedBill(bill)}
-                    className="flex items-center justify-between p-4 bg-white dark:bg-gray-900 hover:bg-blue-50/30 hover:shadow-sm transition-all cursor-pointer active:scale-[0.99] rounded-2xl border border-slate-100 dark:border-gray-700/50 shadow-sm"
+                    className="flex items-center justify-between gap-3 p-3.5 workbench-card hover:bg-muted/40 transition-all cursor-pointer active:scale-[0.99]"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border border-slate-100 dark:border-gray-700/50 shadow-xs bg-slate-50 dark:bg-gray-800/50">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border border-border bg-muted/60">
                         {bill.category === '电费' && <Zap className="w-5 h-5 text-orange-500 fill-current" />}
                         {bill.category === '水费' && <Droplet className="w-5 h-5 text-cyan-500 fill-current" />}
                         {bill.category === '网费' && <Wifi className="w-5 h-5 text-blue-500" />}
@@ -261,8 +258,8 @@ export default function BillTab({
 
       {/* DETAIL MODAL */}
       {selectedBill && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-t-[24px] md:rounded-[24px] w-full max-w-sm p-5 flex flex-col gap-4 relative animate-in slide-in-from-bottom-5 duration-300 shadow-xl">
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-end md:items-center justify-center p-4">
+          <div className="workbench-card rounded-t-xl md:rounded-xl w-full max-w-sm p-5 flex flex-col gap-4 relative animate-in slide-in-from-bottom-5 duration-300">
             <button
               onClick={() => setSelectedBill(null)}
               className="absolute right-4 top-4 text-slate-400 dark:text-gray-500 hover:text-slate-600 cursor-pointer p-1 rounded-full hover:bg-slate-50 dark:bg-gray-800/50"
@@ -276,7 +273,7 @@ export default function BillTab({
             </div>
 
             {/* Invoice info */}
-            <div className="border border-dashed border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800/50 p-4 rounded-xl space-y-3 text-xs text-slate-700 dark:text-gray-200 relative">
+            <div className="border border-dashed border-border bg-muted/40 p-4 rounded-xl flex flex-col gap-3 text-xs text-slate-700 dark:text-gray-200 relative">
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-500 via-orange-400 to-indigo-600 rounded-t-xl"></div>
 
               <div className="flex justify-between items-center pb-2.5 border-b border-slate-200 dark:border-gray-700">
@@ -420,14 +417,14 @@ export default function BillTab({
             <div className="flex gap-2.5">
               <button
                 onClick={() => handleDownloadInvoice(selectedBill)}
-                className="flex-1 py-3 bg-slate-100 dark:bg-gray-800 hover:bg-slate-200 dark:hover:bg-gray-700 text-slate-700 dark:text-gray-200 font-semibold text-xs rounded-full flex items-center justify-center gap-1.5 cursor-pointer"
+                className="flex-1 py-3 bg-muted hover:bg-muted/80 text-muted-foreground font-semibold text-xs rounded-xl flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 下载凭证
               </button>
               <button
                 onClick={() => setSelectedBill(null)}
-                className="py-3 px-6 bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-bold text-xs rounded-full cursor-pointer shadow active:scale-[0.98] transition-transform"
+                className="py-3 px-6 workbench-primary-action font-bold text-xs rounded-xl cursor-pointer active:scale-[0.98] transition-transform"
               >
                 关闭
               </button>

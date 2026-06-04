@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
-import { MapPin, Bell, ChevronDown, Check, ArrowRight, Wallet, CreditCard, Wifi, Zap, Droplet, Flame, Shuffle, Users, AlertTriangle, TrendingDown, TrendingUp, BarChart3, Clock, CheckCircle } from 'lucide-react';
+import { MapPin, Bell, ChevronDown, Wallet, CreditCard, Wifi, Zap, Droplet, Flame, Users, BarChart3 } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '../../components/ui/dialog';
 import { BillItem } from '../types';
 
@@ -53,145 +53,147 @@ export default function HomeTab(props: HomeTabProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Header */}
-      <section className="flex items-center justify-between px-2">
-        <div className="flex items-center gap-2">
-          <MapPin className="w-5 h-5 text-primary" />
-          <span className="font-bold text-lg">{currentRoom}</span>
-          <span className="text-[10px] bg-slate-100 dark:bg-gray-800 rounded-full px-2 py-0.5 text-slate-500 dark:text-gray-400">{currentUserName}</span>
+      <section className="flex items-center justify-between">
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold text-muted-foreground">校园事务工作台</p>
+          <div className="mt-1 flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-primary shrink-0" />
+            <span className="truncate text-lg font-extrabold text-slate-900 dark:text-slate-100">{currentRoom}</span>
+            <span className="shrink-0 rounded-full bg-primary-fixed px-2 py-0.5 text-[10px] font-bold text-primary">{currentUserName}</span>
+          </div>
         </div>
-        <button onClick={onNavigateToNotifications} className="relative w-9 h-9 rounded-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 flex items-center justify-center cursor-pointer hover:bg-slate-50 dark:bg-gray-800/50">
-          <Bell className="w-4 h-4 text-primary" />
-          {hasUnreadMessages && <span className="absolute top-1.5 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>}
+        <button onClick={onNavigateToNotifications} className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-primary shadow-sm active:scale-95">
+          <Bell className="w-4 h-4" />
+          {hasUnreadMessages && <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-slate-900" />}
         </button>
       </section>
 
-      {/* Accounts Dashboard */}
-      <section className="bg-slate-50 dark:bg-gray-800/50 rounded-3xl p-4 border border-slate-200 dark:border-gray-700">
-        <p className="text-[10px] font-semibold text-slate-500 dark:text-gray-400 mb-3 flex items-center gap-1"><Wallet className="w-3.5 h-3.5" />校园账户</p>
-        <div className="bg-gradient-to-br from-blue-700 to-indigo-800 rounded-2xl p-4 text-white mb-3">
-          <div className="flex justify-between items-center">
-            <div><p className="text-[10px] text-white/70">一卡通余额</p><p className="text-2xl font-bold">¥{cardBalance.toFixed(2)}</p></div>
-            <button onClick={() => onQuickRecharge('校园卡')} className="bg-white/20 hover:bg-white/30 dark:bg-gray-900/30 border border-white/30 rounded-full px-4 py-1.5 text-[11px] font-bold cursor-pointer">充值</button>
+      <section className="workbench-card relative z-30 p-4">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground"><Wallet className="w-3.5 h-3.5" />校园一卡通</p>
+            <div className="mt-2 flex items-baseline gap-1">
+              <span className="text-sm font-bold text-primary">¥</span>
+              <span className="text-4xl font-extrabold tracking-normal text-slate-950 dark:text-slate-50">{cardBalance.toFixed(2)}</span>
+            </div>
           </div>
+          <button onClick={() => onQuickRecharge('校园卡')} className="rounded-xl px-4 py-2 text-xs font-extrabold workbench-primary-action active:scale-95">充值</button>
         </div>
-        <div className="grid grid-cols-3 gap-2">
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-2.5 border border-slate-100 dark:border-gray-700/50">
-            <div className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-gray-400 mb-1"><Wifi className="w-3 h-3 text-blue-500" />校园网</div>
-            <p className="font-bold text-sm text-slate-800 dark:text-gray-100">¥{netBalance.toFixed(2)}</p>
-            <button onClick={onAutoDeductNet} className="w-full mt-1.5 py-1 bg-blue-50 text-blue-700 dark:bg-blue-900/50 dark:text-blue-200 rounded-lg text-[9px] font-bold cursor-pointer">自动缴费</button>
-          </div>
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-2.5 border border-slate-100 dark:border-gray-700/50 cursor-pointer hover:shadow-sm" onClick={() => { setQsCat('电费'); setQsAmt(''); }}>
-            <div className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-gray-400 mb-1"><Zap className="w-3 h-3 text-orange-500" />电费</div>
-            <p className="font-bold text-sm text-slate-800 dark:text-gray-100">¥{electricityBalance.toFixed(2)}</p>
-            <p className="text-[9px] text-orange-500 mt-1.5 font-medium">快速分摊</p>
-          </div>
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-2.5 border border-slate-100 dark:border-gray-700/50 cursor-pointer hover:shadow-sm" onClick={() => { setQsCat('水费'); setQsAmt(''); }}>
-            <div className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-gray-400 mb-1"><Droplet className="w-3 h-3 text-cyan-500" />水费</div>
-            <p className="font-bold text-sm text-slate-800 dark:text-gray-100">¥{waterBalance.toFixed(2)}</p>
-            <p className="text-[9px] text-cyan-500 mt-1.5 font-medium">快速分摊</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Payment Buttons */}
-      <section className="px-2">
-        <div className="flex gap-2">
-          <div className="flex-1 relative">
-            <button onClick={() => setShowPay(!showPay)} className="w-full flex items-center gap-2.5 px-3 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm hover:shadow-md active:scale-[0.98] transition-all cursor-pointer">
-              <div className="w-9 h-9 rounded-lg bg-white/15 dark:bg-gray-900/15 flex items-center justify-center backdrop-blur-sm">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-              </div>
-              <div className="text-left flex-1"><p className="font-bold text-xs">个人缴费</p><p className="text-[10px] text-blue-100">网费 · 校园卡</p></div>
-              <div className="w-5 h-5 rounded-full bg-white/20 dark:bg-gray-900/20 flex items-center justify-center"><ChevronDown className={'w-3 h-3 transition-transform '+(showPay?'rotate-180':'')} /></div>
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          <div className="relative">
+            <button onClick={() => setShowPay(!showPay)} className="flex w-full items-center justify-between rounded-xl border border-border bg-muted/50 px-3 py-2.5 text-left active:scale-[0.99]">
+              <span className="flex items-center gap-2 text-xs font-bold text-slate-800 dark:text-slate-100"><CreditCard className="w-4 h-4 text-primary" />个人缴费</span>
+              <ChevronDown className={'w-3.5 h-3.5 text-muted-foreground transition-transform '+(showPay?'rotate-180':'')} />
             </button>
-            {showPay && <div className="absolute z-20 top-full mt-1 left-0 right-0 bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 rounded-xl shadow-xl overflow-hidden">
-              <button onClick={() => { setShowPay(false); onQuickRecharge('网费'); }} className="w-full flex items-center gap-3 px-4 py-3 text-xs text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-gray-700 border-b border-slate-50 dark:border-gray-700 cursor-pointer">
-                <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center"><svg className="w-4 h-4 text-blue-600 dark:text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg></div>
-                <span className="font-medium">缴网费</span>
-              </button>
-              <button onClick={() => { setShowPay(false); onQuickRecharge('校园卡'); }} className="w-full flex items-center gap-3 px-4 py-3 text-xs text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-gray-700 cursor-pointer">
-                <div className="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center"><svg className="w-4 h-4 text-indigo-600 dark:text-indigo-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
-                <span className="font-medium">充校园卡</span>
-              </button>
+            {showPay && <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-xl border border-border bg-card shadow-xl">
+              <button onClick={() => { setShowPay(false); onQuickRecharge('网费'); }} className="flex w-full items-center gap-2 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-muted dark:text-slate-200"><Wifi className="w-4 h-4 text-blue-500" />缴网费</button>
+              <button onClick={() => { setShowPay(false); onQuickRecharge('校园卡'); }} className="flex w-full items-center gap-2 border-t border-border px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-muted dark:text-slate-200"><CreditCard className="w-4 h-4 text-primary" />充校园卡</button>
             </div>}
           </div>
-          <button onClick={() => onNavigateToSplit()} className="flex-1 flex items-center gap-2.5 px-3 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-sm hover:shadow-md active:scale-[0.98] transition-all cursor-pointer">
-            <div className="w-9 h-9 rounded-lg bg-white/15 dark:bg-gray-900/15 flex items-center justify-center backdrop-blur-sm">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-            </div>
-            <div className="text-left"><p className="font-bold text-xs">分摊缴费</p><p className="text-[10px] text-orange-100">电费·水费·空调</p></div>
-          </button>
+          <button onClick={() => onNavigateToSplit()} className="flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-xs font-extrabold workbench-warning-action active:scale-[0.99]"><Users className="w-4 h-4" />发起分摊</button>
         </div>
       </section>
 
-      {/* Trend Chart Entry */}
-      <section className="px-2">
-        <div onClick={() => setShowTrend(true)} className="rounded-2xl bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700 shadow-sm p-3.5 flex items-center justify-between hover:shadow-md transition-all cursor-pointer active:scale-[0.98]">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center"><BarChart3 className="w-5 h-5 text-primary" /></div>
-            <div><p className="font-bold text-xs text-slate-800 dark:text-gray-100">用能走势</p><p className="text-[10px] text-slate-400 dark:text-gray-500">查看水电月度趋势</p></div>
+      <section className="grid grid-cols-3 gap-2">
+        <div className="workbench-card p-3">
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-muted-foreground"><Wifi className="w-3.5 h-3.5 text-blue-500" />校园网</div>
+          <p className="mt-2 text-base font-extrabold">¥{netBalance.toFixed(2)}</p>
+          <button onClick={onAutoDeductNet} className="mt-2 w-full rounded-lg bg-primary-fixed px-2 py-1.5 text-[10px] font-bold text-primary">自动缴费</button>
+        </div>
+        <button className="workbench-card p-3 text-left active:scale-[0.99]" onClick={() => { setQsCat('电费'); setQsAmt(''); }}>
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-muted-foreground"><Zap className="w-3.5 h-3.5 text-orange-500" />电费</div>
+          <p className="mt-2 text-base font-extrabold">¥{electricityBalance.toFixed(2)}</p>
+          <p className="mt-2 text-[10px] font-bold text-orange-600">快速分摊</p>
+        </button>
+        <button className="workbench-card p-3 text-left active:scale-[0.99]" onClick={() => { setQsCat('水费'); setQsAmt(''); }}>
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-muted-foreground"><Droplet className="w-3.5 h-3.5 text-cyan-500" />水费</div>
+          <p className="mt-2 text-base font-extrabold">¥{waterBalance.toFixed(2)}</p>
+          <p className="mt-2 text-[10px] font-bold text-cyan-600">快速分摊</p>
+        </button>
+      </section>
+
+      {unpaidBills.length > 0 && <section className="workbench-card p-4">
+        <div className="flex items-center justify-between gap-2">
+          <div>
+            <h3 className="workbench-section-title">待缴账单</h3>
+            <p className="mt-1 text-[11px] text-muted-foreground">已选 {validIds.length}/{unpaidBills.length} 项，共 ¥{selectedSum.toFixed(2)}</p>
           </div>
-          <ChevronDown className="w-4 h-4 text-slate-400 dark:text-gray-500 -rotate-90" />
+          <button onClick={() => onOneKeyPay(validIds)} disabled={!validIds.length} className="rounded-xl px-3 py-2 text-xs font-bold workbench-primary-action disabled:opacity-50">一键缴费</button>
         </div>
-      </section>
+        <div className="mt-3 flex flex-col gap-2">
+          <button onClick={toggleAll} className="self-start text-[11px] font-bold text-primary">{allSelected ? '取消全选' : '全选账单'}</button>
+          {unpaidBills.map(b => <button key={b.id} onClick={() => toggle(b.id)} className={'flex items-center justify-between rounded-xl border px-3 py-2.5 text-left transition-all '+(validIds.includes(b.id)?'border-primary bg-primary-fixed/70':'border-border bg-muted/30')}>
+            <div className="min-w-0"><p className="truncate text-xs font-bold">{b.title}</p><p className="text-[10px] text-muted-foreground">{b.month || '本月'} · {b.category}</p></div>
+            <span className="shrink-0 text-xs font-extrabold">¥{b.amount.toFixed(2)}</span>
+          </button>)}
+        </div>
+      </section>}
 
-      {/* Only pending splits - already split, just need to pay */}
-      <section className="bg-white dark:bg-gray-900 rounded-3xl p-4 border border-slate-200 dark:border-gray-700 shadow-sm">
-        <h4 className="font-bold text-sm text-slate-800 dark:text-gray-100 mb-3 flex items-center gap-1.5"><Users className="w-4 h-4 text-primary" />宿舍公摊待缴</h4>
-        {pendingSplit.length > 0 ? <div className="space-y-2">
+      <section className="workbench-card p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <h3 className="flex items-center gap-1.5 workbench-section-title"><Users className="w-4 h-4 text-primary" />宿舍公摊待缴</h3>
+          <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-bold text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">{pendingSplit.length} 项</span>
+        </div>
+        {pendingSplit.length > 0 ? <div className="flex flex-col gap-2">
           {pendingSplit.map(({ billId, bill, perPerson }) => (
-            <div key={billId} className="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3 border border-amber-100 dark:border-amber-800/30 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                {bill.category === '电费' && <Zap className="w-4 h-4 text-orange-500" />}
-                {bill.category === '水费' && <Droplet className="w-4 h-4 text-blue-500" />}
-                {bill.category === '空调' && <Flame className="w-4 h-4 text-indigo-500" />}
-                <div><p className="text-xs font-semibold">{bill.title}</p><p className="text-[10px] text-slate-400 dark:text-gray-500">您需缴 ¥{perPerson.toFixed(2)}</p></div>
+            <div key={billId} className="flex items-center justify-between gap-2 rounded-xl border border-amber-200 bg-amber-50/70 p-3 dark:border-amber-900/50 dark:bg-amber-950/20">
+              <div className="min-w-0 flex items-center gap-2">
+                {bill.category === '电费' && <Zap className="w-4 h-4 shrink-0 text-orange-500" />}
+                {bill.category === '水费' && <Droplet className="w-4 h-4 shrink-0 text-cyan-500" />}
+                {bill.category === '空调' && <Flame className="w-4 h-4 shrink-0 text-indigo-500" />}
+                <div className="min-w-0"><p className="truncate text-xs font-bold">{bill.title}</p><p className="text-[10px] text-muted-foreground">您需缴 ¥{perPerson.toFixed(2)}</p></div>
               </div>
-              <button onClick={() => { if (cardBalance < perPerson) { toast.error('余额不足'); return; } if (confirm('缴纳 ¥'+perPerson.toFixed(2)+'？')) onPayForRoommate(billId, currentUserName, perPerson); }}
-                className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-full text-[10px] font-bold cursor-pointer active:scale-95">立即缴费</button>
+              <button onClick={() => { if (cardBalance < perPerson) { toast.error('余额不足'); return; } if (confirm('缴纳 ¥'+perPerson.toFixed(2)+'？')) onPayForRoommate(billId, currentUserName, perPerson); }} className="shrink-0 rounded-lg px-3 py-1.5 text-[10px] font-bold workbench-success-action active:scale-95">缴费</button>
             </div>
           ))}
-        </div> : <div className="text-center py-6 text-slate-400 dark:text-gray-500 text-xs bg-slate-50 dark:bg-gray-800/50 rounded-2xl">全部缴清 ✓</div>}
+        </div> : <div className="rounded-xl bg-muted/50 py-6 text-center text-xs font-semibold text-muted-foreground">全部缴清</div>}
       </section>
 
-      {/* Quick Split Modal */}
+      <section>
+        <button onClick={() => setShowTrend(true)} className="workbench-card flex w-full items-center justify-between p-4 text-left active:scale-[0.99]">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-fixed text-primary"><BarChart3 className="w-5 h-5" /></div>
+            <div><p className="text-sm font-extrabold">用能走势</p><p className="text-[11px] text-muted-foreground">查看水电月度趋势</p></div>
+          </div>
+          <ChevronDown className="w-4 h-4 -rotate-90 text-muted-foreground" />
+        </button>
+      </section>
+
       <Dialog open={!!qsCat} onOpenChange={(o) => { if (!o) setQsCat(null); }}>
         <DialogContent>
-          <DialogTitle className="font-bold text-sm flex items-center gap-2">
+          <DialogTitle className="flex items-center gap-2 text-sm font-bold">
             {qsCat === '电费' ? <Zap className="w-5 h-5 text-orange-500" /> : <Droplet className="w-5 h-5 text-cyan-500" />}
             {qsCat}快速分摊
           </DialogTitle>
-          <p className="text-[10px] text-slate-400 dark:text-gray-500 mb-3">输入金额后将自动向全寝发起分摊</p>
-          <input type="number" value={qsAmt} onChange={e => setQsAmt(e.target.value)} className="w-full bg-slate-50 dark:bg-gray-800/50 border border-slate-200 dark:border-gray-700 text-lg p-3 rounded-xl outline-none text-center font-bold" placeholder="输入金额" autoFocus />
-          <div className="flex gap-2 mt-3">
-            <button onClick={() => setQsCat(null)} className="flex-1 py-2.5 bg-slate-100 text-slate-600 text-xs font-semibold rounded-xl cursor-pointer">取消</button>
+          <p className="mb-3 text-[11px] text-muted-foreground">输入金额后将自动向全寝发起分摊</p>
+          <input type="number" value={qsAmt} onChange={e => setQsAmt(e.target.value)} className="w-full border border-border bg-background p-3 text-center text-lg font-bold outline-none focus:border-primary" placeholder="输入金额" autoFocus />
+          <div className="mt-3 flex gap-2">
+            <button onClick={() => setQsCat(null)} className="flex-1 rounded-xl bg-muted py-2.5 text-xs font-semibold text-muted-foreground">取消</button>
             <button onClick={() => {
               const n = Number(qsAmt);
               if (isNaN(n) || n <= 0) return;
               setQsCat(null);
               onQuickSplit(qsCat, n);
-            }} className="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-sm cursor-pointer disabled:opacity-50" disabled={!qsAmt || Number(qsAmt) <= 0}>发起分摊</button>
+            }} className="flex-1 rounded-xl py-2.5 text-xs font-bold workbench-primary-action disabled:opacity-50" disabled={!qsAmt || Number(qsAmt) <= 0}>发起分摊</button>
           </div>
         </DialogContent>
       </Dialog>
 
-      {/* Trend Modal */}
       <Dialog open={showTrend} onOpenChange={(o) => { if (!o) setShowTrend(false); }}>
         <DialogContent>
-          <DialogTitle className="font-bold text-sm flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-primary" />用能走势</DialogTitle>
-          <div className="flex gap-1 bg-slate-100 dark:bg-gray-800 p-1 rounded-lg mb-3">
-            {(['电费', '水费'] as const).map(t => <button key={t} onClick={() => setTrendTab(t)} className={'flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer '+(trendTab===t?'bg-white dark:bg-gray-700 text-primary shadow-sm':'text-slate-500 dark:text-gray-400')}>{t}走势</button>)}
+          <DialogTitle className="flex items-center gap-1.5 text-sm font-bold"><BarChart3 className="w-4 h-4 text-primary" />用能走势</DialogTitle>
+          <div className="mb-3 flex gap-1 rounded-xl bg-muted p-1">
+            {(['电费', '水费'] as const).map(t => <button key={t} onClick={() => setTrendTab(t)} className={'flex-1 rounded-lg py-1.5 text-xs font-bold transition-all '+(trendTab===t?'bg-card text-primary shadow-sm':'text-muted-foreground')}>{t}走势</button>)}
           </div>
           {(trendTab === '电费' ? elecData : waterData).map(d => {
             const mx = Math.max(...(trendTab === '电费' ? elecData : waterData).map(x => x.amount), 1);
-            return <div key={d.label} className="flex items-center gap-2 mb-1.5">
-              <span className="text-[10px] text-slate-500 dark:text-gray-400 w-8">{d.label.replace('月','')}月</span>
-              <div className="flex-1 h-2 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden"><div className="h-full rounded-full" style={{backgroundColor:trendTab==='电费'?'#f59e0b':'#06b6d4',width:(d.amount/mx)*100+'%'}}></div></div>
-              <span className="text-[10px] text-slate-600 dark:text-gray-300 font-semibold w-12 text-right">¥{d.amount.toFixed(0)}</span>
+            return <div key={d.label} className="mb-2 flex items-center gap-2">
+              <span className="w-8 text-[10px] text-muted-foreground">{d.label.replace('月','')}月</span>
+              <div className="h-2 flex-1 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full" style={{backgroundColor:trendTab==='电费'?'#c86a22':'#0891b2',width:(d.amount/mx)*100+'%'}} /></div>
+              <span className="w-12 text-right text-[10px] font-semibold">¥{d.amount.toFixed(0)}</span>
             </div>;
           })}
-          <button onClick={() => setShowTrend(false)} className="w-full mt-3 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-full cursor-pointer">关闭</button>
+          <button onClick={() => setShowTrend(false)} className="mt-3 w-full rounded-xl py-2.5 text-xs font-bold workbench-primary-action">关闭</button>
         </DialogContent>
       </Dialog>
     </div>
